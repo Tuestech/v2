@@ -7,13 +7,18 @@
 		'tasks'
 		'schedule'
 		'timer'
+		'spacer'
 		'settings';
-	grid-template-rows: repeat(5, min-content) auto;
+	grid-template-rows: repeat(5, min-content) auto min-content;
 	gap: 16px;
 	background: linear-gradient(180deg, #9EC3FF 0.01%, #A2B6FF 100%);
 	width: min-content;
 	padding: 20px 15px;
 	user-select: none;
+}
+
+.spacer {
+	grid-area: spacer;
 }
 
 .nav .icon img {
@@ -24,7 +29,6 @@
 	color: rgb(67, 67, 67);
 	cursor: pointer;
 	transition: ease 0.4s;
-	margin-top: auto;
 }
 
 .nav .icon img:hover {
