@@ -19,6 +19,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+	'landing.apps.LandingConfig',
 	'tuesapp.apps.TuesappConfig',
 	'django.contrib.admin',
 	'django.contrib.auth',
