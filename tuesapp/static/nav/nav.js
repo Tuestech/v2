@@ -1,5 +1,5 @@
 class Nav {
-	static pages = ["home", "list", "schedule", "timer", "settings"]
+	static pages = ["dash", "list", "schedule", "timer", "settings"]
 	static activePage = 0
 	static icons = Array.from(document.getElementsByClassName("icon")).slice(1)
 	static pageChangeEvent = new Event("pageChange")
