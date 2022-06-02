@@ -2,6 +2,10 @@ class Page {
 	static pageName
 	static pageBody
 
+	static onPageChange() {
+		this.updateVisibility()
+	}
+
 	static updateVisibility() {
 		const activePageName = Nav.pages[Nav.activePage]
 		if (activePageName == this.pageName) {
@@ -13,6 +17,6 @@ class Page {
 
 	static init() {
 		this.updateVisibility()
-		document.addEventListener("pageChange", () => {this.updateVisibility()})
+		document.addEventListener("pageChange", () => {this.onPageChange()})
 	}
 }
