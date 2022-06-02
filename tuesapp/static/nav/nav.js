@@ -27,5 +27,3 @@ class Nav {
 		}
 	}
 }
-
-Nav.init()
