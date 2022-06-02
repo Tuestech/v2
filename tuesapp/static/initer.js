@@ -1,1 +1,2 @@
 Nav.init()
+Dash.init()

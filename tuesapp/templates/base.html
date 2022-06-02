@@ -17,7 +17,8 @@
 	{% comment %} JS {% endcomment %}
 	<script defer src="{% static 'nav/nav.js' %}"></script>
 	<script defer src="{% static 'page/page.js' %}"></script>
-	<script defer src="{% static 'initer.js' %}"></script>
+	<script defer src="{% static 'dash/dash.js' %}"></script>
+	<script defer src="{% static 'initer.js' %}" ></script>
 
 	<style>
 		* {
@@ -29,5 +30,6 @@
 </head>
 <body>
 	{% include 'nav.html' %}
+	{% include 'dash.html' %}
 </body>
 </html>

@@ -13,6 +13,6 @@ class Page {
 
 	static init() {
 		this.updateVisibility()
-		document.addEventListener("pageChange", this.updateVisibility)
+		document.addEventListener("pageChange", () => {this.updateVisibility()})
 	}
 }
