@@ -20,8 +20,6 @@ body {
 		'nav content';
 	grid-template-columns: min-content auto;
 	grid-template-rows: min-content auto;
-	margin: 36px;
-	gap: 26px;
 	height: 100vh;
 	width: 100vw;
 	overflow: hidden;
@@ -29,16 +27,19 @@ body {
 }
 
 #title {
+	display: block;
 	grid-area: title;
 	font-weight: bold;
-	font-size: 48px;
+	font-size: 40px;
 	margin-top: 6px;
+	padding: 36px;
+	height: min-content;
 }
 
 #main-content {
 	grid-area: content;
-	width: 100%;
-	height: 100%;
+	padding: 36px;
+	gap: 26px;
 }
 
 /* Standard Design Classes */

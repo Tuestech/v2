@@ -14,9 +14,6 @@ class Nav {
 		// Update active page
 		this.activePage = index
 
-		// Update displayed page name
-		document.getElementById("title").innerText = this.titleNames[this.activePage]
-
 		// Dispatch event
 		document.dispatchEvent(this.pageChangeEvent)
 	}
