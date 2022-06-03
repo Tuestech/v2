@@ -1,5 +1,6 @@
 class Nav {
 	static pages = ["dash", "list", "schedule", "timer", "settings"]
+	static titleNames = ["Dashboard", "Lists", "Schedule", "Timer", "Settings"]
 	static activePage = 0
 	static icons = Array.from(document.getElementsByClassName("icon")).slice(1)
 	static pageChangeEvent = new Event("pageChange")
@@ -12,6 +13,9 @@ class Nav {
 
 		// Update active page
 		this.activePage = index
+
+		// Update displayed page name
+		document.getElementById("title").innerText = this.titleNames[this.activePage]
 
 		// Dispatch event
 		document.dispatchEvent(this.pageChangeEvent)
