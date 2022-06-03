@@ -50,16 +50,13 @@ body {
 	border-radius: 20px;
 	padding: 10px;
 	display: grid;
-	grid-template-areas:
-		'title'
-		'content';
 	gap: 5px;
+	grid-auto-flow: row;
 }
 
 .glass-panel .panel-title {
 	font-weight: bold;
 	font-size: 24px;
-	grid-area: title;
 }
 
 /* Standard Structure Classes */
