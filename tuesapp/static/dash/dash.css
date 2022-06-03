@@ -1,31 +1,31 @@
 /* Multi-Progress Bars */
 .multi-progress {
-    grid-area: content;
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    height: 46px;
-    width: 100%;
+	grid-area: content;
+	position: relative;
+	border-radius: 10px;
+	overflow: hidden;
+	height: 46px;
+	width: 100%;
 }
 .multi-progress .child.green {
-    background-color: var(--green);
+	background-color: var(--green);
 }
 .multi-progress .child.yellow {
-    background-color: var(--yellow);
+	background-color: var(--yellow);
 }
 .multi-progress .child.red {
-    background-color: var(--red);
+	background-color: var(--red);
 }
 .multi-progress .child.gray {
-    background-color: var(--gray);
+	background-color: var(--gray);
 }
 .multi-progress .child {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    height: 46px;
-    width: 100%;
-    margin-left: -100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	height: 46px;
+	width: 100%;
+	margin-left: -100%;
 }
