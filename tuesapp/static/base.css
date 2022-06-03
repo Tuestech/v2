@@ -61,3 +61,19 @@ body {
 	font-size: 24px;
 	grid-area: title;
 }
+
+/* Standard Structure Classes */
+.grid {
+	display: grid;
+	grid-template-rows: auto;
+	grid-auto-flow: row;
+	gap: 28px;
+}
+
+.grid .row-grid {
+	display: grid;
+	grid-auto-flow: column;
+	gap: 28px;
+	height: min-content;
+}
+
