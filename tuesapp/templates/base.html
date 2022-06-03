@@ -12,13 +12,22 @@
 
 	{% comment %} CSS {% endcomment %}
 	<link defer rel="stylesheet" href="{% static 'base.css' %}">
-	<link defer rel="stylesheet" href="{% static 'nav.css' %}">
+	<link defer rel="stylesheet" href="{% static 'nav/nav.css' %}">
+	<link defer rel="stylesheet" href="{% static 'dash/dash.css' %}">
+	<link defer rel="stylesheet" href="{% static 'list/list.css' %}">
+	<link defer rel="stylesheet" href="{% static 'schedule/schedule.css' %}">
+	<link defer rel="stylesheet" href="{% static 'timer/timer.css' %}">
+	<link defer rel="stylesheet" href="{% static 'settings/settings.css' %}">
+
 
 	{% comment %} JS {% endcomment %}
 	<script defer src="{% static 'nav/nav.js' %}"></script>
 	<script defer src="{% static 'page/page.js' %}"></script>
 	<script defer src="{% static 'dash/dash.js' %}"></script>
 	<script defer src="{% static 'list/list.js' %}"></script>
+	<script defer src="{% static 'schedule/schedule.js' %}"></script>
+	<script defer src="{% static 'timer/timer.js' %}"></script>
+	<script defer src="{% static 'settings/settings.js' %}"></script>
 	<script defer src="{% static 'initer.js' %}" ></script>
 
 	<style>
@@ -31,7 +40,15 @@
 </head>
 <body>
 	{% include 'nav.html' %}
-	{% include 'dash.html' %}
-	{% include 'list.html' %}
+
+	<p id="title">Loading...</p>
+
+	<div id="main-content">
+		{% include 'dash.html' %}
+		{% include 'list.html' %}
+		{% include 'schedule.html' %}
+		{% include 'timer.html' %}
+		{% include 'settings.html' %}
+	</div>
 </body>
 </html>

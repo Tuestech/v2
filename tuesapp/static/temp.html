@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Testing</title>
+
+	<style>
+		* {
+			margin: 0px;
+			padding: 0px;
+			font-family: sans-serif;
+		}
+		.glass-panel {
+			background: rgba(255, 255, 255, 0.25);
+			border: 1px solid rgba(255, 255, 255, 0.18);
+			box-shadow: 0px 0px 25px rgba(31, 97, 135, 0.1);
+			border-radius: 20px;
+			padding: 10px;
+			display: grid;
+			grid-template-areas:
+				'title'
+				'content';
+			gap: 5px;
+		}
+
+		.glass-panel .panel-title {
+			font-weight: bold;
+			font-size: 24px;
+			grid-area: title;
+		}
+
+		body {
+			padding: calc(50vh - 50px) auto;
+		}
+		.container {
+			width: 450px;
+			height: 100px;
+		}
+		.multi-progress {
+			grid-area: content;
+			position: relative;
+			border-radius: 10px;
+			overflow: hidden;
+			height: 46px;
+			width: 100%;
+		}
+		.multi-progress .child.green {
+			background-color: rgb(87, 239, 102);
+		}
+		.multi-progress .child.yellow {
+			background-color: rgb(255, 231, 76);
+		}
+		.multi-progress .child.red {
+			background-color: rgb(255, 89, 100);
+		}
+		.multi-progress .child.gray {
+			background-color: rgb(217, 217, 217);
+		}
+		.multi-progress .child {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			border-top-right-radius: 10px;
+			border-bottom-right-radius: 10px;
+			height: 46px;
+			width: 100%;
+			margin-left: -100%;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="glass-panel">
+			<p class="panel-title">Progress</p>
+			<div class="multi-progress">
+				<div class="child red" style="transform: translateX(50%);"></div>
+				<div class="child green" style="transform: translateX(10%);"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
