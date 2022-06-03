@@ -1,11 +1,11 @@
 /* Multi-Progress Bars */
 .multi-progress {
-	grid-area: content;
 	position: relative;
 	border-radius: 10px;
 	overflow: hidden;
 	height: 46px;
 	width: 100%;
+	background-color: var(--gray);
 }
 .multi-progress .child.green {
 	background-color: var(--green);
@@ -28,4 +28,15 @@
 	height: 46px;
 	width: 100%;
 	margin-left: -100%;
+}
+
+/* Row 1 */
+
+#dash .row1 {
+	grid-template-columns: max-content 1fr 1fr;
+}
+
+#basic-info-panel {
+	padding-right: 80px;
+	width: max-content;
 }

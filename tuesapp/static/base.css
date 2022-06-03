@@ -70,6 +70,7 @@ body {
 .grid .row-grid {
 	display: grid;
 	grid-auto-flow: column;
+	grid-auto-columns: max-content;
 	gap: 28px;
 	height: min-content;
 }

@@ -2,8 +2,29 @@
 
 <div id="dash" class="grid hidden">
 
-	<div class="row-grid">
+	<div class="row-grid row1">
 		{% comment %} Date, progress, timing {% endcomment %}
+		<div class="glass-panel" id="basic-info-panel">
+			<p class="panel-title" id="date-display">Friday, June 3</p>
+			<p id="p-complete">5%  Complete</p>
+			<p id="p-on-track">85% On-Track</p>
+		</div>
+
+		<div class="glass-panel">
+			<p class="panel-title">Progress</p>
+			<div class="multi-progress">
+				<div class="child yellow" id="yellow-progress" style="transform: TranslateX(90%)"></div>
+				<div class="child green" id="green-progress" style="transform: TranslateX(10%)"></div>
+			</div>
+		</div>
+
+		<div class="glass-panel">
+			<p class="panel-title">Timing</p>
+			<div class="multi-progress">
+				<div class="child red" id="red-timing" style="transform: TranslateX(90%)"></div>
+				<div class="child green" id="green-timing" style="transform: TranslateX(75%)"></div>
+			</div>
+		</div>
 	</div>
 
 	<div class="row-grid">
