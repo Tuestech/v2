@@ -16,14 +16,21 @@
 body {
 	display: grid;
 	grid-template-areas: 
-		'nav title'
 		'nav content';
 	grid-template-columns: min-content auto;
-	grid-template-rows: min-content auto;
 	height: 100vh;
 	width: 100vw;
 	overflow: hidden;
 	background-color: var(--light-gray);
+}
+
+#main-content {
+	display: grid;
+	grid-template-areas: 'title' 'body';
+	grid-template-rows: min-content auto;
+	grid-area: content;
+	padding: 36px;
+	gap: 26px;
 }
 
 #title {
@@ -32,14 +39,7 @@ body {
 	font-weight: bold;
 	font-size: 40px;
 	margin-top: 6px;
-	padding: 36px;
 	height: min-content;
-}
-
-#main-content {
-	grid-area: content;
-	padding: 36px;
-	gap: 26px;
 }
 
 /* Standard Design Classes */
@@ -61,4 +61,3 @@ body {
 	font-size: 24px;
 	grid-area: title;
 }
-
