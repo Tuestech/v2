@@ -21,6 +21,7 @@ class Page {
 
 	static init() {
 		this.updateVisibility()
+		this.onPageChange()
 		document.addEventListener("pageChange", () => {this.onPageChange()})
 	}
 }
