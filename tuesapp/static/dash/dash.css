@@ -40,3 +40,9 @@
 	padding-right: 80px;
 	width: max-content;
 }
+
+/* Row 2 */
+
+#dash .row2 {
+	grid-template-columns: auto max-content;
+}

@@ -62,7 +62,7 @@ body {
 /* Standard Structure Classes */
 .grid {
 	display: grid;
-	grid-template-rows: auto;
+	grid-template-rows: min-content;
 	grid-auto-flow: row;
 	gap: 28px;
 }
