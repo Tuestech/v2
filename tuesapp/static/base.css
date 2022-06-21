@@ -6,6 +6,7 @@
 	--red: rgb(255, 89, 100);
 	--yellow: rgb(255, 231, 76);
 	--green: rgb(87, 239, 102);
+	--blue: rgb(67, 139, 255);
 }
 
 /* Utility Classes */
@@ -78,3 +79,41 @@ body {
 	height: min-content;
 }
 
+/* Task Cards */
+.task-card {
+	display: grid;
+	grid-template-areas: 
+		'name days'
+		'progress progress';
+	grid-template-columns: auto max-content;
+	grid-template-rows: min-content min-content;
+	border-radius: 10px;
+	background-color: white;
+}
+
+.task-card p {
+	font-size: 18px;
+}
+
+.task-card p:nth-of-type(1) {
+	grid-area: name;
+}
+
+.task-card p:nth-of-type(2) {
+	grid-area: days;
+}
+
+/* Progress */
+.progress {
+	background-color: var(--gray);
+	border-radius: 100px;
+	height: 8px;
+	grid-area: progress;
+}
+
+.progress .blue {
+	border-radius: 100px;
+	height: 8px;
+	background-color: var(--blue);
+	width: 50%;
+}
