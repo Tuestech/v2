@@ -39,7 +39,7 @@
 	content: "";
 	position: absolute;
 	display: block;
-	background-color: rgb(243, 243, 243);
+	background-color: white;
 	margin-left: -3px;
 	width: calc(3px + 57px + 15px);
 	margin-top: -2px;

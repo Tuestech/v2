@@ -21,7 +21,7 @@ body {
 	height: 100vh;
 	width: 100vw;
 	overflow: hidden;
-	background-color: var(--light-gray);
+	background-color: white;
 }
 
 #main-content {
