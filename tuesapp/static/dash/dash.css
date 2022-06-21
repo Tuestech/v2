@@ -48,5 +48,5 @@
 /* Row 2 */
 
 #dash .row2 {
-	grid-template-columns: auto max-content;
+	grid-template-columns: minmax(min-content, 3fr) minmax(min-content, 4fr);
 }
