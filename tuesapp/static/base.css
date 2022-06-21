@@ -85,7 +85,7 @@ body {
 	grid-template-areas: 
 		'name days'
 		'progress progress';
-	grid-template-columns: auto max-content;
+	grid-template-columns: auto min-content;
 	grid-template-rows: min-content min-content;
 	border-radius: 10px;
 	background-color: white;
@@ -93,6 +93,9 @@ body {
 
 .task-card p {
 	font-size: 18px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .task-card p:nth-of-type(1) {
@@ -105,15 +108,42 @@ body {
 
 /* Progress */
 .progress {
+	-webkit-appearance: none;
+	appearance: none;
 	background-color: var(--gray);
-	border-radius: 100px;
 	height: 8px;
+	width: 100%;
 	grid-area: progress;
+	overflow: hidden;
+	border-radius: 100px;
+	cursor: pointer;
 }
 
-.progress .blue {
-	border-radius: 100px;
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
 	height: 8px;
+	width: 8px;
+	border-radius: 100px;
 	background-color: var(--blue);
-	width: 50%;
+	border: 0px;
+	box-shadow: -1004px 0 0 1000px var(--blue);
 }
+
+.progress::-moz-range-thumb {
+	background: red;
+	height: 8px;
+	width: 8px;
+	border-radius: 100px;
+	background-color: var(--blue);
+	border: 0px;
+	box-shadow: -1004px 0 0 1000px var(--blue);
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+	background-color: var(--gray);
+}
+
+input[type=range]::-moz-range-track {
+	background-color: var(--gray);
+}
+
