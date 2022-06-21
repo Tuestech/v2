@@ -2,6 +2,7 @@
 :root {
 	--light-gray: rgb(243, 243, 243);
 	--gray: rgb(217, 217, 217);
+	--dark-gray: rgb(67, 67, 67);
 	--red: rgb(255, 89, 100);
 	--yellow: rgb(255, 231, 76);
 	--green: rgb(87, 239, 102);
@@ -40,6 +41,7 @@ body {
 	font-size: 40px;
 	margin-top: 6px;
 	height: min-content;
+	color: var(--dark-gray)
 }
 
 /* Standard Design Classes */
@@ -56,7 +58,8 @@ body {
 
 .glass-panel .panel-title {
 	font-weight: bold;
-	font-size: 24px;
+	font-size: 22px !important;
+	color: var(--dark-gray)
 }
 
 /* Standard Structure Classes */

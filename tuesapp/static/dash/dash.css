@@ -41,6 +41,10 @@
 	width: max-content;
 }
 
+#basic-info-panel p {
+	font-size: 18px;
+}
+
 /* Row 2 */
 
 #dash .row2 {
