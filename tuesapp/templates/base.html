@@ -10,6 +10,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Tuesday - App</title>
 
+	{% comment %} Favicon {% endcomment %}
+	<link rel="icon" href="{% static 'favicons/Light.png'%}" media="(prefers-color-scheme:no-preference)">
+	<link rel="icon" href="{% static 'favicons/Dark.png'%}"  media="(prefers-color-scheme:dark)">
+	<link rel="icon" href="{% static 'favicons/Light.png'%}" media="(prefers-color-scheme:light)">
+
 	{% comment %} Auth Stuff {% endcomment %}
 	<meta name="uid" content="pretend the actual value is here">
 	
