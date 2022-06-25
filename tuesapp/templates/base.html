@@ -10,6 +10,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Tuesday - App</title>
 
+	{% comment %} Auth Stuff {% endcomment %}
+	<meta name="uid" content="pretend the actual value is here">
+	
 	{% comment %} CSS {% endcomment %}
 	<link defer rel="stylesheet" href="{% static 'base.css' %}">
 	<link defer rel="stylesheet" href="{% static 'nav/nav.css' %}">
@@ -19,8 +22,8 @@
 	<link defer rel="stylesheet" href="{% static 'timer/timer.css' %}">
 	<link defer rel="stylesheet" href="{% static 'settings/settings.css' %}">
 
-
 	{% comment %} JS {% endcomment %}
+	<script defer src="{% static 'data.js' %}"></script>
 	<script defer src="{% static 'page.js' %}"></script>
 	<script defer src="{% static 'nav/nav.js' %}"></script>
 	<script defer src="{% static 'dash/dash.js' %}"></script>

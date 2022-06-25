@@ -1,5 +1,11 @@
 class Data {
 	static tasks
+	static uid
+
+	// Get uid
+	static getUid() {
+		this.uid = document.querySelector("meta[name='uid']").content
+	}
 
 	// Network
 	static post(url, data, csrfToken) {
@@ -27,5 +33,6 @@ class Data {
 	}
 
 	static init() {
+		Data.getUid()
 	}
 }
