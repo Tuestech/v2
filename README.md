@@ -1,5 +1,5 @@
 # Tuesday
-Tuesday is a task management tool that helps students manage and prioritize tasks.
+Tuesday is a web app that helps students manage and prioritize tasks.
 
 ## Table of contents
 
