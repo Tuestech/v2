@@ -16,7 +16,7 @@
 	<link rel="icon" href="{% static 'favicons/Light.png'%}" media="(prefers-color-scheme:light)">
 
 	{% comment %} Auth Stuff {% endcomment %}
-	<meta name="uid" content="pretend the actual value is here">
+	<meta name="csrf_token" content="{{ csrf_token }}">
 	
 	{% comment %} CSS {% endcomment %}
 	<link defer rel="stylesheet" href="{% static 'base.css' %}">

@@ -1,23 +1,19 @@
 class Data {
 	static tasks
-	static uid
-
-	// Get uid
-	static getUid() {
-		this.uid = document.querySelector("meta[name='uid']").content
-	}
 
 	// Network
 	static post(url, data, csrfToken) {
+		let xhr
 		if (window.XMLHttpRequest) {
-			xhr = new XMLHttpRequest();
+			xhr = new XMLHttpRequest()
 		} else if (window.ActiveXObject) {
-			xhr = new ActiveXObject("Microsoft.XMLHTTP");
+			xhr = new ActiveXObject("Microsoft.XMLHTTP")
 		}
-		xhr.open('POST', url, true);
-		xhr.setRequestHeader('Content-Type', 'application/json');
-		xhr.setRequestHeader('X-CSRF-Token', csrfToken);
-		xhr.send(JSON.stringify(data));
+		xhr.open('POST', url, true)
+		xhr.setRequestHeader('Content-Type', 'application/json')
+		xhr.setRequestHeader('X-CSRFToken', csrfToken)
+		xhr.setRequestHeader("Accept", "application/json")
+		xhr.send(JSON.stringify(data))
 	}
 
 	static get() {
@@ -27,12 +23,18 @@ class Data {
 	}
 
 	static set() {
-		// TODO: Use an actual csrf token
-		const csrfToken = "asdf"
-		// TODO: Send Post request using post function
+		// Get latest CSRF token
+		const csrfToken = document.querySelector("meta[name='csrf_token']").content
+
+		// TODO: Convert data to nested arrays and JSON stringify
+		const data = {
+			"appData": "qweagsdgasdgrty"
+		}
+
+		// Send Post request
+		Data.post("/updateuser/", data, csrfToken)
 	}
 
 	static init() {
-		Data.getUid()
 	}
 }
