@@ -14,6 +14,7 @@ import json
 def main(request):
 	return render(request, "base.html")
 
+@login_required
 @require_http_methods(["POST"])
 def updateUser(request):
 	# Convert request data to dict
