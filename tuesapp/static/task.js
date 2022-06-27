@@ -6,10 +6,10 @@ class Task {
 		}
 	}
 
-	static toArray(task) {
+	toArray() {
 		let out = []
 		for (const key of keys) {
-			out.push(task[key])
+			out.push(this[key])
 		}
 		return out
 	}
