@@ -1,10 +1,17 @@
 class Task {
-	constructor(name, course, start, end, progress) {
-		this.course = course
-		this.name = name
-		this.start = start
-		this.end = end
-		this.progress = progress
+	static keys = ["name", "course", "start", "end", "progress", "link"]
+	constructor(arr) {
+		for (let i = 0; i < Task.keys.length; i++) {
+			this[Task.keys[i]] = arr[i]
+		}
+	}
+
+	static toArray(task) {
+		let out = []
+		for (const key of keys) {
+			out.push(task[key])
+		}
+		return out
 	}
 
 	getScore() {
