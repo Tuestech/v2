@@ -16,10 +16,13 @@ class Data {
 		xhr.send(JSON.stringify(data))
 	}
 
-	static get() {
-		// TODO: Use fetch to get data
-		let result = fetch("url goes here")
-		tasks = JSON.parse()
+	static get(callback) {
+		fetch("/getuser/").then(result => {
+			result = JSON.parse(result)
+			// TODO: Convert result into objects before storing back into Data
+			Data.tasks = "Asdfasdf"
+			callback()
+		})
 	}
 
 	static set() {
