@@ -84,9 +84,13 @@ SOCIALACCOUNT_PROVIDERS = {
 	}
 }
 
+LOGIN_URL = "/accounts/google/login/?process=login"
+
 LOGIN_REDIRECT_URL = '/app/'
 
 ACCOUNT_USERNAME_REQUIRED = False
+
+SOCIALACCOUNT_LOGIN_ON_GET=True
 
 SOCIALACCOUNT_AUTO_SIGNUP = True
 
