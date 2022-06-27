@@ -15,6 +15,17 @@ def main(request):
 	return render(request, "base.html")
 
 @login_required
+def getUser(request):
+	uid = SocialAccount.objects.filter(user=request.user).first().uid
+
+	# Attempt to find user and return data
+	try:
+		user = User.objects.get(uid=uid)
+		return user.app_data
+	except ObjectDoesNotExist:
+		return HttpResponseServerError("Invalid Request: User does not exist")
+
+@login_required
 @require_http_methods(["POST"])
 def updateUser(request):
 	# Convert request data to dict
