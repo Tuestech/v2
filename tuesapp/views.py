@@ -11,10 +11,12 @@ from .models import User
 import json
 
 @login_required
+@require_http_methods(["GET"])
 def main(request):
 	return render(request, "base.html")
 
 @login_required
+@require_http_methods(["GET"])
 def getUser(request):
 	uid = SocialAccount.objects.filter(user=request.user).first().uid
 
