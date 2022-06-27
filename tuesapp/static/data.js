@@ -1,6 +1,16 @@
 class Data {
 	static tasks
 
+	// Task Processing
+	static fromJSON(json) {
+		const arr_tasks = JSON.parse(json)
+		temp = []
+		for (const task of arr_tasks) {
+			temp.push(new Task(task))
+		}
+		Data.tasks = temp
+	}
+
 	// Network
 	static post(url, data, csrfToken) {
 		let xhr
@@ -18,9 +28,7 @@ class Data {
 
 	static get(callback) {
 		fetch("/getuser/").then(result => {
-			result = JSON.parse(result)
-			// TODO: Convert result into objects before storing back into Data
-			Data.tasks = "Asdfasdf"
+			Data.fromJSON(result)
 			callback()
 		})
 	}
@@ -29,9 +37,14 @@ class Data {
 		// Get latest CSRF token
 		const csrfToken = document.querySelector("meta[name='csrf_token']").content
 
-		// TODO: Convert data to nested arrays and JSON stringify
+		// Convert data to nested arrays and JSON stringify
+		let arrTasks = []
+		for (const task of arrTasks) {
+			arrTasks.push(task.toArray())
+		}
+
 		const data = {
-			"appData": "qweagsdgasdgrty"
+			"appData": JSON.stringify(arrTasks)
 		}
 
 		// Send Post request
