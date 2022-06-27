@@ -23,7 +23,7 @@ def getUser(request):
 	# Attempt to find user and return data
 	try:
 		user = User.objects.get(uid=uid)
-		return user.app_data
+		return HttpResponse(user.app_data)
 	except ObjectDoesNotExist:
 		return HttpResponseServerError("Invalid Request: User does not exist")
 
