@@ -10,6 +10,28 @@ from .models import User
 
 import json
 
+# DEVELOPMENT PURPOSES ONLY
+@login_required
+def setSampleData(request):
+	# Sample Data
+	SAMPLE = '[{"name":"Task 1","course":"Class","start":"2022-06-28T22:28:47.393Z","end":"2022-06-28T22:28:47.000Z","progress":90,"link":"https://example.com"},{"name":"Task 2","course":"Class","start":"2022-06-28T22:32:36.139Z","end":"2022-06-28T22:32:36.000Z","progress":30,"link":"https://example.com"},{"name":"Task 3","course":"Class 2","start":"2022-06-28T22:32:45.000Z","end":"2022-06-28T22:32:45.000Z","progress":50,"link":"https://example.com"}]'
+
+	# Get UID
+	uid = SocialAccount.objects.filter(user=request.user).first().uid
+	name = request.user.username
+
+	# Attempt to update an existing user, creates a new user otherwise
+	try:
+		user = User.objects.get(uid=uid)
+		user.app_data = SAMPLE
+	except ObjectDoesNotExist:
+		user = User(uid=uid, name=name, app_data=SAMPLE)
+
+	user.save()
+
+	# Return
+	return HttpResponse("Good")
+
 @login_required
 @require_http_methods(["GET"])
 def main(request):
