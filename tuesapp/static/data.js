@@ -39,7 +39,7 @@ class Data {
 
 		// Convert data to nested arrays and JSON stringify
 		let arrTasks = []
-		for (const task of arrTasks) {
+		for (const task of Data.tasks) {
 			arrTasks.push(task.toArray())
 		}
 
