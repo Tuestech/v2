@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% comment %} Meta and stuff {% endcomment %}
+	<base target="_self">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tuesday Technologies</title>
+
+	{% comment %} Favicon {% endcomment %}
+	<link rel="icon" href="{% static 'favicons/Light.png'%}" media="(prefers-color-scheme:no-preference)">
+	<link rel="icon" href="{% static 'favicons/Dark.png'%}"  media="(prefers-color-scheme:dark)">
+	<link rel="icon" href="{% static 'favicons/Light.png'%}" media="(prefers-color-scheme:light)">
+
+	<link rel="stylesheet" href="{% static 'landing.css' %}">
+</head>
+<body>
+	<script src="{% static 'landing.js' %}"></script>
+</body>
+</html>
