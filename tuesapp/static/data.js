@@ -4,7 +4,7 @@ class Data {
 	// Task Processing
 	static fromJSON(json) {
 		const arr_tasks = JSON.parse(json)
-		temp = []
+		let temp = []
 		for (const task of arr_tasks) {
 			temp.push(new Task(task))
 		}
@@ -52,5 +52,7 @@ class Data {
 	}
 
 	static init() {
+		const data = document.getElementById("data").innerText
+		this.fromJSON(data)
 	}
 }

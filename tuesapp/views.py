@@ -35,7 +35,17 @@ def setSampleData(request):
 @login_required
 @require_http_methods(["GET"])
 def main(request):
-	return render(request, "base.html")
+	uid = SocialAccount.objects.filter(user=request.user).first().uid
+
+	# Attempt to find user and get data, creates a new blank user otherwise
+	try:
+		user = User.objects.get(uid=uid)
+		data = user.app_data
+	except ObjectDoesNotExist:
+		name = request.user.username
+		user = User(uid=uid, name=name, app_data="")
+		data = ""
+	return render(request, "base.html", {"data": data})
 
 @login_required
 @require_http_methods(["GET"])
