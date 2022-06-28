@@ -14,7 +14,7 @@ import json
 @login_required
 def setSampleData(request):
 	# Sample Data
-	SAMPLE = '[["Task 1","Class","2022-06-28T22:55:20.978Z","2022-06-28T22:55:20.000Z",10,"https://example.com"],["Task 2","Class","2022-06-28T22:55:26.115Z","2022-06-28T22:55:26.000Z",70,"https://example.com"],["Task 3","Class 2","2022-06-28T22:55:30.000Z","2022-06-28T22:55:30.000Z",70,"https://example.com"]]'
+	SAMPLE = '[["Task 1","Class","2022-06-28T05:00:00.000Z","2022-07-01T05:00:00.000Z",10,"https://example.com"],["Task 2","Class","2022-06-28T05:00:00.000Z","2022-06-30T05:00:00.000Z",80,"https://example.com"],["Task 3","Class 3","2022-06-29T05:00:00.000Z","2022-07-05T05:00:00.000Z",60,"https://example.com"]]'
 
 	# Get UID
 	uid = SocialAccount.objects.filter(user=request.user).first().uid
