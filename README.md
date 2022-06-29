@@ -60,10 +60,43 @@ After a suggestion is submited, you can track out progress and see your idea com
 
 This is the full code of the Django app (except the actual secret key, which is replaced by a django default).
 
-If you already have Django installed, you can start a local development server directly from this repo by running this command:
+Running this app requires [Python](https://www.python.org/downloads/) and a few libraries.
+
+In the environment you would like to work in, run the following commands:
+```
+pip install Django
+pip install django-allauth
+```
+
+Run this to set up the local database:
+```
+python manage.py migrate
+```
+
+Now, you need to create a local superuser.
+Note that these credentials are stored locally so they don't need to be particularly secure.
+Run the following command and follow the instructions:
+```
+python manage.py createsuperuser
+```
+
+Start the local server with this command:
 ```
 python manage.py runserver
 ```
+
+Open your web browser and go to `https://127.0.0.1:8000/admin`.
+This should open the login to the admin site.
+Use your credentials from before the log in.
+
+Now, navigate to `Social applications` on the left menu and add your Google OAuth credentials (Just client ID and client secret).
+If you don't have these credentials yet, check out [this help page](https://support.google.com/cloud/answer/6158849?hl=en) to get them.
+
+Once you're done with the admin page, you must log out with the link in the top right.
+
+Now, go to `https://127.0.0.1:8080/setsample/`.
+You should be prompted to sign in with Google.
+If the page says `Good`, your dev environment is all set up!
 
 &nbsp;
 
