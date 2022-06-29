@@ -39,7 +39,6 @@ class Dash extends Page {
 	// pdone and pstarted are between 0 and 100
 	// pstarted doesn't include tasks that are done
 	static updateProgressBar(pdone, pstarted) {
-		const prefix = "transform: translateX("
 		document.getElementById("green-progress").setAttribute("style", `transform: translateX(${pdone}%);`)
 		document.getElementById("yellow-progress").setAttribute("style", `transform: translateX(${pdone +pstarted}%);`)
 	}
