@@ -1,6 +1,7 @@
 class Dash extends Page {
 	static onPageChange() {
 		this.updateBasicInfoPanel()
+		this.updateProgressBar()
 		super.onPageChange()
 	}
 
@@ -38,7 +39,19 @@ class Dash extends Page {
 
 	// pdone and pstarted are between 0 and 100
 	// pstarted doesn't include tasks that are done
-	static updateProgressBar(pDone, pStarted) {
+	static updateProgressBar() {
+		let doneProgress = 0
+		let totalProgress = 0
+		for (const task of Data.tasks) {
+			if (task.progress == 100) {
+				doneProgress += 100
+			}
+			totalProgress += task.progress
+		}
+
+		const pDone = doneProgress/Data.tasks.length
+		const pStarted = totalProgress/Data.tasks.length
+
 		document.getElementById("green-progress").setAttribute("style", `transform: translateX(${pDone}%);`)
 		document.getElementById("yellow-progress").setAttribute("style", `transform: translateX(${pDone +pStarted}%);`)
 	}
