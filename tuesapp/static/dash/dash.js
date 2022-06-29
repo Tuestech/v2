@@ -45,7 +45,7 @@ class Dash extends Page {
 	}
 
 	// pgood and pbad are between 0 and 100
-	static updateProgressBar(pgood, pbad) {
+	static updateTimingBar(pgood, pbad) {
 		const prefix = "transform: translateX("
 		document.getElementById("green-timing").setAttribute("style", prefix + pgood + "%);")
 		document.getElementById("red-timing").setAttribute("style", prefix + (pgood + pbad) + "%);")
