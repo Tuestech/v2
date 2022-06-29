@@ -2,6 +2,7 @@ class Dash extends Page {
 	static onPageChange() {
 		this.updateBasicInfoPanel()
 		this.updateProgressBar()
+		this.updateTimingBar()
 		super.onPageChange()
 	}
 
@@ -57,7 +58,20 @@ class Dash extends Page {
 	}
 
 	// pgood and pbad are between 0 and 100
-	static updateTimingBar(pGood, pBad) {
+	static updateTimingBar() {
+		let numGood = 0
+		let numBad = 0
+		for (const task of Data.tasks) {
+			if (task.getScore() < 0) {
+				numBad++
+			} else if (task.getScore() > 0) {
+				numGood++
+			}
+		}
+
+		const pGood = 100 * numGood / Data.tasks.length
+		const pBad = 100 * numBad / Data.tasks.length
+
 		document.getElementById("green-timing").setAttribute("style", `transform: translateX(${pGood}%);`)
 		document.getElementById("red-timing").setAttribute("style", `transform: translateX(${pGood + pBad}%);`)
 	}
