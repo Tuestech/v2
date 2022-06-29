@@ -38,15 +38,15 @@ class Dash extends Page {
 
 	// pdone and pstarted are between 0 and 100
 	// pstarted doesn't include tasks that are done
-	static updateProgressBar(pdone, pstarted) {
-		document.getElementById("green-progress").setAttribute("style", `transform: translateX(${pdone}%);`)
-		document.getElementById("yellow-progress").setAttribute("style", `transform: translateX(${pdone +pstarted}%);`)
+	static updateProgressBar(pDone, pStarted) {
+		document.getElementById("green-progress").setAttribute("style", `transform: translateX(${pDone}%);`)
+		document.getElementById("yellow-progress").setAttribute("style", `transform: translateX(${pDone +pStarted}%);`)
 	}
 
 	// pgood and pbad are between 0 and 100
-	static updateTimingBar(pgood, pbad) {
-		document.getElementById("green-timing").setAttribute("style", `transform: translateX(${pgood}%);`)
-		document.getElementById("red-timing").setAttribute("style", `transform: translateX(${pgood + pbad}%);`)
+	static updateTimingBar(pGood, pBad) {
+		document.getElementById("green-timing").setAttribute("style", `transform: translateX(${pGood}%);`)
+		document.getElementById("red-timing").setAttribute("style", `transform: translateX(${pGood + pBad}%);`)
 	}
 	
 	static init() {
