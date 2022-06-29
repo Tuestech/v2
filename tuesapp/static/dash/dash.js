@@ -13,9 +13,27 @@ class Dash extends Page {
 
 		document.getElementById("date-display").innerText = dateString
 
-		// Build Progress String (TODO)
+		// Build Complete String
+		let numDone = 0
+		for (const task of Data.tasks) {
+			if (task.progress == 0) {
+				numDone++
+			}
+		}
+		const pDone = Math.floor(100 * numDone / Data.tasks.length)
 
-		// Build Timing String (TODO)
+		document.getElementById("p-complete").innerText = `${pDone}% Complete`
+
+		// Build On Track String (TODO)
+		let numOnTrack = 0
+		for (const task of Data.tasks) {
+			if (task.getScore() >= 0) {
+				numOnTrack++
+			}
+		}
+		const pOnTrack = Math.floor(100 * numOnTrack / Data.tasks.length)
+
+		document.getElementById("p-on-track").innerText = `${pOnTrack}% On Track`
 	}
 
 	// pdone and pstarted are between 0 and 100
