@@ -50,3 +50,8 @@
 #dash .row2 {
 	grid-template-columns: minmax(min-content, 3fr) minmax(min-content, 4fr);
 }
+
+#current-tasks {
+	display: grid;
+	gap: 15px;
+}

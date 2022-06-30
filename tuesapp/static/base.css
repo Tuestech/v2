@@ -93,6 +93,7 @@ body {
 
 .task-card p {
 	font-size: 18px;
+	font-weight: normal;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
