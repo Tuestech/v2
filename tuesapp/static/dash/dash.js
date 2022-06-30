@@ -6,7 +6,7 @@ class Dash extends Page {
 		this.updateTimingBar()
 
 		// Row 2
-		
+		this.updateCurrentTasks()
 
 		// Update page visibility
 		super.onPageChange()
@@ -77,6 +77,34 @@ class Dash extends Page {
 
 		document.getElementById("green-timing").setAttribute("style", `transform: translateX(${pGood}%);`)
 		document.getElementById("red-timing").setAttribute("style", `transform: translateX(${pGood + pBad}%);`)
+	}
+
+	static updateCurrentTasks() {
+		const currentTasks = document.getElementById("current-tasks")
+
+		for (const task of Data.tasks) {
+			const taskDiv = document.createElement("div")
+			taskDiv.className = "task-card glass-panel"
+
+			const taskName = document.createElement("p")
+			taskName.innerText = task.name
+			taskDiv.append(taskName)
+
+			// TODO: Implement good method of calculating time left
+			const timeLeft = document.createElement("p")
+			timeLeft.innerText = "2 days"
+			taskDiv.append(timeLeft)
+
+			const taskProgress = document.createElement("input")
+			taskProgress.setAttribute("type", "range")
+			taskProgress.setAttribute("min", "0")
+			taskProgress.setAttribute("max", "100")
+			taskProgress.setAttribute("value", task.progress)
+			taskProgress.className = "progress"
+			taskDiv.append(taskProgress)
+
+			currentTasks.append(taskDiv)
+		}
 	}
 	
 	static init() {
