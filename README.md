@@ -94,7 +94,7 @@ If you don't have these credentials yet, check out [this help page](https://supp
 
 Once you're done with the admin page, you must log out with the link in the top right.
 
-Now, go to `https://127.0.0.1:8080/setsample/`.
+Now, go to `https://127.0.0.1:8000/setsample/`.
 You should be prompted to sign in with Google.
 If the page says `Good`, your dev environment is all set up!
 
