@@ -1,8 +1,14 @@
 class Dash extends Page {
 	static onPageChange() {
+		// Row 1
 		this.updateBasicInfoPanel()
 		this.updateProgressBar()
 		this.updateTimingBar()
+
+		// Row 2
+		
+
+		// Update page visibility
 		super.onPageChange()
 	}
 
@@ -38,8 +44,6 @@ class Dash extends Page {
 		document.getElementById("p-on-track").innerText = `${pOnTrack}% On Track`
 	}
 
-	// pdone and pstarted are between 0 and 100
-	// pstarted doesn't include tasks that are done
 	static updateProgressBar() {
 		let doneProgress = 0
 		let totalProgress = 0
@@ -57,7 +61,6 @@ class Dash extends Page {
 		document.getElementById("yellow-progress").setAttribute("style", `transform: translateX(${pDone +pStarted}%);`)
 	}
 
-	// pgood and pbad are between 0 and 100
 	static updateTimingBar() {
 		let numGood = 0
 		let numBad = 0
