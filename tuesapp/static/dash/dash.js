@@ -82,12 +82,16 @@ class Dash extends Page {
 
 	static updateCurrentTasks() {
 		const currentTasks = document.getElementById("current-tasks")
+
+		// Prevents duplicate tasks
 		Page.clearChildren(currentTasks)
 
 		for (const task of Data.tasks) {
+			// Create new panel for the task
 			const taskDiv = document.createElement("div")
 			taskDiv.className = "task-card glass-panel"
 
+			// Set task name
 			const taskName = document.createElement("p")
 			taskName.innerText = task.name
 			taskDiv.append(taskName)
@@ -97,6 +101,7 @@ class Dash extends Page {
 			timeLeft.innerText = "2 days"
 			taskDiv.append(timeLeft)
 
+			// Add the slider/progress bar
 			const taskProgress = document.createElement("input")
 			taskProgress.setAttribute("type", "range")
 			taskProgress.setAttribute("min", "0")
@@ -105,6 +110,7 @@ class Dash extends Page {
 			taskProgress.className = "progress"
 			taskDiv.append(taskProgress)
 
+			// Add the full task element to the page
 			currentTasks.append(taskDiv)
 		}
 	}
@@ -123,14 +129,22 @@ class Dash extends Page {
 		let currDate = new Date()
 		for (let i = 1; i <= 5; i++) {
 			const dayDiv = document.getElementById(`day-${i}`)
+
+			// Prevents duplicate tasks
 			Page.clearChildren(dayDiv)
 			for (const task of Data.tasks) {
+				// Creates element if the due date matches the date of the calendar
 				if (task.end.toDateString() == currDate.toDateString()) {
+					// Create the container element
 					const taskDiv = document.createElement("div")
 					taskDiv.className = "glass-panel"
+
+					// Create the task name
 					const textP = document.createElement("p")
 					textP.innerText = `${task.name} Due`
 					taskDiv.append(textP)
+
+					// Add task to the page
 					dayDiv.append(taskDiv)
 				}
 			}
