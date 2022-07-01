@@ -82,6 +82,7 @@ class Dash extends Page {
 
 	static updateCurrentTasks() {
 		const currentTasks = document.getElementById("current-tasks")
+		Page.clearChildren(currentTasks)
 
 		for (const task of Data.tasks) {
 			const taskDiv = document.createElement("div")
@@ -122,6 +123,7 @@ class Dash extends Page {
 		let currDate = new Date()
 		for (let i = 1; i <= 5; i++) {
 			const dayDiv = document.getElementById(`day-${i}`)
+			Page.clearChildren(dayDiv)
 			for (const task of Data.tasks) {
 				if (task.end.toDateString() == currDate.toDateString()) {
 					const taskDiv = document.createElement("div")

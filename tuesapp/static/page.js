@@ -19,6 +19,12 @@ class Page {
 		}
 	}
 
+	static clearChildren(parent) {
+		while (parent.firstChild) {
+			parent.removeChild(parent.firstChild)
+		}
+	}
+
 	static init() {
 		this.updateVisibility()
 		this.onPageChange()
