@@ -30,6 +30,11 @@
 	margin-left: -100%;
 }
 
+/* Dash */
+#dash {
+	grid-template-rows: min-content auto min-content;
+}
+
 /* Row 1 */
 
 #dash .row1 {
@@ -49,9 +54,14 @@
 
 #dash .row2 {
 	grid-template-columns: minmax(min-content, 3fr) minmax(min-content, 4fr);
+	height: 100%;
 }
 
 #current-tasks {
 	display: grid;
 	gap: 15px;
+	align-items: start;
+	align-content: start;
 }
+
+
