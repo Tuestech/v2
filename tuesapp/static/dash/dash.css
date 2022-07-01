@@ -90,3 +90,34 @@
 	overflow-wrap: break-word;
 	overflow: hidden
 }
+
+/* Row 3 */
+
+#dash .row3 {
+	grid-template-rows: repeat(2, min-content);
+	gap: 5px;
+}
+
+#links {
+	width: 100%;
+	display: grid;
+	grid-auto-flow: column;
+	gap: 10px;
+}
+
+#links .glass-panel {
+	padding: 5px;
+	border-radius: 10px;
+}
+
+.link {
+	display: grid;
+	grid-template-columns: min-content max-content;
+	gap: 10px;
+	align-items: center;
+	cursor: pointer;
+}
+
+.link p {
+	font-size: 18px;
+}
