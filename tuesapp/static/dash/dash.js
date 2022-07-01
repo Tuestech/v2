@@ -7,6 +7,7 @@ class Dash extends Page {
 
 		// Row 2
 		this.updateCurrentTasks()
+		this.updateUpcoming()
 
 		// Update page visibility
 		super.onPageChange()
@@ -104,6 +105,34 @@ class Dash extends Page {
 			taskDiv.append(taskProgress)
 
 			currentTasks.append(taskDiv)
+		}
+	}
+
+	static updateUpcoming() {
+		const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+		
+		// Set day name headers
+		let idIndex = 1
+		for (let i = new Date().getDay(); i < new Date().getDay() + 5; i++) {
+			document.getElementById(`day-label-${idIndex}`).innerText = dayNames[i]
+			idIndex += 1
+		}
+
+		// Add tasks
+		let currDate = new Date()
+		for (let i = 1; i <= 5; i++) {
+			const dayDiv = document.getElementById(`day-${i}`)
+			for (const task of Data.tasks) {
+				if (task.end.toDateString() == currDate.toDateString()) {
+					const taskDiv = document.createElement("div")
+					taskDiv.className = "glass-panel"
+					const textP = document.createElement("p")
+					textP.innerText = `${task.name} Due`
+					taskDiv.append(textP)
+					dayDiv.append(taskDiv)
+				}
+			}
+			currDate.setDate(currDate.getDate() + 1)
 		}
 	}
 	
