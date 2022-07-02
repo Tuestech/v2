@@ -66,7 +66,10 @@ class Data {
 	}
 
 	static init() {
-		const data = document.getElementById("data").innerText
-		this.tasks = this.fromJSON(data, Task)
+		const data = JSON.parse(document.getElementById("data").innerText)
+		this.tasks = this.fromJSON(data["tasks"], Task)
+		// Commented out because Event class is not implemented yet
+		// this.events = this.fromJSON(data["events"], Event)
+		this.links = JSON.parse(data["links"])
 	}
 }
