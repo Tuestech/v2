@@ -1,14 +1,17 @@
 class Data {
 	static tasks
+	static events
+	static links
+	static settings
 
 	// Task Processing
-	static fromJSON(json) {
-		const arr_tasks = JSON.parse(json)
+	static fromJSON(json, class_) {
+		const arr = JSON.parse(json)
 		let temp = []
-		for (const task of arr_tasks) {
-			temp.push(new Task(task))
+		for (const item of arr) {
+			temp.push(new class_(item))
 		}
-		Data.tasks = temp
+		return temp
 	}
 
 	// Network
@@ -28,7 +31,7 @@ class Data {
 
 	static get(callback) {
 		fetch("/getuser/").then(result => {
-			Data.fromJSON(result)
+			Data.tasks = Data.fromJSON(result, Task)
 			callback()
 		})
 	}
@@ -37,7 +40,7 @@ class Data {
 		// Get latest CSRF token
 		const csrfToken = document.querySelector("meta[name='csrf_token']").content
 
-		// Convert data to nested arrays and JSON stringify
+		// Convert tasks to nested arrays and JSON stringify
 		let arrTasks = []
 		for (const task of Data.tasks) {
 			arrTasks.push(task.toArray())
@@ -53,6 +56,6 @@ class Data {
 
 	static init() {
 		const data = document.getElementById("data").innerText
-		this.fromJSON(data)
+		this.tasks = this.fromJSON(data, Task)
 	}
 }
