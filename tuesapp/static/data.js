@@ -56,8 +56,9 @@ class Data {
 			"appData": JSON.stringify({
 				"tasks": JSON.stringify(arrTasks),
 				"events": JSON.stringify(arrEvents),
-				// No need to convert links because they will not be objects
-				"links": JSON.stringify(Data.links)
+				// No need to convert because they will not be special objects
+				"links": JSON.stringify(Data.links),
+				"settings": JSON.stringify(Data.settings)
 			})
 		}
 
@@ -71,5 +72,6 @@ class Data {
 		// Commented out because Event class is not implemented yet
 		// this.events = this.fromJSON(data["events"], Event)
 		this.links = JSON.parse(data["links"])
+		this.settings = JSON.parse(data["settings"])
 	}
 }
