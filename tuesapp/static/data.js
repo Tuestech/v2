@@ -40,14 +40,25 @@ class Data {
 		// Get latest CSRF token
 		const csrfToken = document.querySelector("meta[name='csrf_token']").content
 
-		// Convert tasks to nested arrays and JSON stringify
+		// Convert tasks to nested arrays
 		let arrTasks = []
 		for (const task of Data.tasks) {
 			arrTasks.push(task.toArray())
 		}
 
+		// Convert events to nested arrays
+		let arrEvents = []
+		for (const event of Data.events) {
+			arrEvents.push(event.toArray())
+		}
+
 		const data = {
-			"appData": JSON.stringify(arrTasks)
+			"appData": JSON.stringify({
+				"tasks": JSON.stringify(arrTasks),
+				"events": JSON.stringify(arrEvents),
+				// No need to convert links because they will not be objects
+				"links": JSON.stringify(Data.links)
+			})
 		}
 
 		// Send Post request
