@@ -14,6 +14,15 @@
 	display: none !important;
 }
 
+.button {
+	transition: filter 0.3s;
+}
+
+.button:hover {
+	cursor: pointer;
+	filter: brightness(0.85);
+}
+
 /* Full Page Layout Classes */
 body {
 	display: grid;
