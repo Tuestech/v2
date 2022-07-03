@@ -23,6 +23,13 @@
 	filter: brightness(0.85);
 }
 
+.empty-text {
+	display: grid;
+	align-items: center;
+	font-size: 18px;
+	width: max-content;
+}
+
 /* Full Page Layout Classes */
 body {
 	display: grid;
