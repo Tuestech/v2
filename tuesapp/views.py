@@ -10,11 +10,34 @@ from .models import User
 
 import json
 
+import datetime
+
 # DEVELOPMENT PURPOSES ONLY
 @login_required
 def setSampleData(request):
-	# Sample Data
-	SAMPLE = '[["Task 1","Class","2022-06-28T05:00:00.000Z","2022-07-01T05:00:00.000Z",10,"https://example.com"],["Task 2","Class","2022-06-28T05:00:00.000Z","2022-06-30T05:00:00.000Z",80,"https://example.com"],["Task 3","Class 3","2022-06-29T05:00:00.000Z","2022-07-05T05:00:00.000Z",60,"https://example.com"]]'
+	# Days
+	def days_after(n):
+		return (datetime.datetime.now() + datetime.timedelta(days=n)).strftime("%Y-%m-%d")
+
+	# Task sample data
+	tasks = f'[["Task 1","Class","{days_after(0)}","{days_after(3)}",10,"https://example.com"],["Task 2","Class","{days_after(0)}","{days_after(2)}",80,"https://example.com"],["Task 3","Class 3","{days_after(1)}","{days_after(8)}",60,"https://example.com"]]'
+
+	# Events sample data
+	# No sample data because it's not implemented in frontend yet
+	events = '[]'
+
+	# Links sample data
+	# No sample data because it's not implemented in frontend yet
+	links = '[]'
+
+	# Settings sample data
+	# No sample data because it's not implemented in frontend yet
+	settings = '[]'
+
+	# Combined sample data
+	SAMPLE = json.dumps(
+		{"tasks": tasks, "events": events, "links": links, "settings": settings}
+	)
 
 	# Get UID
 	uid = SocialAccount.objects.filter(user=request.user).first().uid
