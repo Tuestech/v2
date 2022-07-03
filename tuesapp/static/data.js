@@ -70,7 +70,7 @@ class Data {
 		const data = JSON.parse(document.getElementById("data").innerText)
 		this.tasks = this.fromJSON(data["tasks"], Task)
 		// Commented out because Event class is not implemented yet
-		// this.events = this.fromJSON(data["events"], Event)
+		this.events = this.fromJSON(data["events"], Event)
 		this.links = JSON.parse(data["links"])
 		this.settings = JSON.parse(data["settings"])
 	}
