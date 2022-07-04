@@ -95,11 +95,8 @@ class Dash extends Page {
 		const currentTasks = document.getElementById("current-tasks")
 
 		// Prevents duplicate tasks
-		Page.clearChildren(currentTasks)
-
-		// Adds back title of section
-		currentTasks.innerHTML = "<div class='panel-title'>Current Tasks</div>"
-
+		Page.clearChildren(currentTasks, 1)
+		
 		for (const task of Data.tasks) {
 			// Create new panel for the task
 			const taskDiv = document.createElement("div")
