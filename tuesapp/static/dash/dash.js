@@ -96,7 +96,7 @@ class Dash extends Page {
 
 		// Prevents duplicate tasks
 		Page.clearChildren(currentTasks, 1)
-		
+
 		for (const task of Data.tasks) {
 			// Create new panel for the task
 			const taskDiv = document.createElement("div")
@@ -164,8 +164,12 @@ class Dash extends Page {
 	}
 
 	static updateLinks() {
-		// <div class="glass-panel link"><img src="{% static 'icons/Web Icon.png' %}" alt="Icon"><p>Web</p></div>
+		const links = document.getElementById("links")
+
+		Page.clearChildren(links, 0, 1)
+
 		const defaultWebIcon = "/static/icons/Web Icon.png"
+
 		for (const link of Data.links) {
 			// Container
 			const container = document.createElement("div")
@@ -188,7 +192,9 @@ class Dash extends Page {
 				// TODO: Make safety function to prevent javascript running
 				window.open(link[1], "_blank", "noreferrer")
 			})
-			// TODO: Append container to the document
+
+			// Prepend container to the document
+			links.prepend(container)
 		}
 	}
 	
