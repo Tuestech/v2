@@ -25,7 +25,7 @@ class Page {
 		const array = parent.children
 
 		// Iterate backwards for peace of mind
-		for (let i = array.length - endIndex; i < startIndex; i--) {
+		for (let i = array.length - endIndex - 1; i < startIndex; i--) {
 			parent.removeChild(array[i])
 		}
 	}
