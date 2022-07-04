@@ -139,7 +139,7 @@ body {
 	grid-area: progress;
 	overflow: hidden;
 	border-radius: 100px;
-	cursor:w-resize;
+	cursor: w-resize;
 }
 
 .progress:hover {
