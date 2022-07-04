@@ -15,7 +15,7 @@
 }
 
 .button {
-	transition: filter 0.3s;
+	transition: filter 0.15s;
 }
 
 .button:hover {

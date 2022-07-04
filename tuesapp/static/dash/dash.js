@@ -173,7 +173,7 @@ class Dash extends Page {
 		for (const link of Data.links) {
 			// Container
 			const container = document.createElement("div")
-			container.className = "glass-panel link"
+			container.className = "glass-panel link button"
 
 			// Icon
 			const img = document.createElement("img")
