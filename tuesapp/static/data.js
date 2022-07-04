@@ -56,7 +56,7 @@ class Data {
 			"appData": JSON.stringify({
 				"tasks": JSON.stringify(arrTasks),
 				"events": JSON.stringify(arrEvents),
-				// No need to convert because they will not be special objects
+				// No need to use converted versions because they will not be special objects
 				"links": JSON.stringify(Data.links),
 				"settings": JSON.stringify(Data.settings)
 			})
