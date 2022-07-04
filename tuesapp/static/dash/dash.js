@@ -14,10 +14,12 @@ class Dash extends Page {
 	}
 
 	static updateBasicInfoPanel() {
-		// Build Date String
+		// Set constants
 		const now = new Date()
 		const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 		const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+		// Build date string
 		let dateString = `${dayNames[now.getDay()]}, ${monthNames[now.getMonth()]} ${now.getDate()}`
 
 		document.getElementById("date-display").innerText = dateString
@@ -33,7 +35,7 @@ class Dash extends Page {
 
 		document.getElementById("p-complete").innerText = `${pDone}% Complete`
 
-		// Build On Track String (TODO)
+		// Build On Track String
 		let numOnTrack = 0
 		for (const task of Data.tasks) {
 			if (task.getScore() >= 0) {
@@ -46,6 +48,7 @@ class Dash extends Page {
 	}
 
 	static updateProgressBar() {
+		// Aggregate progress across all tasks and count done
 		let doneProgress = 0
 		let totalProgress = 0
 		for (const task of Data.tasks) {
@@ -55,14 +58,17 @@ class Dash extends Page {
 			totalProgress += task.progress
 		}
 
+		// Calculate percentages [0-100]
 		const pDone = doneProgress/Data.tasks.length
 		const pStarted = totalProgress/Data.tasks.length
 
+		// Update display
 		document.getElementById("green-progress").setAttribute("style", `transform: translateX(${pDone}%);`)
 		document.getElementById("yellow-progress").setAttribute("style", `transform: translateX(${pDone +pStarted}%);`)
 	}
 
 	static updateTimingBar() {
+		// Count good and bad tasks
 		let numGood = 0
 		let numBad = 0
 		for (const task of Data.tasks) {
@@ -73,9 +79,11 @@ class Dash extends Page {
 			}
 		}
 
+		// Calculate percentages [0-100]
 		const pGood = 100 * numGood / Data.tasks.length
 		const pBad = 100 * numBad / Data.tasks.length
 
+		// Update display
 		document.getElementById("green-timing").setAttribute("style", `transform: translateX(${pGood}%);`)
 		document.getElementById("red-timing").setAttribute("style", `transform: translateX(${pGood + pBad}%);`)
 	}
