@@ -19,9 +19,14 @@ class Page {
 		}
 	}
 
-	static clearChildren(parent) {
-		while (parent.firstChild) {
-			parent.removeChild(parent.firstChild)
+	// startIndex is number of elements to skip from the beginning
+	// endIndex is the number of elements
+	static clearChildren(parent, startIndex=0, endIndex=0) {
+		const array = parent.children
+
+		// Iterate backwards for peace of mind
+		for (let i = array.length - endIndex; i < startIndex; i--) {
+			parent.removeChild(array[i])
 		}
 	}
 
