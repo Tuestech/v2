@@ -28,7 +28,7 @@ def setSampleData(request):
 
 	# Links sample data
 	# No sample data because it's not implemented in frontend yet
-	links = '[]'
+	links = '[["Google", "https://www.google.com"]]'
 
 	# Settings sample data
 	# No sample data because it's not implemented in frontend yet
