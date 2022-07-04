@@ -9,6 +9,9 @@ class Dash extends Page {
 		this.updateCurrentTasks()
 		this.updateUpcoming()
 
+		// Row 3
+		this.updateLinks()
+
 		// Update page visibility
 		super.onPageChange()
 	}
@@ -160,6 +163,35 @@ class Dash extends Page {
 				}
 			}
 			currDate.setDate(currDate.getDate() + 1)
+		}
+	}
+
+	static updateLinks() {
+		// <div class="glass-panel link"><img src="{% static 'icons/Web Icon.png' %}" alt="Icon"><p>Web</p></div>
+		const defaultWebIcon = "/static/icons/Web Icon.png"
+		for (const link of Data.links) {
+			// Container
+			const container = document.createElement("div")
+			container.className = "glass-panel link"
+
+			// Icon
+			const img = document.createElement("img")
+
+			// TODO: Dynamic icons to match certain favicons
+			img.setAttribute("src", defaultWebIcon)
+			container.append(img)
+
+			// Label
+			const label = document.createElement("p")
+			label.innerText = link[0]
+			container.append(label)
+
+			// Link function
+			container.addEventListener("click", () => {
+				// TODO: Make safety function to prevent javascript running
+				window.open(link[1], "_blank", "noreferrer")
+			})
+			// TODO: Append container to the document
 		}
 	}
 	
