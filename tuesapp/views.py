@@ -50,6 +50,7 @@ def setSampleData(request):
 	except ObjectDoesNotExist:
 		user = User(uid=uid, name=name, app_data=SAMPLE)
 
+	# Update user in model
 	user.save()
 
 	# Return
@@ -108,6 +109,8 @@ def updateUser(request):
 	# Return
 	return HttpResponse("Good")
 
+# Determines of a post body is valid
+# Returns parsed object if valid and False if not
 def valid_post(request, keys):
 	data = json.loads(request.body)
 	for key in keys:
