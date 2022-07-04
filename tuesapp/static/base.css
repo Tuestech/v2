@@ -105,6 +105,8 @@ body {
 	grid-template-rows: min-content min-content;
 	border-radius: 10px;
 	background-color: white;
+	cursor: pointer;
+	transition: 0.2s;
 }
 
 .task-card p {
@@ -123,6 +125,10 @@ body {
 	grid-area: days;
 }
 
+.task-card:hover {
+	filter: brightness(0.95);
+}
+
 /* Progress */
 .progress {
 	-webkit-appearance: none;
@@ -133,7 +139,7 @@ body {
 	grid-area: progress;
 	overflow: hidden;
 	border-radius: 100px;
-	cursor: pointer;
+	cursor:w-resize;
 }
 
 .progress:hover {
