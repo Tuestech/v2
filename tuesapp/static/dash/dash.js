@@ -67,7 +67,7 @@ class Dash extends Page {
 
 		// Update display
 		document.getElementById("green-progress").setAttribute("style", `transform: translateX(${pDone}%);`)
-		document.getElementById("yellow-progress").setAttribute("style", `transform: translateX(${pDone +pStarted}%);`)
+		document.getElementById("yellow-progress").setAttribute("style", `transform: translateX(${pStarted}%);`)
 	}
 
 	static updateTimingBar() {
