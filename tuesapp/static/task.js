@@ -28,4 +28,12 @@ class Task {
 		}
 		return this.score
 	}
+
+	getSafeLink() {
+		// Replace with more robust solution
+		if (this.link.substring(0, 4) != "http") {
+			this.link = "https://" + this.link
+		}
+		return this.link
+	}
 }
