@@ -97,7 +97,10 @@ class Dash extends Page {
 		// Prevents duplicate tasks
 		Page.clearChildren(currentTasks, 1)
 
-		for (const task of Data.tasks) {
+		for (let i = 0; i < Data.tasks.length; i++) {
+			// Ease of programming variable
+			const task = Data.tasks[i]
+
 			// Create new panel for the task
 			const taskDiv = document.createElement("div")
 			taskDiv.className = "task-card glass-panel"
@@ -119,6 +122,14 @@ class Dash extends Page {
 			taskProgress.setAttribute("max", "100")
 			taskProgress.setAttribute("value", task.progress)
 			taskProgress.className = "progress"
+
+			// Add event listener
+			taskProgress.addEventListener("change", () => {
+				Data.tasks[i]["progress"] = parseInt(taskProgress.value)
+				console.log(parseInt(taskProgress.value))
+				Dash.updateProgressBar()
+			})
+
 			taskDiv.append(taskProgress)
 
 			// Add the full task element to the page
