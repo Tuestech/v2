@@ -115,7 +115,7 @@ class Dash extends Page {
 			timeLeft.innerText = "2 days"
 			taskDiv.append(timeLeft)
 
-			// Add the slider/progress bar
+			// Create the slider/progress bar
 			const taskProgress = document.createElement("input")
 			taskProgress.setAttribute("type", "range")
 			taskProgress.setAttribute("min", "0")
@@ -123,14 +123,21 @@ class Dash extends Page {
 			taskProgress.setAttribute("value", task.progress)
 			taskProgress.className = "progress"
 
-			// Add event listener
+			// Add progress bar event listener
 			taskProgress.addEventListener("change", () => {
-				Data.tasks[i]["progress"] = parseInt(taskProgress.value)
+				Data.tasks[i].progress = parseInt(taskProgress.value)
 				console.log(parseInt(taskProgress.value))
 				Dash.updateProgressBar()
 			})
 
+			// Add progress bar
 			taskDiv.append(taskProgress)
+
+			// Add link clickability
+			taskDiv.addEventListener("click", () => {
+				// Implement some link safety system
+				window.open(task.link, "_blank")
+			})
 
 			// Add the full task element to the page
 			currentTasks.append(taskDiv)
