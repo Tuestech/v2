@@ -108,6 +108,7 @@
 #links .glass-panel {
 	padding: 5px;
 	border-radius: 10px;
+	width: min-content;
 }
 
 .link {

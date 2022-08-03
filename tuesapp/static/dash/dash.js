@@ -134,13 +134,13 @@ class Dash extends Page {
 			taskDiv.append(taskProgress)
 
 			// Add link clickability
-			taskDiv.addEventListener("click", () => {
-				// Implement some link safety system
-				try {
-					window.open(task.getSafeLink(), "_blank")
-				} catch {
-					console.log("Invalid link, failed to open")
+			taskDiv.addEventListener("click", (e) => {
+				// Block clicks on progress bar
+				if (e.target.tagName == "INPUT") {
+					return
 				}
+				// "Safely" open link
+				window.open(task.getSafeLink(), "_blank")
 			})
 
 			// Add the full task element to the page
