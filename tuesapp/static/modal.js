@@ -47,8 +47,8 @@ class Modal {
 			// Make buttons do something
 			if (callbacks.length > i) {
 				button.addEventListener("click", () => {
-					body.removeChild(container)
 					callbacks[i]()
+					body.removeChild(container)
 				})
 			} else {
 				button.addEventListener("click", () => {
