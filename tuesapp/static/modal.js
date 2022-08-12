@@ -40,9 +40,8 @@ class Modal {
 		// Create buttons
 		for (let i = 0; i < options.length; i++) {
 			const button = document.createElement("button")
-			button.className = `glass-panel button ${buttonPos[i]}`
+			button.className = `glass-panel button ${buttonPos[i]} ${colors[i]}`
 			button.innerText = options[i]
-			// TODO: Add colors
 
 			// Make buttons do something
 			if (callbacks.length > i) {
