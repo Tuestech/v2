@@ -129,6 +129,14 @@ body {
 	filter: brightness(0.95);
 }
 
+.task-card input {
+	transition: 0.1s linear;
+}
+
+.task-card:hover input {
+	transform: scaleY(1.5);
+}
+
 /* Progress */
 .progress {
 	-webkit-appearance: none;
