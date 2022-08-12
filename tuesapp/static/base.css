@@ -250,3 +250,26 @@ input[type=range]::-moz-range-track {
 	color: white;
 	font-weight: bold;
 }
+
+/* Form inputs */
+
+.form-label {
+	font-size: 16px;
+	font-weight: bold;
+	margin: 3px 0px;
+}
+
+input:focus {
+	outline: none;
+}
+
+.form input {
+	background-color: var(--gray);
+	height: 18px;
+	border: none;
+	border-bottom: 2px solid var(--dark-gray);
+	user-select: none;
+	padding: 3px 10px;
+	font-size: 16px;
+	color: black;
+}
