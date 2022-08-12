@@ -10,6 +10,9 @@ class Modal {
 		 * callbacks - Array of callback functions that correspond to buttons in options [Optional]
 		 */
 		
+		// Constants
+		const body = document.getElementsByTagName("body")[0]
+
 		// Positioning setup
 		const buttonPositionMap = {
 			1: ["right"],
@@ -41,13 +44,22 @@ class Modal {
 			button.innerText = options[i]
 			// TODO: Add colors
 
-			// TODO: Make buttons do something
+			// Make buttons do something
+			if (callbacks.length > i) {
+				button.addEventListener("click", () => {
+					body.removeChild(container)
+					callbacks[i]()
+				})
+			} else {
+				button.addEventListener("click", () => {
+					body.removeChild(container)
+				})
+			}
 
 			optionsDiv.append(button)
 		}
 
 		// Build
-		const body = document.getElementsByTagName("body")[0]
 		modal.append(p)
 		modal.append(contentDiv)
 		modal.append(optionsDiv)
