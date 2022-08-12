@@ -65,4 +65,28 @@ class Modal {
 		container.append(modal)
 		body.append(container)
 	}
+
+	static sandwichForm(top, left, right, bottom) {
+		const form = document.createElement("div")
+		// TODO: Fill form with content
+		return form
+	}
+
+	static stackForm(top, bottom) {
+		const form = document.createElement("div")
+		// TODO: Fill form with content
+		return form
+	}
+
+	static textInput(label) {
+		// Return div with text input
+	}
+
+	static dateInput(label) {
+		// Return div with date input
+	}
+
+	static selectInput(label, options) {
+		// Return div with select input
+	}
 }
