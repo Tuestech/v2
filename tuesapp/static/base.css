@@ -232,3 +232,13 @@ input[type=range]::-moz-range-track {
 .modal .options .right {
 	grid-area: right;
 }
+
+.modal .options .green {
+	background-color: var(--green);
+}
+
+.modal .options .red {
+	background-color: var(--red);
+	color: white;
+	font-weight: bold;
+}
