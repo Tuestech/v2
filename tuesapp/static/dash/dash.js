@@ -126,7 +126,6 @@ class Dash extends Page {
 			// Add progress bar event listener
 			taskProgress.addEventListener("change", () => {
 				Data.tasks[i].progress = parseInt(taskProgress.value)
-				console.log(parseInt(taskProgress.value))
 				Dash.updateProgressBar()
 			})
 
