@@ -217,7 +217,7 @@ input[type=range]::-moz-range-track {
 	min-width: min-content;
 	width: 100px;
 	padding: 5px 20px;
-	border-radius: 5px;
+	border-radius: 8px;
 	font-size: 16px;
 }
 
