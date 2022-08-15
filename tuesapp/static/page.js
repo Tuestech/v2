@@ -35,4 +35,7 @@ class Page {
 		this.onPageChange()
 		document.addEventListener("pageChange", () => {this.onPageChange()})
 	}
+
+	static externalLoaded() {
+	}
 }
