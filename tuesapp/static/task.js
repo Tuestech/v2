@@ -36,4 +36,17 @@ class Task {
 		}
 		return this.link
 	}
+
+	// Task progress prediction functions
+	static linear(t) {
+		return t
+	}
+
+	static slightPoly(t) {
+		return 100*(-800*(t**(0.973188)) + 803.876*(t**(0.972444)))/99.5594227405
+	}
+
+	static strongPoly(t) {
+		return 100*(-800*(t**(0.748301)) + 812.105*(t**(0.7459)))/99.6199552061
+	}
 }
