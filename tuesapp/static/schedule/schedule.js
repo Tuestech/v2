@@ -4,4 +4,83 @@ class Schedule extends Page {
 		this.pageBody = document.getElementById("schedule")
 		super.init()
 	}
+
+	static externalLoaded() {
+		// Load graph with data
+	}
+	
+	static graph(x, y, wY) {
+		// x, y, and wY must be the same length
+		// wY are the y values for the warnings if needed, else null
+
+		// Create warning image
+		const warningImage = new Image(30, 30)
+		warningImage.src = "/static/icons/Warning.png"
+
+		// Define data
+		const data = {
+			labels: x,
+			datasets: [{
+				label: 'Workload',
+				backgroundColor: '#438BFF',
+				borderColor: '#438BFF',
+				data: y,
+				tension: 0.4,
+				pointRadius: 0
+			}, {
+				label: 'Warnings',
+				backgroundColor: 'rgba(0, 0, 0, 0)',
+				data: wY,
+				pointStyle: [warningImage],
+			}]
+		}
+
+		// Configure graph
+		const config = {
+			type: 'line',
+			data: data,
+			options: {
+				plugins: {
+					legend: {
+						display: false
+					},
+					tooltip: {
+						position: "nearest",
+						callbacks: {
+							title: (a) => "Warning",
+							beforeLabel: () => "Your workload will be very high. Consider\ndoing extra work now to reduce work later.",
+							label: () => "",
+						}
+					},
+				},
+				scales: {
+					xAxes: {
+						grid: {
+							display: false,
+							drawBorder: false
+						},
+						ticks: {
+							display: false
+						}
+					},
+					yAxes: {
+						min: 0,
+						max: 8,
+						grid: {
+							display: false,
+							drawBorder: false
+						},
+						ticks: {
+							display: false,
+						}
+					}
+				}
+			}
+		}
+
+		return new Chart(
+			document.getElementById('s-graph'),
+			config
+		)
+	}
 }
