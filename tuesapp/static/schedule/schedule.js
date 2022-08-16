@@ -34,6 +34,7 @@ class Schedule extends Page {
 				backgroundColor: 'rgba(0, 0, 0, 0)',
 				data: wY,
 				pointStyle: [warningImage],
+				pointHitRadius: 15
 			}]
 		}
 
@@ -52,7 +53,7 @@ class Schedule extends Page {
 						position: "nearest",
 						callbacks: {
 							title: (a) => "Warning",
-							beforeLabel: () => "Your workload will be very high. Consider\ndoing extra work now to reduce work later.",
+							beforeLabel: () => "Your workload will be higher than usual.\nConsider doing extra work to reduce peaks.",
 							label: () => "",
 						}
 					},
