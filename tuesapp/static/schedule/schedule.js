@@ -43,6 +43,7 @@ class Schedule extends Page {
 			data: data,
 			options: {
 				responsive: true,
+				aspectRatio: 4,
 				plugins: {
 					legend: {
 						display: false
