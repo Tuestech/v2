@@ -7,6 +7,8 @@
 	--yellow: rgb(255, 231, 76);
 	--green: rgb(87, 239, 102);
 	--blue: rgb(67, 139, 255);
+	/* 100vw - padding - nav width */
+	--main-width: calc(100vw - 36px*2 - 87px);
 }
 
 /* Utility Classes */
@@ -49,6 +51,7 @@ body {
 	grid-area: content;
 	padding: 36px;
 	gap: 26px;
+	width: var(--main-width);
 }
 
 #title {
