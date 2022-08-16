@@ -1,0 +1,11 @@
+/* Schedule */
+#schedule {
+	/* height: 100%; */
+	grid-template-rows: auto min-content;
+}
+
+/* Graph containing */
+#s-graph-container {
+	/* Width - padding */
+	width: calc(var(--main-width) - 10px*2)
+}
