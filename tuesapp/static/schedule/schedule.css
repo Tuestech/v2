@@ -6,6 +6,8 @@
 
 /* Graph containing */
 #s-graph-container {
-	/* Width - padding */
-	width: calc(var(--main-width) - 10px*2)
+	/* Width - padding - border*/
+	width: calc(var(--main-width) - 10px*2 - 1px*2);
+	min-height: 135px;
+	min-width: 540px;
 }
