@@ -1,0 +1,5 @@
+/* Timer */
+#timer {
+	grid-template-columns: 5fr 7fr;
+	grid-template-rows: auto;
+}
