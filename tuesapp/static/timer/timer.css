@@ -21,3 +21,29 @@
 #sequence .glass-panel.active {
 	box-shadow: 0px 0px 10px var(--blue);
 }
+
+/* Time */
+#display {
+	display: grid;
+	align-content: start;
+}
+
+#display #time {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 80px;
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 30px;
+}
+
+#display #timer-buttons {
+	display: grid;
+	grid-template-columns: repeat(3, min-content);
+	justify-content: center;
+	gap: 20px;
+}
+
+#display #timer-buttons .glass-panel.button {
+	padding: 5px;
+	border-radius: 10px;
+}
