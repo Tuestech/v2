@@ -1,5 +1,19 @@
 {% load static %}
 
-<div id="list" class="hidden">
+<div id="list" class="grid hidden">
 	{% comment %} List stuff {% endcomment %}
+	<div class="glass-panel" id="todo">
+		<p class="panel-title">To Do</p>
+		<div class="task-container">
+			<div class="task-card glass-panel"><p>Task 1</p><p>2 days</p><input type="range" min="0" max="100" value="10" class="progress"></div>
+			<div class="glass-panel button"><img src="/static/icons/Edit%20Icon.png" alt="Edit"></div>
+			<div class="glass-panel button"><img src="/static/icons/Delete%20Icon.png" alt="Delete"></div>
+		</div>
+	</div>
+	<div class="glass-panel" id="completed">
+		<p class="panel-title">Completed Tasks</p>
+	</div>
+	<div class="glass-panel" id="events">
+		<p class="panel-title">Events</p>
+	</div>
 </div>
