@@ -3,3 +3,21 @@
 	grid-template-columns: 5fr 7fr;
 	grid-template-rows: auto;
 }
+
+/* Sequence */
+#sequence {
+	display: grid;
+	align-content: start;
+	gap: 10px;
+}
+
+#sequence .glass-panel {
+	display: grid;
+	grid-template-columns: auto max-content;
+	border-radius: 10px;
+	font-size: 18px;
+}
+
+#sequence .glass-panel.active {
+	box-shadow: 0px 0px 10px var(--blue);
+}
