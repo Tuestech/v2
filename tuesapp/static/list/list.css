@@ -1,0 +1,37 @@
+/* List */
+#list {
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: min-content auto;
+	grid-template-areas:
+		'todo completed'
+		'todo events';
+}
+
+#list div {
+	align-items: start;
+	align-content: start;
+	gap: 10px;
+}
+
+#todo {
+	grid-area: todo;
+}
+
+#completed {
+	grid-area: completed;
+}
+
+#events {
+	grid-area: events;
+}
+
+/* Task container */
+.task-container {
+	display: grid;
+	grid-template-columns: auto repeat(2, min-content);
+	gap: 10px;
+}
+
+.task-container .button {
+	border-radius: 10px;
+}
