@@ -6,7 +6,9 @@ class Schedule extends Page {
 	}
 
 	static externalLoaded() {
-		// Load graph with data
+		let testX = [1, 2, 3, 4, 5, 6, 7, 8]
+		let testY = [2, 5, 3, 2, 3, 4, 1, 3]
+		this.graph(testX, testY, [null, 7, null, null, null, null, null, null])
 	}
 	
 	static graph(x, y, wY) {
@@ -40,6 +42,7 @@ class Schedule extends Page {
 			type: 'line',
 			data: data,
 			options: {
+				responsive: true,
 				plugins: {
 					legend: {
 						display: false
