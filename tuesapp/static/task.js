@@ -21,20 +21,26 @@ class Task {
 	}
 
 	getScore() {
+		// Use existing score if possible
 		if (this.score) return this.score
 
+		// Progress prediction functions
 		const functionMap = {
 			0: Task.linear,
 			1: Task.slightPoly,
 			2: Task.strongPoly
 		}
 
+		// Precomputed time constants
 		const taskLength = this.end - this.start
 		const taskElapsed = new Date() - this.start
 		const timePercent = 100*taskElapsed/taskLength
+
+		// Edge cases
 		if (taskElapsed < 0) return 0
 		if (taskElapsed > taskLength) return 1000
 
+		// Score calculation
 		const deviation = this.progress - functionMap[Data.settings["scoreType"]](timePercent)
 		this.score = -1 * deviation
 		return this.score
