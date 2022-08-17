@@ -20,9 +20,15 @@ class Task {
 		return out
 	}
 
+	recomputeScore() {
+		if (this.score != null) {
+			this.score = null
+		}
+	}
+
 	getScore() {
 		// Use existing score if possible
-		if (this.score) return this.score
+		if (this.score != null) return this.score
 
 		// Progress prediction functions
 		const functionMap = {
