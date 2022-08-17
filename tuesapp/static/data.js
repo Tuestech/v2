@@ -14,6 +14,31 @@ class Data {
 		return temp
 	}
 
+	static getPrioritized() {
+		// Create indicies to sort by
+		let indices = []
+		for (const i = 0; i < Data.task.length; i++) {
+			indices.push(i)
+		}
+
+		// Sort indices by their corresponding tasks
+		indices.sort((a, b) => {
+			if (Data.tasks[a].getScore() < Data.tasks[b].getScore()) {
+				return -1
+			} else if (Data.tasks[a].getScore() > Data.tasks[b].getScore()) {
+				return 1
+			}
+			return 0
+		})
+
+		// Convert indices back to task objects
+		let out = []
+		for (const i = 0; i < Data.tasks.length; i++) {
+			out.push(Data.tasks[i])
+		}
+		return out
+	}
+
 	// Network
 	static post(url, data, csrfToken) {
 		let xhr
@@ -66,6 +91,7 @@ class Data {
 		Data.post("/updateuser/", data, csrfToken)
 	}
 
+	// Calculations
 	static daysBetween(date1, date2) {
 		return Math.floor((date1 - date2)/(1000 * 60 * 60 * 24))
 	}

@@ -97,6 +97,7 @@ class Dash extends Page {
 		// Prevents duplicate tasks
 		Page.clearChildren(currentTasks, 1)
 
+		// Create task cards
 		for (const task of Data.tasks) {
 			currentTasks.append(task.generateTaskCard(Dash.updateProgressBar))
 		}
