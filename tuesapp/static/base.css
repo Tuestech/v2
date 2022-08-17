@@ -110,6 +110,8 @@ body {
 	background-color: white;
 	cursor: pointer;
 	transition: 0.2s;
+	row-gap: 3px;
+	padding: 5px;
 }
 
 .task-card p {
