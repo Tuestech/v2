@@ -30,7 +30,7 @@ class Dash extends Page {
 		// Build Complete String
 		let numDone = 0
 		for (const task of Data.tasks) {
-			if (task.progress == 0) {
+			if (task.progress == 100) {
 				numDone++
 			}
 		}
@@ -99,7 +99,7 @@ class Dash extends Page {
 
 		// Create task cards
 		for (const task of Data.tasks) {
-			currentTasks.append(task.generateTaskCard(Dash.updateProgressBar))
+			currentTasks.append(task.generateTaskCard(() => {Dash.updateProgressBar(); Dash.updateBasicInfoPanel();}))
 		}
 	}
 
