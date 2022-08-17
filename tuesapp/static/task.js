@@ -28,12 +28,14 @@ class Task {
 			1: Task.slightPoly,
 			2: Task.strongPoly
 		}
-		
-		const taskLength = this.end - this.start
-		const taskElapsed = this.end - new Date()
-		if (taskElapsed < 0) return 0
 
-		const deviation = this.progress - functionMap[Data.settings["scoreType"]](100*taskElapsed/taskLength)
+		const taskLength = this.end - this.start
+		const taskElapsed = new Date() - this.start
+		const timePercent = 100*taskElapsed/taskLength
+		if (taskElapsed < 0) return 0
+		if (taskElapsed > taskLength) return 1000
+
+		const deviation = this.progress - functionMap[Data.settings["scoreType"]](timePercent)
 		this.score = -1 * deviation
 		return this.score
 	}
