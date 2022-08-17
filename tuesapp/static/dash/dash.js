@@ -97,53 +97,8 @@ class Dash extends Page {
 		// Prevents duplicate tasks
 		Page.clearChildren(currentTasks, 1)
 
-		for (let i = 0; i < Data.tasks.length; i++) {
-			// Ease of programming variable
-			const task = Data.tasks[i]
-
-			// Create new panel for the task
-			const taskDiv = document.createElement("div")
-			taskDiv.className = "task-card glass-panel"
-
-			// Set task name
-			const taskName = document.createElement("p")
-			taskName.innerText = task.name
-			taskDiv.append(taskName)
-
-			// TODO: Implement good method of calculating time left
-			const timeLeft = document.createElement("p")
-			timeLeft.innerText = "2 days"
-			taskDiv.append(timeLeft)
-
-			// Create the slider/progress bar
-			const taskProgress = document.createElement("input")
-			taskProgress.setAttribute("type", "range")
-			taskProgress.setAttribute("min", "0")
-			taskProgress.setAttribute("max", "100")
-			taskProgress.setAttribute("value", task.progress)
-			taskProgress.className = "progress"
-
-			// Add progress bar event listener
-			taskProgress.addEventListener("change", () => {
-				Data.tasks[i].progress = parseInt(taskProgress.value)
-				Dash.updateProgressBar()
-			})
-
-			// Add progress bar
-			taskDiv.append(taskProgress)
-
-			// Add link clickability
-			taskDiv.addEventListener("click", (e) => {
-				// Block clicks on progress bar
-				if (e.target.tagName == "INPUT") {
-					return
-				}
-				// "Safely" open link
-				window.open(task.getSafeLink(), "_blank")
-			})
-
-			// Add the full task element to the page
-			currentTasks.append(taskDiv)
+		for (const task of Data.tasks) {
+			currentTasks.append(task.generateTaskCard(Dash.updateProgressBar()))
 		}
 	}
 
