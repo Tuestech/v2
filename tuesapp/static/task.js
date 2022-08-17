@@ -69,9 +69,14 @@ class Task {
 		taskName.innerText = this.name
 		taskDiv.append(taskName)
 
-		// TODO: Implement good method of calculating time left
+		// Set days left display
 		const timeLeft = document.createElement("p")
-		timeLeft.innerText = "2 days"
+		let dateDeficit = Data.daysBetween(this.end, new Date())
+		if (dateDeficit < 0) {
+			timeLeft.innerText = "Overdue"
+		} else {
+			timeLeft.innerText = `${dateDeficit} days`
+		}
 		taskDiv.append(timeLeft)
 
 		// Create the slider/progress bar

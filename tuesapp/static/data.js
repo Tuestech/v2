@@ -66,6 +66,10 @@ class Data {
 		Data.post("/updateuser/", data, csrfToken)
 	}
 
+	static daysBetween(date1, date2) {
+		return Math.floor((date1 - date2)/(1000 * 60 * 60 * 24))
+	}
+
 	static init() {
 		const data = JSON.parse(document.getElementById("data").innerText)
 		this.tasks = this.fromJSON(data["tasks"], Task)
