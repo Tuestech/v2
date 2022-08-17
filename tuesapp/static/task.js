@@ -20,10 +20,8 @@ class Task {
 		return out
 	}
 
-	recomputeScore() {
-		if (this.score != null) {
-			this.score = null
-		}
+	flagRecomputeScore() {
+		this.score = null
 	}
 
 	getScore() {
