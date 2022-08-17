@@ -28,20 +28,18 @@
 /* Task container */
 .task-container {
 	display: grid;
-	/* Same size as  task card*/
+	/* Same size as task card*/
 	grid-template-columns: auto repeat(2, calc(52px));
 	gap: 10px;
 }
 
 .task-container .button {
-	aspect-ratio: 1;
+	display: grid;
+	/* Same size as task card height - padding*/
+	width: calc(52px - 5px*2);
+	height: calc(52px - 5px*2);
 	padding: 5px;
 	border-radius: 10px;
-}
-
-.task-container .button img {
-	aspect-ratio: 1;
-	/* Height of task card - padding */
-	display: block;
-	height: calc(52px - 5px*2)
+	align-content: center !important;
+	justify-items: center;
 }
