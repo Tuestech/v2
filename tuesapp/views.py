@@ -32,7 +32,7 @@ def setSampleData(request):
 
 	# Settings sample data
 	# No sample data because it's not implemented in frontend yet
-	settings = '[]'
+	settings = '{"scoreType": 0}'
 
 	# Combined sample data
 	SAMPLE = json.dumps(
