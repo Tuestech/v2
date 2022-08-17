@@ -21,11 +21,20 @@ class Task {
 	}
 
 	getScore() {
-		if (!this.score) {
-			// TODO: implement scoring algorithm
+		if (this.score) return this.score
 
-			this.score = 100
+		const functionMap = {
+			0: Task.linear,
+			1: Task.slightPoly,
+			2: Task.strongPoly
 		}
+		
+		const taskLength = this.end - this.start
+		const taskElapsed = this.end - new Date()
+		if (taskElapsed < 0) return 0
+
+		const deviation = this.progress - functionMap[Data.settings["scoreType"]](100*taskElapsed/taskLength)
+		this.score = -1 * deviation
 		return this.score
 	}
 
