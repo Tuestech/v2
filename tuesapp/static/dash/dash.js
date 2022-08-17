@@ -98,7 +98,7 @@ class Dash extends Page {
 		Page.clearChildren(currentTasks, 1)
 
 		for (const task of Data.tasks) {
-			currentTasks.append(task.generateTaskCard(Dash.updateProgressBar()))
+			currentTasks.append(task.generateTaskCard(Dash.updateProgressBar))
 		}
 	}
 
