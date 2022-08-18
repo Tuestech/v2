@@ -72,7 +72,7 @@ class Task {
 		// Set days left display
 		const timeLeft = document.createElement("p")
 		let dateDeficit = Data.daysBetween(this.end, new Date())
-		
+
 		if (dateDeficit < 0) {
 			timeLeft.innerText = "Overdue"
 		} else {
@@ -110,6 +110,14 @@ class Task {
 		})
 
 		return taskDiv
+	}
+
+	openEdit() {
+		// TODO: Open an edit modal for the task in the current page
+	}
+
+	delete() {
+		// TODO: Delete this task
 	}
 
 	// Task progress prediction functions
