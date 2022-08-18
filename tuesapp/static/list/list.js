@@ -16,14 +16,18 @@ class List extends Page {
 		const editImg = document.createElement("img")
 		editImg.src = "/static/icons/Edit%20Icon.png"
 		editButton.append(editImg)
-		// TODO: Add event listener
+		editButton.addEventListener("click", () => {
+			task.openEdit()
+		})
 
 		const deleteButton = document.createElement("div")
 		deleteButton.className = "glass-panel button"
 		const deleteImg = document.createElement("img")
 		deleteImg.src = "/static/icons/Delete%20Icon.png"
 		deleteButton.append(deleteImg)
-		// TODO: Add event listener
+		deleteButton.addEventListener("click", () => {
+			task.delete()
+		})
 
 		container.append(mainTask)
 		container.append(editButton)
