@@ -117,7 +117,9 @@ class Task {
 	}
 
 	delete() {
-		// TODO: Delete this task
+		// TODO: Test this function
+		thisTask = this
+		Data.tasks.filter((task) => task == thisTask)
 	}
 
 	// Task progress prediction functions
