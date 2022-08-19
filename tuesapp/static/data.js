@@ -3,6 +3,17 @@ class Data {
 	static events
 	static links
 	static settings
+	static lastUpdate = new Date()
+
+	// Data update pattern
+	static requestUpdate() {
+		if (new Date() - lastUpdate < 200) {
+			setTimeout(Data.requestUpdate, 200 - new Date() + lastUpdate)
+		} else {
+			Data.set()
+			lastUpdate = new Date()
+		}
+	}
 
 	// Task Processing
 	static fromJSON(json, class_) {
