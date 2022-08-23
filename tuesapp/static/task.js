@@ -75,6 +75,10 @@ class Task {
 
 		if (dateDeficit < 0) {
 			timeLeft.innerText = "Overdue"
+		} else if (dateDeficit == 0) {
+			timeLeft.innerText = "Due Today"
+		} else if (dateDeficit == 1) {
+			timeLeft.innerText = "Due Tomorrow"
 		} else {
 			timeLeft.innerText = `${dateDeficit} days`
 		}
