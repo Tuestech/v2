@@ -106,7 +106,7 @@ class Task {
 				return
 			}
 			// "Safely" open link
-			window.open(task.getSafeLink(), "_blank")
+			window.open(this.getSafeLink(), "_blank")
 		})
 
 		return taskDiv
