@@ -5,6 +5,24 @@ class List extends Page {
 		super.init()
 	}
 
+	static updateToDo(tasks) {
+		const toDo = document.getElementById("todo")
+		Page.clearChildren(toDo, 1)
+
+		for (const task of tasks) {
+			toDo.append(List.generateTaskCard(task))
+		}
+	}
+
+	static updateCompleted(tasks) {
+		const completed = document.getElementById("completed")
+		Page.clearChildren(completed, 1)
+
+		for (const task of tasks) {
+			completed.append(List.generateTaskCard(task))
+		}
+	}
+
 	static generateTaskCard(task) {
 		const container = document.createElement("div")
 		container.className = "task-container"
