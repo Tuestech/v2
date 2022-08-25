@@ -11,7 +11,7 @@ class Timer extends Page {
 	}
 
 	static activateButtons() {
-		for (const button of Page.sequenceButtons) {
+		for (const button of Timer.sequenceButtons) {
 			button.addEventListener("click", () => {
 				// TODO: Deactivate active button, activate current button, update time display
 			})
