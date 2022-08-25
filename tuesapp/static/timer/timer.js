@@ -1,4 +1,6 @@
 class Timer extends Page {
+	static sequenceButtons = Array.from(document.getElementById("sequence").getElementsByClassName("button"))
+
 	static init() {
 		this.pageName = "timer"
 		this.pageBody = document.getElementById("timer")
@@ -9,9 +11,10 @@ class Timer extends Page {
 	}
 
 	static activateButtons() {
-		const sequence = document.getElementById("sequence")
-		sequence.addEventListener("click", () => {
-			// TODO: Deactivate active button, activate current button, update time display
-		})
+		for (const button of Page.sequenceButtons) {
+			button.addEventListener("click", () => {
+				// TODO: Deactivate active button, activate current button, update time display
+			})
+		}
 	}
 }
