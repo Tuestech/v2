@@ -28,11 +28,11 @@ class Timer extends Page {
 
 	static createTimer(timerMinutes, callback) {
 		// Set constants
-		const init = new Date().getTime()
+		let init = new Date().getTime()
 		const MINUTE = 1000 * 60
-		const target = init + timerMinutes * MINUTE
+		let target = init + timerMinutes * MINUTE
 
-		let interval = setInterval(() => {
+		const intervalFunc = () => {
 			const now = new Date().getTime()
 
 			// Stop running if the timer is done
@@ -60,6 +60,28 @@ class Timer extends Page {
 
 			// Update the displayed time
 			document.getElementById("time").innerText = newString
-		}, 100)
+		}
+
+		let interval = setInterval(intervalFunc, 100)
+
+		// Create control functions
+		let timeLeft = target - init
+
+		const stop = () => {
+			clearInterval(interval)
+		}
+
+		const pause = () => {
+			clearInterval(interval)
+			timeLeft = target - new Date().getTime()
+		}
+
+		const play = () => {
+			init = new Date().getTime()
+			target = init + timeLeft
+			interval = setInterval(intervalFunc, 100)
+		}
+
+		return [stop, pause, play]
 	}
 }
