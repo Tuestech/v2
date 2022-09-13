@@ -1,5 +1,6 @@
 class Timer extends Page {
 	static sequenceButtons = Array.from(document.getElementById("sequence").getElementsByClassName("button"))
+	static stopCurrent = () => {}
 
 	static init() {
 		this.pageName = "timer"
@@ -15,7 +16,12 @@ class Timer extends Page {
 			button.addEventListener("click", () => {
 				Timer.deactivateAllButtons()
 				button.classList.add("active")
-				// TODO: update time display
+
+				Timer.stopCurrent()
+
+				let [stop, play, pause] = Timer.createTimer(parseInt(button.children[1].innerText.replace(" mins", "")))
+				pause()
+				// TODO: Assign functions to control buttons
 			})
 		}
 	}
