@@ -1,4 +1,7 @@
 class Timer extends Page {
+	static pauseImgPath = "/static/icons/Pause%20Icon.png"
+	static playImgPath = "/static/icons/Play%20Icon.png"
+
 	static sequenceButtons = Array.from(document.getElementById("sequence").getElementsByClassName("button"))
 	static stop = () => {}
 	static toggle = () => {}
@@ -77,6 +80,9 @@ class Timer extends Page {
 
 		let interval = setInterval(intervalFunc, 100)
 
+		// Update control button
+		document.getElementById("play").children[0].setAttribute("src", Timer.pauseImgPath)
+
 		// Create control functions
 		let timeLeft = target - init
 		let paused = false
@@ -99,8 +105,10 @@ class Timer extends Page {
 		const toggle = () => {
 			if (paused) {
 				play()
+				document.getElementById("play").children[0].setAttribute("src", Timer.pauseImgPath)
 			} else {
 				pause()
+				document.getElementById("play").children[0].setAttribute("src", Timer.playImgPath)
 			}
 			paused = !paused
 		}
