@@ -1,6 +1,7 @@
 class Timer extends Page {
 	static sequenceButtons = Array.from(document.getElementById("sequence").getElementsByClassName("button"))
-	static stopCurrent = () => {}
+	static stop = () => {}
+	static toggle = () => {}
 
 	static init() {
 		this.pageName = "timer"
@@ -17,13 +18,19 @@ class Timer extends Page {
 				Timer.deactivateAllButtons()
 				button.classList.add("active")
 
-				Timer.stopCurrent()
+				Timer.stop()
 
-				let [stop, play, pause] = Timer.createTimer(parseInt(button.children[1].innerText.replace(" mins", "")))
-				pause()
-				// TODO: Assign functions to control buttons
+				let [stop, toggle] = Timer.createTimer(parseInt(button.children[1].innerText.replace(" mins", "")))
+
+				Timer.stop = stop
+				Timer.toggle = toggle
 			})
 		}
+		
+		document.getElementById("play").addEventListener("click", () => {
+			console.log("a")
+			Timer.toggle()
+		})
 	}
 
 	static deactivateAllButtons() {
@@ -50,8 +57,8 @@ class Timer extends Page {
 			}
 
 			// Calculate numbers for timer
-			const minutes = Math.floor((target - now) / MINUTE)
-			const seconds = Math.floor((target - now) % MINUTE / 1000)
+			let minutes = Math.floor((target - now) / MINUTE)
+			let seconds = Math.floor((target - now) % MINUTE / 1000)
 
 			// Ensure seconds are always 2 digits
 			if (seconds < 10) {
@@ -72,6 +79,7 @@ class Timer extends Page {
 
 		// Create control functions
 		let timeLeft = target - init
+		let paused = false
 
 		const stop = () => {
 			clearInterval(interval)
@@ -88,6 +96,15 @@ class Timer extends Page {
 			interval = setInterval(intervalFunc, 100)
 		}
 
-		return [stop, pause, play]
+		const toggle = () => {
+			if (paused) {
+				play()
+			} else {
+				pause()
+			}
+			paused = !paused
+		}
+
+		return [stop, toggle]
 	}
 }
