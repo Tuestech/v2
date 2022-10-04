@@ -7,11 +7,13 @@ class Timer extends Page {
 	static toggle = () => {}
 
 	static init() {
+		// Setup Variables
 		this.pageName = "timer"
 		this.pageBody = document.getElementById("timer")
 
 		Timer.activateButtons()
 
+		// Start Timer
 		let [stop, toggle] = Timer.createTimer(25, Timer.sequenceButtons[1].click)
 
 		toggle()
@@ -24,24 +26,32 @@ class Timer extends Page {
 
 	static activateButtons() {
 		for (let i = 0; i < Timer.sequenceButtons.length; i++) {
+			// Set temp variable
 			const button = Timer.sequenceButtons[i]
+
+			// Add event listener to each button
 			button.addEventListener("click", () => {
+				// Visually show active button
 				Timer.deactivateAllButtons()
 				button.classList.add("active")
 
+				// Stop current timer
 				Timer.stop()
 
+				// Create new timer
 				let [stop, toggle] = Timer.createTimer(
 					parseInt(button.children[1].innerText.replace(" mins", "")),
 					() => {
 						Timer.sequenceButtons[(i+1)%(Timer.sequenceButtons.length)].click()
 					})
 
+				// Set variables
 				Timer.stop = stop
 				Timer.toggle = toggle
 			})
 		}
 		
+		// Add play button functionality
 		document.getElementById("play").addEventListener("click", () => {
 			Timer.toggle()
 		})
