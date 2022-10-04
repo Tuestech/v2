@@ -12,6 +12,13 @@ class Timer extends Page {
 
 		Timer.activateButtons()
 
+		let [stop, toggle] = Timer.createTimer(25, Timer.sequenceButtons[1].click)
+
+		toggle()
+
+		Timer.stop = stop
+		Timer.toggle = toggle
+
 		super.init()
 	}
 
