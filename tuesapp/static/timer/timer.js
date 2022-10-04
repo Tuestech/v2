@@ -43,7 +43,6 @@ class Timer extends Page {
 		}
 		
 		document.getElementById("play").addEventListener("click", () => {
-			console.log("a")
 			Timer.toggle()
 		})
 	}
