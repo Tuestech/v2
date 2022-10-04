@@ -16,14 +16,19 @@ class Timer extends Page {
 	}
 
 	static activateButtons() {
-		for (const button of Timer.sequenceButtons) {
+		for (let i = 0; i < Timer.sequenceButtons.length; i++) {
+			const button = Timer.sequenceButtons[i]
 			button.addEventListener("click", () => {
 				Timer.deactivateAllButtons()
 				button.classList.add("active")
 
 				Timer.stop()
 
-				let [stop, toggle] = Timer.createTimer(parseInt(button.children[1].innerText.replace(" mins", "")))
+				let [stop, toggle] = Timer.createTimer(
+					parseInt(button.children[1].innerText.replace(" mins", "")),
+					() => {
+						Timer.sequenceButtons[(i+1)%(Timer.sequenceButtons.length)].click()
+					})
 
 				Timer.stop = stop
 				Timer.toggle = toggle
