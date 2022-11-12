@@ -1,0 +1,8 @@
+django
+gunicorn
+django-heroku
+django-allauth
+django-cors-headers
+
+user-agents
+django-user-agents
