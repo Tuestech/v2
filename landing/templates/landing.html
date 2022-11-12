@@ -10,6 +10,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Tuesday Technologies</title>
 
+	{% comment %} Fonts {% endcomment %}
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
 	{% comment %} Favicon {% endcomment %}
 	<link rel="icon" href="{% static 'favicons/Light.png'%}" media="(prefers-color-scheme:no-preference)">
 	<link rel="icon" href="{% static 'favicons/Dark.png'%}"  media="(prefers-color-scheme:dark)">
@@ -22,6 +27,55 @@
 	<script defer src="{% static 'landing.js' %}"></script>
 </head>
 <body>
+	<div class="hero">
+		<div class="content-container">
+			<div class="navbar">
+				<img src="{% static 'images/Logo.png' %}" alt="Logo">
+				{% comment %} <p class="underline">Impact</p> {% endcomment %}
+				<p class="underline" onclick="javascript:window.open('mailto:contact@tues.tech', '_blank')">Contact</p>
+			</div>
+			<div class="text-button">
+				<p class="header">Transform the way you work</p>
+				<p class="text">Study tools, automatic task prioritization, and workload management, all in one place</p>
+				<button>Coming soon</button>
+			</div>
+			<img src="{% static 'images/Page Cluster.png' %}" alt="Page Cluster">
+		</div>
+	</div>
+
+	<div class="content-container">
+		<div class="text-image">
+			<div class="text">
+				<p class="title">Algorithmic Assistance</p>
+				<p class="description">Tuesday is more than just a to-do list. Our unique system finds tasks that are going off track and prioritizes them. It will also identify days when you have too much work and warn you so you can plan ahead.</p>
+				<button>Coming soon</button>
+			</div>
+			<div class="image">
+				<img src="{% static 'images/Algorithm Images.png' %}" alt="Algorithm Images">
+			</div>
+		</div>
+
+		<div class="text-image">
+			<div class="image">
+				<img src="{% static 'images/Versatile Visuals.png' %}" alt="Versatile Visuals">
+			</div>
+			<div class="text">
+				<p class="title">Verstatile Visuals</p>
+				<p class="description">Tuesday is designed to show all the important information at a glance. With just a few progress bars, you can quickly understand where you stand in work pace and progress.</p>
+				<button>Coming soon</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">
+		<div class="links">
+			<p class="underline" onclick="javascript:window.open('https://github.com/Tuestech/v2', '_blank')">Github</p>
+			<p class="underline" onclick="javascript:window.open('/privacy/', '_blank')">Privacy</p>
+			<p class="underline" onclick="javascript:window.open('https://github.com/Tuestech/v2/blob/main/LICENSE.md', '_blank')">License</p>
+			<p class="underline" onclick="javascript:window.open('mailto:contact@tues.tech', '_blank')">Contact</p>
+		</div>
+		<p class="copy">Copyright © 2022 Jeffrey Lu</p>
+	</div>
 
 </body>
 </html>

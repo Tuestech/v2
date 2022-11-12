@@ -7,6 +7,7 @@ from landing import views as landing_views
 urlpatterns = [
 	path('admin/', admin.site.urls),
 	path('', landing_views.index, name="index"),
+	path('privacy/', landing_views.privacy, name="privacy"),
 	path('app/', app_views.main, name="app"),
 	path('updateuser/', app_views.updateUser),
 	path('getuser/', app_views.getUser),

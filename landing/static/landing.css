@@ -1,5 +1,182 @@
 * {
 	margin: 0px;
 	padding: 0px;
-	font-family: sans-serif;
+	font-family: "Roboto", sans-serif;
+}
+
+button {
+	background-color: transparent;
+	display: block;
+	position: relative;
+	border: 2px solid #474747;
+	border-radius: 10px;
+	padding: 8px 30px;
+	font-size: 18px;
+	width: max-content;
+	cursor: pointer;
+	font-weight: bold;
+	transition: 0.1s linear;
+}
+
+.hero {
+	padding: 100px;
+	padding-top: 50px;
+	background: linear-gradient(109.76deg, #D5E0FF 0%, #D6E1FF 0.01%, #F6DDFF 100%);
+}
+
+.content-container {
+	display: grid;
+	margin: auto;
+	padding: 80px 100px;
+	max-width: 900px;
+	row-gap: 80px;
+}
+
+.hero .content-container {
+	padding: 0px;
+	display: grid;
+	max-width: 1000px;
+	grid-template-areas: 
+		'nav nav'
+		'text-button img';
+	grid-template-rows: min-content 1fr;
+	grid-template-columns: minmax(0, 3fr) minmax(0, 4fr);
+	row-gap: 80px;
+	column-gap: 20px;
+}
+
+.hero .content-container .text-button {
+	padding-top: 50px;
+	max-width: 350px;
+	margin-left: auto;
+}
+
+.navbar {
+	grid-area: nav;
+	display: grid;
+	align-items: center;
+	grid-template-areas: 'img link1 link2';
+	grid-template-columns: auto max-content max-content;
+	grid-template-rows: 45px;
+	height: 45px;
+	gap: 30px;
+	overflow: hidden;
+}
+
+.navbar * {
+	cursor: pointer;
+}
+
+.navbar *:hover {
+	filter: brightness(1.2);
+}
+
+.navbar img {
+	height: 45px;
+}
+
+.underline {
+	font-weight: bold;
+	height: max-content;
+	font-size: 20px;
+	color: #474747;
+	display: block;
+	width: max-content;
+	position: relative;
+	cursor: pointer;
+}
+
+.underline::before {
+	content: '';
+	width: 0%;
+	position: absolute;
+	bottom: -1px;
+	height: 2px;
+	background-color: #474747;
+	transition: width 0.3s ease;
+}
+
+.underline:hover::before {
+	width: 100%;
+}
+
+img {
+	grid-area: img;
+	display: block;
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+}
+
+.text-button {
+	display: grid;
+	gap: 10px;
+	grid-area: text-button;
+	height: min-content;
+	color: #474747;
+}
+
+.text-button .header {
+	font-weight: bold;
+	font-size: 35px;
+}
+
+.text-button .text {
+	font-size: 18px;
+}
+
+.text-button button:hover {
+	box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.text-image {
+	display: grid;
+	column-gap: 20px;
+	grid-template-columns: repeat(2, 1fr);
+}
+
+.text-image .text {
+	display: grid;
+	gap: 15px;
+	height: min-content;
+}
+
+.text-image .text .title {
+	font-weight: bold;
+	font-size: 26px;
+}
+
+.text-image .text .description {
+	font-size: 18px;
+}
+
+.text-image button {
+	background-color: #F1F1F1;
+	border: 2px solid #F1F1F1;
+}
+
+.text-image button:hover {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.footer {
+	background-color: #D9D9D9;
+	height: min-content;
+	display: grid;
+	padding: 5px;
+	justify-items: center;
+}
+
+.footer .links {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 30px;
+	padding: 15px;
+	width: min-content;
+}
+
+.footer .copy {
+	font-weight: bold;
+	color: #7B7B7B;
+	font-size: 16px;
 }
