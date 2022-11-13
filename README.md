@@ -13,6 +13,7 @@ Tuesday is a web app that helps students manage and prioritize tasks.
  - [Development](#Development)
  - [Implementation](#Implementation)
  - [Pull requests](#Pull-requests)
+ - [Privacy and Security](#Privacy-and-Security)
 
 [License](#License)
 
@@ -112,6 +113,8 @@ The CSS and JS are split similarly, with a few central files and various other f
 
 The landing page is not yet implemented, but will be done with static HTML, CSS, and JS.
 
+&nbsp;
+
 ### Pull requests
 
 The title of a pull request should briefly describe your changes at a high level.
@@ -125,6 +128,22 @@ If your pull request addresses an issue, be sure to provide a link to the issue 
 Sometimes, your pull request may not be up to our standards.
 Don't worry, we will always explain what was wrong and how it can be fixed.
 You can always submit another pull request
+
+&nbsp;
+
+### Privacy and Security
+
+Privacy and security are among our top priorities. Please take care to ensure users and their data are protected to a high standard.
+
+When contributing, check that your contribution follows the [privacy policy](https://tues.tech/privacy/) in its entirety.
+Do not unnecessarily use 3rd party services, especially when user data is involved.
+
+Security for both the user and the application must also be maintained.
+Do not make hardcoded private keys and avoid changes to the authentication system unless absolutely necessary for functionality or improving security.
+
+All contributions will be checked for privacy and security issues and, if they're found, rejected from merging with the main branch.
+
+&nbsp;
 
 ## License
 
