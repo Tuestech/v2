@@ -1,3 +1,7 @@
+html {
+	font-size: 10px;
+}
+
 * {
 	margin: 0px;
 	padding: 0px;
@@ -11,7 +15,7 @@ button {
 	border: 2px solid #474747;
 	border-radius: 10px;
 	padding: 8px 30px;
-	font-size: 18px;
+	font-size: 1.8rem;
 	width: max-content;
 	cursor: pointer;
 	font-weight: bold;
@@ -78,7 +82,7 @@ button {
 .underline {
 	font-weight: bold;
 	height: max-content;
-	font-size: 20px;
+	font-size: 2rem;
 	color: #474747;
 	display: block;
 	width: max-content;
@@ -106,6 +110,7 @@ img {
 	max-width: 100%;
 	max-height: 100%;
 	object-fit: contain;
+	align-self: end;
 }
 
 .text-button {
@@ -118,11 +123,11 @@ img {
 
 .text-button .header {
 	font-weight: bold;
-	font-size: 35px;
+	font-size: 3.5rem;
 }
 
 .text-button .text {
-	font-size: 18px;
+	font-size: 1.8rem;
 }
 
 .text-button button:hover {
@@ -133,6 +138,7 @@ img {
 	display: grid;
 	column-gap: 20px;
 	grid-template-columns: repeat(2, 1fr);
+	align-items: center;
 }
 
 .text-image .text {
@@ -143,11 +149,11 @@ img {
 
 .text-image .text .title {
 	font-weight: bold;
-	font-size: 26px;
+	font-size: 2.6rem;
 }
 
 .text-image .text .description {
-	font-size: 18px;
+	font-size: 1.8rem;
 }
 
 .text-image button {
@@ -178,5 +184,5 @@ img {
 .footer .copy {
 	font-weight: bold;
 	color: #7B7B7B;
-	font-size: 16px;
+	font-size: 1.6rem;
 }
