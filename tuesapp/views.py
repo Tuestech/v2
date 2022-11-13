@@ -47,7 +47,7 @@ def setSampleData(request):
 	try:
 		user = User.objects.get(uid=uid)
 		user.app_data = SAMPLE
-	except ObjectDoesNotExist:
+	except:
 		user = User(uid=uid, name=name, app_data=SAMPLE)
 
 	# Update user in model
@@ -84,7 +84,7 @@ def getUser(request):
 	try:
 		user = User.objects.get(uid=uid)
 		return HttpResponse(user.app_data)
-	except ObjectDoesNotExist:
+	except:
 		return HttpResponseServerError("Invalid Request: User does not exist")
 
 @login_required
@@ -105,7 +105,7 @@ def updateUser(request):
 	try:
 		user = User.objects.get(uid=uid)
 		user.app_data = data["appData"]
-	except ObjectDoesNotExist:
+	except:
 		user = User(uid=uid, name=name, app_data=data["appData"])
 
 	user.save()
