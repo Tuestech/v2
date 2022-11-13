@@ -2,7 +2,6 @@ from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedir
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import ObjectDoesNotExist
 
 from allauth.socialaccount.models import SocialAccount
 
