@@ -26,6 +26,7 @@ button {
 	cursor: pointer;
 	font-weight: bold;
 	transition: 0.1s linear;
+	color: #000000;
 }
 
 .hero {
@@ -79,7 +80,7 @@ button {
 	.hero .content-container .page-cluster {
 		display: none;
 	}
-	
+
 	.hero .content-container .text-button {
 		margin-right: auto;
 		text-align: center;
