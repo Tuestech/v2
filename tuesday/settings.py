@@ -110,6 +110,9 @@ SOCIALACCOUNT_AUTO_SIGNUP = True
 
 WSGI_APPLICATION = 'tuesday.wsgi.application'
 
+CSRF_TRUSTED_ORIGINS = [
+	"https://tues.tech"
+]
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
