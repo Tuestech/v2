@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseServerError
+from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedirect
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -59,6 +59,10 @@ def setSampleData(request):
 @login_required
 @require_http_methods(["GET"])
 def main(request):
+	# Dev mode
+	if not request.user.is_superuser:
+		return HttpResponseRedirect("/")
+
 	uid = SocialAccount.objects.filter(user=request.user).first().uid
 
 	# Attempt to find user and get data, creates a new blank user otherwise
