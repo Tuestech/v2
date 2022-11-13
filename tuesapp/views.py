@@ -69,7 +69,7 @@ def main(request):
 	try:
 		user = User.objects.get(uid=uid)
 		data = user.app_data
-	except ObjectDoesNotExist:
+	except:
 		name = request.user.username
 		user = User(uid=uid, name=name, app_data="")
 		data = ""
