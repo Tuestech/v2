@@ -92,7 +92,11 @@ SOCIALACCOUNT_PROVIDERS = {
 
 LOGIN_URL = "/accounts/google/login/?process=login"
 
-LOGIN_REDIRECT_URL = '/app/'
+LOGIN_REDIRECT_URL = 'https://tues.tech/app/'
+
+LOGOUT_REDIRECT_URL = 'https://tues.tech/'
+
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 ACCOUNT_USERNAME_REQUIRED = False
 
