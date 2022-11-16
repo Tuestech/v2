@@ -260,7 +260,14 @@ input[type=range]::-moz-range-track {
 
 /* Form inputs */
 
-.form-label {
+.modal .input {
+	display: grid;
+	grid-auto-flow: column;
+	gap: 10px;
+	margin: 10px;
+}
+
+.modal .input p {
 	font-size: 16px;
 	font-weight: bold;
 	margin: 3px 0px;
@@ -270,7 +277,7 @@ input:focus {
 	outline: none;
 }
 
-.form input {
+.modal .input input {
 	background-color: var(--gray);
 	height: 18px;
 	border: none;
@@ -279,4 +286,9 @@ input:focus {
 	padding: 3px 10px;
 	font-size: 16px;
 	color: black;
+	min-width: 250px;
+}
+
+.modal .input input.wide {
+	min-width: 500px;
 }

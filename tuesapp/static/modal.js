@@ -6,7 +6,7 @@ class Modal {
 		 * title     - String of the title of the modal
 		 * content   - DOM element for the main content of the modal
 		 * options   - Array of String names of buttons
-		 * colors    - Array of String colors of buttons
+		 * colors    - Array of String colors ["red", "white", "green"] of buttons
 		 * callbacks - Array of callback functions that correspond to buttons in options [Optional]
 		 */
 		
@@ -78,8 +78,24 @@ class Modal {
 		return form
 	}
 
-	static textInput(label) {
+	static textInput(label, wide=false) {
 		// Return div with text input
+		const out = document.createElement("div")
+		out.classList.add("input")
+
+		const labelP = document.createElement("p")
+		labelP.innerText = label
+		out.append(labelP)
+
+		const input = document.createElement("input")
+		input.setAttribute("type", "text")
+		
+		if (wide) {
+			input.classList.add("wide")
+		}
+		out.append(input)
+
+		return out
 	}
 
 	static dateInput(label) {
