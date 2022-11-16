@@ -260,15 +260,8 @@ input[type=range]::-moz-range-track {
 
 /* Form inputs */
 
-.modal .input {
-	display: grid;
-	grid-auto-flow: column;
-	gap: 10px;
-	margin: 10px;
-}
-
 .modal .input p {
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: bold;
 	margin: 3px 0px;
 }
@@ -287,8 +280,44 @@ input:focus {
 	font-size: 16px;
 	color: black;
 	min-width: 250px;
+	width: calc(100% - 10px * 2); /* 100% - padding */
 }
 
 .modal .input input.wide {
 	min-width: 500px;
+}
+
+.modal .form {
+	display: grid;
+	margin: 10px;
+}
+
+.modal .form.sandwich {
+	grid-template-areas:
+		'top top'
+		'left right'
+		'bottom bottom';
+	grid-template-columns: 1fr 1fr;
+	row-gap: 25px;
+	column-gap: 15px;
+}
+
+.modal .form.sandwich .top {
+	grid-area: top;
+}
+
+.modal .form.sandwich .left {
+	grid-area: left;
+}
+
+.modal .form.sandwich .right {
+	grid-area: right;
+}
+
+.modal .form.sandwich .bottom {
+	grid-area: bottom;
+}
+
+.modal .form.sandwich .input {
+	width: 100%;
 }

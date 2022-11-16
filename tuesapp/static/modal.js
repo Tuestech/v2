@@ -68,7 +68,18 @@ class Modal {
 
 	static sandwichForm(top, left, right, bottom) {
 		const form = document.createElement("div")
-		// TODO: Fill form with content
+		form.classList.add("form", "sandwich")
+
+		top.classList.add("top")
+		left.classList.add("left")
+		right.classList.add("right")
+		bottom.classList.add("bottom")
+
+		form.append(top)
+		form.append(left)
+		form.append(right)
+		form.append(bottom)
+
 		return form
 	}
 
@@ -85,7 +96,6 @@ class Modal {
 
 		const labelP = document.createElement("p")
 		labelP.innerText = label
-		out.append(labelP)
 
 		const input = document.createElement("input")
 		input.setAttribute("type", "text")
@@ -93,7 +103,9 @@ class Modal {
 		if (wide) {
 			input.classList.add("wide")
 		}
+
 		out.append(input)
+		out.append(labelP)
 
 		return out
 	}
@@ -105,11 +117,12 @@ class Modal {
 
 		const labelP = document.createElement("p")
 		labelP.innerText = label
-		out.append(labelP)
 
 		const input = document.createElement("input")
 		input.setAttribute("type", "date")
+
 		out.append(input)
+		out.append(labelP)
 
 		return out
 	}
