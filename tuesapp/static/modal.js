@@ -100,9 +100,23 @@ class Modal {
 
 	static dateInput(label) {
 		// Return div with date input
+		const out = document.createElement("div")
+		out.classList.add("input")
+
+		const labelP = document.createElement("p")
+		labelP.innerText = label
+		out.append(labelP)
+
+		const input = document.createElement("input")
+		input.setAttribute("type", "date")
+		out.append(input)
+
+		return out
 	}
 
 	static selectInput(label, options) {
 		// Return div with select input
+		
+		// Implement later
 	}
 }
