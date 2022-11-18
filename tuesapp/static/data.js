@@ -52,8 +52,7 @@ class Data {
 
 	// Links
 	static newLink() {
-		// TODO: Create a model that adds a new link then trigger a page update
-		console.log("asdf")
+		// TODO: Create a modal that adds a new link then trigger a page update
 	}
 
 	// Network
