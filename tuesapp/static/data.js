@@ -50,6 +50,12 @@ class Data {
 		return out
 	}
 
+	// Links
+	static newLink() {
+		// TODO: Create a model that adds a new link then trigger a page update
+		console.log("asdf")
+	}
+
 	// Network
 	static post(url, data, csrfToken) {
 		let xhr

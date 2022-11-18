@@ -12,6 +12,9 @@ class Dash extends Page {
 		// Row 3
 		this.updateLinks()
 
+		// Functionalize buttons
+		this.functionalizeButtons()
+
 		// Update page visibility
 		super.onPageChange()
 	}
@@ -174,10 +177,16 @@ class Dash extends Page {
 			links.prepend(container)
 		}
 	}
+
+	static functionalizeButtons() {
+		document.getElementById("new-link").addEventListener("click", Data.newLink)
+	}
 	
 	static init() {
+		// Set properties
 		this.pageName = "dash"
 		this.pageBody = document.getElementById("dash")
+
 		super.init()
 	}
 }
