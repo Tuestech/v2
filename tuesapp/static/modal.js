@@ -85,7 +85,11 @@ class Modal {
 
 	static stackForm(top, bottom) {
 		const form = document.createElement("div")
-		// TODO: Fill form with content
+		form.classList.add("form", "stack")
+		
+		form.append(top)
+		form.append(bottom)
+
 		return form
 	}
 

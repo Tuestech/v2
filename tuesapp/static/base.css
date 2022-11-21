@@ -290,6 +290,7 @@ input:focus {
 .modal .form {
 	display: grid;
 	margin: 10px;
+	min-width: 380px;
 }
 
 .modal .form.sandwich {
@@ -320,4 +321,8 @@ input:focus {
 
 .modal .form.sandwich .input {
 	width: 100%;
+}
+
+.modal .form.stack {
+	row-gap: 25px;
 }
