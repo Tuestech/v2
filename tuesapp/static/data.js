@@ -7,11 +7,11 @@ class Data {
 
 	// Data update pattern
 	static requestUpdate() {
-		if (new Date() - lastUpdate < 200) {
+		if (new Date() - Data.lastUpdate < 200) {
 			setTimeout(Data.requestUpdate, 200 - new Date() + lastUpdate)
 		} else {
 			Data.set()
-			lastUpdate = new Date()
+			Data.lastUpdate = new Date()
 		}
 	}
 
@@ -52,7 +52,29 @@ class Data {
 
 	// Links
 	static newLink() {
-		// TODO: Create a modal that adds a new link then trigger a page update
+		// Create a modal that adds a new link then trigger a page update
+		const name = Modal.textInput("Name")
+		const link = Modal.textInput("Link")
+		const stackForm = Modal.stackForm(name, link)
+
+		const blankCallback = () => {}
+
+		const callback = () => {
+			const newName = name.children[0].value
+			const newLink = link.children[0].value
+
+			// TODO: Add link filtering
+			
+			Data.links.push([newName, newLink])
+
+			Data.requestUpdate()
+		}
+
+		// Create modal
+		new Modal("New Link", stackForm, ["Remove", "Cancel", "OK"], ["red", "white", "green"], [blankCallback, blankCallback, callback])
+
+		// Page update
+		document.dispatchEvent(new Event("pageChange"))
 	}
 
 	// Network
