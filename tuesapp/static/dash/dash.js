@@ -169,7 +169,7 @@ class Dash extends Page {
 
 			// Link function
 			container.addEventListener("click", () => {
-				// TODO: Make safety function to prevent javascript running
+				// TODO: Validate links are safe
 				window.open(link[1], "_blank", "noreferrer")
 			})
 
