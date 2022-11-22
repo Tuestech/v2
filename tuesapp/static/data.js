@@ -68,13 +68,13 @@ class Data {
 			Data.links.push([newName, newLink])
 
 			Data.requestUpdate()
+
+			// Page update
+			document.dispatchEvent(new Event("pageChange"))
 		}
 
 		// Create modal
 		new Modal("New Link", stackForm, ["Remove", "Cancel", "OK"], ["red", "white", "green"], [blankCallback, blankCallback, callback])
-
-		// Page update
-		document.dispatchEvent(new Event("pageChange"))
 	}
 
 	// Network
