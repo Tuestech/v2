@@ -74,7 +74,7 @@ class Data {
 		}
 
 		// Create modal
-		new Modal("New Link", stackForm, ["Remove", "Cancel", "OK"], ["red", "white", "green"], [blankCallback, blankCallback, callback])
+		new Modal("New Link", stackForm, ["Cancel", "OK"], ["white", "green"], [blankCallback, callback])
 	}
 
 	// Network
