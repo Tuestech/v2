@@ -92,7 +92,7 @@ def updateUser(request):
 	# Convert request data to dict
 	data = valid_post(request, ["appData"])
 	
-	# Throw error if the request is missing required data
+	# Throw error if the request is empty
 	if not data:
 		return HttpResponseServerError("Invalid POST Request: Missing required data: "+str(request.body))
 
