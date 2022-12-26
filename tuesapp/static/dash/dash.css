@@ -101,8 +101,14 @@
 #links {
 	width: 100%;
 	display: grid;
+	align-items: center;
 	grid-auto-flow: column;
 	gap: 10px;
+}
+
+#links p {
+	font-size: 18px;
+	padding: 0px 10px;
 }
 
 #links .glass-panel {

@@ -155,6 +155,12 @@ class Dash extends Page {
 
 		const defaultWebIcon = "/static/icons/Web Icon.png"
 
+		if (Data.links.length == 0) {
+			const p = document.createElement("p")
+			p.innerText = "No links yet..."
+			links.append(p)
+		}
+
 		for (let i = 0; i < Data.links.length; i++) {
 			// Temp variable
 			const link = Data.links[i]
