@@ -17,12 +17,12 @@
 }
 
 .button {
-	transition: filter 0.15s;
+	transition: backdrop-filter 0.15s;
 }
 
 .button:hover {
 	cursor: pointer;
-	filter: brightness(0.85);
+	backdrop-filter: brightness(0.85);
 }
 
 .empty-text {
