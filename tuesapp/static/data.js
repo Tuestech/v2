@@ -28,7 +28,7 @@ class Data {
 	static getPrioritized() {
 		// Create indices to sort by
 		let indices = []
-		for (const i = 0; i < Data.task.length; i++) {
+		for (let i = 0; i < Data.tasks.length; i++) {
 			indices.push(i)
 		}
 
@@ -44,8 +44,8 @@ class Data {
 
 		// Convert indices back to task objects
 		let out = []
-		for (const i = 0; i < Data.tasks.length; i++) {
-			out.push(Data.tasks[i])
+		for (let i = 0; i < Data.tasks.length; i++) {
+			out.push(Data.tasks[indices[i]])
 		}
 		return out
 	}

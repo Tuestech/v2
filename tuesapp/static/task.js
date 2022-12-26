@@ -55,7 +55,7 @@ class Task {
 		if (taskElapsed > taskLength) {this.score=1000; return 1000}
 
 		// Calculate Deviation
-		const deviation = functionMap[Data.settings["scoreType"]](timePercent) - this.progress
+		const deviation = this.progress - functionMap[Data.settings["scoreType"]](timePercent)
 
 		// Calculate score
 		this.score = deviation

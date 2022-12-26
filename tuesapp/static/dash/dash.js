@@ -101,8 +101,13 @@ class Dash extends Page {
 		Page.clearChildren(currentTasks, 1)
 
 		// Create task cards
-		for (const task of Data.tasks) {
-			currentTasks.append(task.generateTaskCard(() => {Dash.updateProgressBar(); Dash.updateBasicInfoPanel();}))
+		for (const task of Data.getPrioritized()) {
+			currentTasks.append(task.generateTaskCard(() => {
+				Dash.updateBasicInfoPanel()
+				Dash.updateProgressBar()
+				Dash.updateTimingBar()
+				Dash.updateCurrentTasks()
+			}))
 		}
 	}
 
