@@ -158,7 +158,7 @@ class Dash extends Page {
 		if (Data.links.length == 0) {
 			const p = document.createElement("p")
 			p.innerText = "No links yet..."
-			links.append(p)
+			links.prepend(p)
 		}
 
 		for (let i = 0; i < Data.links.length; i++) {
