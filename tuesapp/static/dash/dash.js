@@ -155,7 +155,10 @@ class Dash extends Page {
 
 		const defaultWebIcon = "/static/icons/Web Icon.png"
 
-		for (const link of Data.links) {
+		for (let i = 0; i < Data.links.length; i++) {
+			// Temp variable
+			const link = Data.links[i]
+
 			// Container
 			const container = document.createElement("div")
 			container.className = "glass-panel link button"
@@ -174,9 +177,21 @@ class Dash extends Page {
 
 			// Link function
 			container.addEventListener("click", () => {
-				// TODO: Validate links are safe
 				window.open(link[1], "_blank", "noreferrer")
 			})
+
+			// X
+			const x = document.createElement("div")
+			x.className = "x"
+
+			x.addEventListener("click", (e) => {
+				e.stopPropagation()
+				Data.links = Data.links.filter((list) => list != link)
+				Data.requestUpdate()
+				Dash.updateLinks()
+			})
+
+			container.append(x)
 
 			// Prepend container to the document
 			links.prepend(container)
