@@ -26,7 +26,7 @@ class Data {
 	}
 
 	static getPrioritized() {
-		// Create indicies to sort by
+		// Create indices to sort by
 		let indices = []
 		for (const i = 0; i < Data.task.length; i++) {
 			indices.push(i)
