@@ -35,27 +35,31 @@ class Task {
 			2: Task.strongPoly
 		}
 
+		// Require completion on day before due date
+		const trueEnd = new Date(this.end - 1000*60*60*24)
+
+		// Get end of day
+		const today = new Date()
+		today.setHours(this.end.getHours())
+		today.setMinutes(this.end.getMinutes())
+		today.setSeconds(this.end.getSeconds())
+		today.setMilliseconds(this.end.getMilliseconds())
+
 		// Precomputed time constants
-		const taskLength = this.end - this.start
-		const taskElapsed = new Date() - this.start
+		const taskLength = trueEnd - this.start
+		const taskElapsed = today - this.start
 		const timePercent = 100*taskElapsed/taskLength
 
 		// Edge cases
-		if (taskElapsed < 0) return 0
-		if (taskElapsed > taskLength) return 1000
+		if (taskElapsed < 0) {this.score = 0; return 0}
+		if (taskElapsed > taskLength) {this.score=1000; return 1000}
 
-		// Score calculation
-		const deviation = this.progress - functionMap[Data.settings["scoreType"]](timePercent)
-		this.score = -1 * deviation
-		return this.score
-	}
+		// Calculate Deviation
+		const deviation = functionMap[Data.settings["scoreType"]](timePercent) - this.progress
 
-	getSafeLink() {
-		// Replace with more robust solution
-		if (this.link.substring(0, 4) != "http") {
-			this.link = "https://" + this.link
-		}
-		return this.link
+		// Calculate score
+		this.score = deviation
+		return deviation
 	}
 
 	// DOM element generation
@@ -109,8 +113,8 @@ class Task {
 			if (e.target.tagName == "INPUT") {
 				return
 			}
-			// "Safely" open link
-			window.open(this.getSafeLink(), "_blank")
+			// Open link
+			window.open(this.link, "_blank")
 		})
 
 		return taskDiv
