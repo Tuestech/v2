@@ -101,6 +101,7 @@ class Task {
 		taskProgress.addEventListener("change", () => {
 			this.progress = parseInt(taskProgress.value)
 			this.flagRecomputeScore()
+			Data.requestUpdate()
 			callback()
 		})
 
