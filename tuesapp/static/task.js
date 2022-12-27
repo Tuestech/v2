@@ -127,7 +127,7 @@ class Task {
 
 	delete() {
 		const filler = document.createElement("div")
-		new Modal(`Are you sure you want to delete \"${this.name}\"?`, filler, ["Keep", "Delete"], ["White", "Red"], [() => {}, () => {
+		new Modal(`Are you sure you want to delete \"${this.name}\"?`, filler, ["Keep", "Delete"], ["white", "red"], [() => {}, () => {
 			Data.tasks = Data.tasks.filter((task) => task != this)
 			Data.requestUpdate()
 		}])
