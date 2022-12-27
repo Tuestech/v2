@@ -44,14 +44,19 @@ class Modal {
 			button.innerText = options[i]
 
 			// Make buttons do something
+			const baseCallback = () => {
+				container.classList.add("removed")
+				container.addEventListener("transitionend", () => {body.removeChild(container)})
+			}
+
 			if (callbacks.length > i) {
 				button.addEventListener("click", () => {
 					callbacks[i]()
-					body.removeChild(container)
+					baseCallback()
 				})
 			} else {
 				button.addEventListener("click", () => {
-					body.removeChild(container)
+					baseCallback()
 				})
 			}
 
