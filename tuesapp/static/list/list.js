@@ -24,6 +24,12 @@ class List extends Page {
 
 		const tasks = Data.tasks.filter((task) => task.progress != 100)
 
+		if (tasks.length == 0) {
+			const p = document.createElement("p")
+			p.innerText = "Nothing to do!"
+			toDo.append(p)
+		}
+
 		for (const task of tasks) {
 			toDo.append(List.generateTaskCard(task))
 		}
@@ -36,6 +42,12 @@ class List extends Page {
 		Page.clearChildren(completed, 1)
 
 		const tasks = Data.tasks.filter((task) => task.progress == 100)
+
+		if (tasks.length == 0) {
+			const p = document.createElement("p")
+			p.innerText = "Nothing done yet!"
+			completed.append(p)
+		}
 
 		for (const task of tasks) {
 			completed.append(List.generateTaskCard(task))

@@ -13,21 +13,28 @@
 	gap: 10px;
 }
 
-#todo {
-	grid-area: todo;
-}
-
-#completed {
-	grid-area: completed;
-}
-
 #events {
 	grid-area: events;
 }
 
+/* Empty Text */
+#completed > p:not(.panel-title), #todo > p:not(.panel-title) {
+	font-size: 18px;
+	padding: 0px 10px;
+}
+
 /* Todo */
+#todo {
+	grid-area: todo;
+}
+
 #new-task {
 	justify-self: left;
+}
+
+/* Completed */
+#completed {
+	grid-area: completed;
 }
 
 /* Task container */
