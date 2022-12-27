@@ -57,7 +57,7 @@ class List extends Page {
 		const deleteImg = document.createElement("img")
 		deleteImg.src = "/static/icons/Delete%20Icon.png"
 		deleteButton.append(deleteImg)
-		deleteButton.addEventListener("click", task.delete)
+		deleteButton.addEventListener("click", () => {task.delete()})
 
 		container.append(mainTask)
 		container.append(editButton)
