@@ -126,8 +126,11 @@ class Task {
 	}
 
 	delete() {
-		Data.tasks = Data.tasks.filter((task) => task != this)
-		Data.requestUpdate()
+		const filler = document.createElement("div")
+		new Modal(`Are you sure you want to delete \"${this.name}\"?`, filler, ["Keep", "Delete"], ["White", "Red"], [() => {}, () => {
+			Data.tasks = Data.tasks.filter((task) => task != this)
+			Data.requestUpdate()
+		}])
 	}
 
 	// Task progress prediction functions
