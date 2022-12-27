@@ -3,15 +3,29 @@ class Data {
 	static events
 	static links
 	static settings
-	static lastUpdate = new Date()
+	static updateNecessary = false
+	static timeoutActive = false
+	static TIMEOUT_LENGTH = 500
 
 	// Data update pattern
 	static requestUpdate() {
-		if (new Date() - Data.lastUpdate < 200) {
-			setTimeout(Data.requestUpdate, 200 - new Date() + lastUpdate)
-		} else {
+		Data.updateNecessary = true
+
+		if (Data.timeoutActive) return
+
+		Data.set()
+		Data.updateNecessary = false
+		Data.timeoutActive = true
+		setTimeout(Data.updateLoop, Data.TIMEOUT_LENGTH)
+	}
+
+	static updateLoop() {
+		if (Data.updateNecessary) {
+			Data.updateNecessary = false
 			Data.set()
-			Data.lastUpdate = new Date()
+			setTimeout(Data.updateLoop, Data.TIMEOUT_LENGTH)
+		} else {
+			Data.timeoutActive = false
 		}
 	}
 
@@ -26,9 +40,9 @@ class Data {
 	}
 
 	static getPrioritized() {
-		// Create indicies to sort by
+		// Create indices to sort by
 		let indices = []
-		for (const i = 0; i < Data.task.length; i++) {
+		for (let i = 0; i < Data.tasks.length; i++) {
 			indices.push(i)
 		}
 
@@ -44,8 +58,8 @@ class Data {
 
 		// Convert indices back to task objects
 		let out = []
-		for (const i = 0; i < Data.tasks.length; i++) {
-			out.push(Data.tasks[i])
+		for (let i = 0; i < Data.tasks.length; i++) {
+			out.push(Data.tasks[indices[i]])
 		}
 		return out
 	}

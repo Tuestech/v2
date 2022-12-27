@@ -35,27 +35,31 @@ class Task {
 			2: Task.strongPoly
 		}
 
+		// Require completion on day before due date
+		const trueEnd = new Date(this.end - 1000*60*60*24)
+
+		// Get end of day
+		const today = new Date()
+		today.setHours(this.end.getHours())
+		today.setMinutes(this.end.getMinutes())
+		today.setSeconds(this.end.getSeconds())
+		today.setMilliseconds(this.end.getMilliseconds())
+
 		// Precomputed time constants
-		const taskLength = this.end - this.start
-		const taskElapsed = new Date() - this.start
+		const taskLength = trueEnd - this.start
+		const taskElapsed = today - this.start
 		const timePercent = 100*taskElapsed/taskLength
 
 		// Edge cases
-		if (taskElapsed < 0) return 0
-		if (taskElapsed > taskLength) return 1000
+		if (taskElapsed < 0) {this.score = 0; return 0}
+		if (taskElapsed > taskLength) {this.score=1000; return 1000}
 
-		// Score calculation
+		// Calculate Deviation
 		const deviation = this.progress - functionMap[Data.settings["scoreType"]](timePercent)
-		this.score = -1 * deviation
-		return this.score
-	}
 
-	getSafeLink() {
-		// Replace with more robust solution
-		if (this.link.substring(0, 4) != "http") {
-			this.link = "https://" + this.link
-		}
-		return this.link
+		// Calculate score
+		this.score = deviation
+		return deviation
 	}
 
 	// DOM element generation
@@ -97,6 +101,7 @@ class Task {
 		taskProgress.addEventListener("change", () => {
 			this.progress = parseInt(taskProgress.value)
 			this.flagRecomputeScore()
+			Data.requestUpdate()
 			callback()
 		})
 
@@ -109,21 +114,78 @@ class Task {
 			if (e.target.tagName == "INPUT") {
 				return
 			}
-			// "Safely" open link
-			window.open(this.getSafeLink(), "_blank")
+			// Open link
+			window.open(this.link, "_blank")
 		})
 
 		return taskDiv
 	}
 
-	openEdit() {
-		// TODO: Open an edit modal for the task in the current page
+	static openEdit(task, isNew=false) {
+		// Create dummy task if new
+		if (!task) {
+			task = new Task(["", "", "", "", 0, ""])
+		}
+
+		// Set form elements
+		const name = Modal.textInput("Name", true, task.name)
+		const start = Modal.dateInput("Start Date", task.start)
+		const end = Modal.dateInput("Due Date", task.end)
+		const link = Modal.textInput("Link (optional)", true, task.link)
+		const form = Modal.sandwichForm(
+			name,
+			start, end,
+			link
+		)
+
+		// Determine modal title
+		let modalTitle
+		if (isNew) {
+			modalTitle = "New Task"
+		} else {
+			modalTitle = "Edit Task"
+		}
+
+		// Create modal
+		new Modal(modalTitle, form, ["Cancel", "Save"], ["white", "green"], [() => {}, () => {
+			let nameValue = name.children[0].value
+			let startValue = new Date(start.children[0].value)
+			let endValue = new Date(end.children[0].value)
+			let linkValue = link.children[0].value
+			// Validate input
+			if (!(nameValue && !!startValue && !!endValue)) {
+				const dummy = document.createElement("div")
+				new Modal("Make sure all required fields are complete before saving", dummy, ["Ok"], ["white"])
+				return true
+			}
+
+			if (endValue < startValue) {
+				const dummy = document.createElement("div")
+				new Modal("Due date must be after start date", dummy, ["Ok"], ["white"])
+				return true
+			}
+
+			task.name = name.children[0].value
+			task.start = new Date(start.children[0].value)
+			task.end = new Date(end.children[0].value)
+			task.link = link.children[0].value
+
+			if (isNew) {
+				Data.tasks.push(task)
+			}
+		}])
+	}
+
+	edit() {
+		Task.openEdit(this)
 	}
 
 	delete() {
-		// TODO: Test this function
-		thisTask = this
-		Data.tasks.filter((task) => task == thisTask)
+		const filler = document.createElement("div")
+		new Modal(`Are you sure you want to delete \"${this.name}\"?`, filler, ["Keep", "Delete"], ["white", "red"], [() => {}, () => {
+			Data.tasks = Data.tasks.filter((task) => task != this)
+			Data.requestUpdate()
+		}])
 	}
 
 	// Task progress prediction functions
@@ -137,5 +199,21 @@ class Task {
 
 	static strongPoly(t) {
 		return 100*(-800*(t**(0.748301)) + 812.105*(t**(0.7459)))/99.6199552061
+	}
+
+	// Formatters
+	static formatDate(date, mode) {
+		if (mode == "yyyy-mm-dd") {
+			return `${date.getFullYear()}-${Task.prependZeroes(date.getMonth()+1, 2)}-${Task.prependZeroes(date.getDate(), 2)}`
+		}
+	}
+
+	static prependZeroes(n, targetDigits) {
+		// Prepends zeroes to n until targetDigits digits are reached
+		let out = ""+n
+		for (let i = 0; i < targetDigits-out.length; i++) {
+			out = "0"+out
+		}
+		return out
 	}
 }

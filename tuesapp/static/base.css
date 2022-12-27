@@ -17,12 +17,12 @@
 }
 
 .button {
-	transition: filter 0.15s;
+	transition: backdrop-filter 0.15s;
 }
 
 .button:hover {
 	cursor: pointer;
-	filter: brightness(0.85);
+	backdrop-filter: brightness(0.85);
 }
 
 .empty-text {
@@ -188,6 +188,15 @@ input[type=range]::-moz-range-track {
 }
 
 /* Modals */
+@keyframes modal-container-append-animate {
+	from {
+		backdrop-filter: blur(0px);
+	}
+	to {
+		backdrop-filter: blur(4px);
+	}
+}
+
 .modal-container {
 	position: absolute;
 	backdrop-filter: blur(4px);
@@ -196,6 +205,18 @@ input[type=range]::-moz-range-track {
 	display: grid;
 	align-items: center;
 	justify-items: center;
+	transition: backdrop-filter 0.25s;
+	animation: modal-container-append-animate 0.25s linear;
+}
+
+/* animate new box */
+.new-box {
+	animation: append-animate .3s linear;
+}
+
+.modal-container.removed {
+	pointer-events: none;
+	backdrop-filter: blur(0px);
 }
 
 .modal {
@@ -205,6 +226,7 @@ input[type=range]::-moz-range-track {
 	margin: 0px 50px;
 	padding: 20px;
 	max-width: calc(100% - 60px);
+	min-width: 250px;
 	grid-template-areas: 
 		'title'
 		'content'

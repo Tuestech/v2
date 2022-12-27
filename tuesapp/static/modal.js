@@ -44,14 +44,19 @@ class Modal {
 			button.innerText = options[i]
 
 			// Make buttons do something
+			const baseCallback = () => {
+				container.classList.add("removed")
+				container.addEventListener("transitionend", () => {body.removeChild(container)})
+			}
+
 			if (callbacks.length > i) {
 				button.addEventListener("click", () => {
-					callbacks[i]()
-					body.removeChild(container)
+					if (callbacks[i]()) return
+					baseCallback()
 				})
 			} else {
 				button.addEventListener("click", () => {
-					body.removeChild(container)
+					baseCallback()
 				})
 			}
 
@@ -93,7 +98,7 @@ class Modal {
 		return form
 	}
 
-	static textInput(label, wide=false) {
+	static textInput(label, wide=false, initialValue="") {
 		// Return div with text input
 		const out = document.createElement("div")
 		out.classList.add("input")
@@ -103,6 +108,7 @@ class Modal {
 
 		const input = document.createElement("input")
 		input.setAttribute("type", "text")
+		input.value = initialValue
 		
 		if (wide) {
 			input.classList.add("wide")
@@ -114,7 +120,7 @@ class Modal {
 		return out
 	}
 
-	static dateInput(label) {
+	static dateInput(label, initialValue) {
 		// Return div with date input
 		const out = document.createElement("div")
 		out.classList.add("input")
@@ -124,6 +130,9 @@ class Modal {
 
 		const input = document.createElement("input")
 		input.setAttribute("type", "date")
+		if (initialValue) {
+			input.value = Task.formatDate(initialValue, "yyyy-mm-dd")
+		}
 
 		out.append(input)
 		out.append(labelP)

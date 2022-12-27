@@ -101,8 +101,13 @@ class Dash extends Page {
 		Page.clearChildren(currentTasks, 1)
 
 		// Create task cards
-		for (const task of Data.tasks) {
-			currentTasks.append(task.generateTaskCard(() => {Dash.updateProgressBar(); Dash.updateBasicInfoPanel();}))
+		for (const task of Data.getPrioritized()) {
+			currentTasks.append(task.generateTaskCard(() => {
+				Dash.updateBasicInfoPanel()
+				Dash.updateProgressBar()
+				Dash.updateTimingBar()
+				Dash.updateCurrentTasks()
+			}))
 		}
 	}
 
@@ -150,7 +155,16 @@ class Dash extends Page {
 
 		const defaultWebIcon = "/static/icons/Web Icon.png"
 
-		for (const link of Data.links) {
+		if (Data.links.length == 0) {
+			const p = document.createElement("p")
+			p.innerText = "No links yet..."
+			links.prepend(p)
+		}
+
+		for (let i = 0; i < Data.links.length; i++) {
+			// Temp variable
+			const link = Data.links[i]
+
 			// Container
 			const container = document.createElement("div")
 			container.className = "glass-panel link button"
@@ -169,9 +183,21 @@ class Dash extends Page {
 
 			// Link function
 			container.addEventListener("click", () => {
-				// TODO: Validate links are safe
 				window.open(link[1], "_blank", "noreferrer")
 			})
+
+			// X
+			const x = document.createElement("div")
+			x.className = "x"
+
+			x.addEventListener("click", (e) => {
+				e.stopPropagation()
+				Data.links = Data.links.filter((list) => list != link)
+				Data.requestUpdate()
+				Dash.updateLinks()
+			})
+
+			container.append(x)
 
 			// Prepend container to the document
 			links.prepend(container)
