@@ -18,7 +18,7 @@
 }
 
 /* Empty Text */
-#completed > p:not(.panel-title), #todo > p:not(.panel-title) {
+#completed > p:not(.panel-title), #todo > p:not(.panel-title), #events > p:not(.panel-title) {
 	font-size: 18px;
 	padding: 0px 10px;
 }
