@@ -25,6 +25,12 @@
 	grid-area: events;
 }
 
+/* Todo */
+#new-task {
+	justify-self: left;
+	border-radius: 10px;
+}
+
 /* Task container */
 .task-container {
 	display: grid;

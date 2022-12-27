@@ -173,6 +173,9 @@ class Task {
 			if (isNew) {
 				Data.tasks.push(task)
 			}
+
+			Data.requestUpdate()
+			document.dispatchEvent(new Event("pageChange"))
 		}])
 	}
 
