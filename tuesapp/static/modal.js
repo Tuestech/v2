@@ -51,7 +51,7 @@ class Modal {
 
 			if (callbacks.length > i) {
 				button.addEventListener("click", () => {
-					callbacks[i]()
+					if (callbacks[i]()) return
 					baseCallback()
 				})
 			} else {

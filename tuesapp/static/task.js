@@ -122,19 +122,23 @@ class Task {
 	}
 
 	static openEdit(task, isNew=false) {
+		// Create dummy task if new
 		if (!task) {
 			task = new Task(["", "", "", "", 0, ""])
 		}
+
+		// Set form elements
 		const name = Modal.textInput("Name", true, task.name)
 		const start = Modal.dateInput("Start Date", task.start)
 		const end = Modal.dateInput("Due Date", task.end)
-		const link = Modal.textInput("Link", true, task.link)
+		const link = Modal.textInput("Link (optional)", true, task.link)
 		const form = Modal.sandwichForm(
 			name,
 			start, end,
 			link
 		)
 
+		// Determine modal title
 		let modalTitle
 		if (isNew) {
 			modalTitle = "New Task"
@@ -142,12 +146,29 @@ class Task {
 			modalTitle = "Edit Task"
 		}
 
+		// Create modal
 		new Modal(modalTitle, form, ["Cancel", "Save"], ["white", "green"], [() => {}, () => {
+			let nameValue = name.children[0].value
+			let startValue = new Date(start.children[0].value)
+			let endValue = new Date(end.children[0].value)
+			let linkValue = link.children[0].value
+			// Validate input
+			if (!(nameValue && !!startValue && !!endValue)) {
+				const dummy = document.createElement("div")
+				new Modal("Make sure all required fields are complete before saving", dummy, ["Ok"], ["white"])
+				return true
+			}
+
+			if (endValue < startValue) {
+				const dummy = document.createElement("div")
+				new Modal("Due date must be after start date", dummy, ["Ok"], ["white"])
+				return true
+			}
+
 			task.name = name.children[0].value
 			task.start = new Date(start.children[0].value)
 			task.end = new Date(end.children[0].value)
 			task.link = link.children[0].value
-			task.form = form.children[0].value
 
 			if (isNew) {
 				Data.tasks.push(task)

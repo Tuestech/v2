@@ -226,6 +226,7 @@ input[type=range]::-moz-range-track {
 	margin: 0px 50px;
 	padding: 20px;
 	max-width: calc(100% - 60px);
+	min-width: 250px;
 	grid-template-areas: 
 		'title'
 		'content'
