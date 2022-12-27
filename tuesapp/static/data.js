@@ -145,7 +145,9 @@ class Data {
 
 	// Calculations
 	static daysBetween(date1, date2) {
-		return Math.floor((date1 - date2)/(1000 * 60 * 60 * 24))
+		date1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate())
+		date2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate())
+		return Math.floor((date1 - date2) / (1000 * 60 * 60 * 24))
 	}
 
 	static init() {
