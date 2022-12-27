@@ -121,8 +121,42 @@ class Task {
 		return taskDiv
 	}
 
-	openEdit() {
-		// TODO: Open an edit modal for the task in the current page
+	static openEdit(task, isNew=false) {
+		if (!task) {
+			task = new Task(["", "", "", "", 0, ""])
+		}
+		const name = Modal.textInput("Name", true, task.name)
+		const start = Modal.dateInput("Start Date", task.start)
+		const end = Modal.dateInput("Due Date", task.end)
+		const link = Modal.textInput("Link", true, task.link)
+		const form = Modal.sandwichForm(
+			name,
+			start, end,
+			link
+		)
+
+		let modalTitle
+		if (isNew) {
+			modalTitle = "New Task"
+		} else {
+			modalTitle = "Edit Task"
+		}
+
+		new Modal(modalTitle, form, ["Cancel", "Save"], ["white", "green"], [() => {}, () => {
+			task.name = name.children[0].value
+			task.start = new Date(start.children[0].value)
+			task.end = new Date(end.children[0].value)
+			task.link = link.children[0].value
+			task.form = form.children[0].value
+
+			if (isNew) {
+				Data.tasks.push(task)
+			}
+		}])
+	}
+
+	edit() {
+		Task.openEdit(this)
 	}
 
 	delete() {
@@ -144,5 +178,21 @@ class Task {
 
 	static strongPoly(t) {
 		return 100*(-800*(t**(0.748301)) + 812.105*(t**(0.7459)))/99.6199552061
+	}
+
+	// Formatters
+	static formatDate(date, mode) {
+		if (mode == "yyyy-mm-dd") {
+			return `${date.getFullYear()}-${Task.prependZeroes(date.getMonth()+1, 2)}-${Task.prependZeroes(date.getDate(), 2)}`
+		}
+	}
+
+	static prependZeroes(n, targetDigits) {
+		// Prepends zeroes to n until targetDigits digits are reached
+		let out = ""+n
+		for (let i = 0; i < targetDigits-out.length; i++) {
+			out = "0"+out
+		}
+		return out
 	}
 }

@@ -50,7 +50,7 @@ class List extends Page {
 		const editImg = document.createElement("img")
 		editImg.src = "/static/icons/Edit%20Icon.png"
 		editButton.append(editImg)
-		editButton.addEventListener("click", task.openEdit)
+		editButton.addEventListener("click", () => {task.edit()})
 
 		const deleteButton = document.createElement("div")
 		deleteButton.className = "glass-panel button"
