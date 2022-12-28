@@ -39,7 +39,7 @@ class Data {
 		return temp
 	}
 
-	static getPrioritized() {
+	static getPrioritized(excludeCompleted=false) {
 		// Create indices to sort by
 		let indices = []
 		for (let i = 0; i < Data.tasks.length; i++) {
@@ -61,6 +61,12 @@ class Data {
 		for (let i = 0; i < Data.tasks.length; i++) {
 			out.push(Data.tasks[indices[i]])
 		}
+
+		// Exclude completed if needed
+		if (excludeCompleted) {
+			out = out.filter(x => x.progress != 100)
+		}
+
 		return out
 	}
 

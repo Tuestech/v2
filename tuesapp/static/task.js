@@ -25,6 +25,9 @@ class Task {
 	}
 
 	getScore() {
+		// Task complete edge case
+		if (this.progress == 100) {this.score = 1000; return 1000}
+
 		// Use existing score if possible
 		if (this.score != null) return this.score
 
@@ -77,7 +80,9 @@ class Task {
 		const timeLeft = document.createElement("p")
 		let dateDeficit = Data.daysBetween(this.end, new Date())
 
-		if (dateDeficit < 0) {
+		if (this.progress == 100) {
+			timeLeft.innerText = "Done"
+		} else if (dateDeficit < 0) {
 			timeLeft.innerText = "Overdue"
 		} else if (dateDeficit == 0) {
 			timeLeft.innerText = "Due Today"
