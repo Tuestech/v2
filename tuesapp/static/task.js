@@ -52,14 +52,14 @@ class Task {
 
 		// Edge cases
 		if (taskElapsed < 0) {this.score = 0; return 0}
-		if (taskElapsed > taskLength) {this.score=1000; return 1000}
+		if (Data.daysBetween(this.end, today) < 0) {this.score=-1000; return -1000}
 
 		// Calculate Deviation
 		const deviation = this.progress - functionMap[Data.settings["scoreType"]](timePercent)
 
 		// Calculate score
 		this.score = deviation
-		return deviation
+		return this.score
 	}
 
 	// DOM element generation
