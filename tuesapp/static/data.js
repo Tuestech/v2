@@ -7,6 +7,15 @@ class Data {
 	static timeoutActive = false
 	static TIMEOUT_LENGTH = 500
 
+	// Init
+	static init() {
+		const data = JSON.parse(document.getElementById("data").innerText)
+		this.tasks = this.fromJSON(data["tasks"], Task)
+		this.events = this.fromJSON(data["events"], Event)
+		this.links = JSON.parse(data["links"])
+		this.settings = JSON.parse(data["settings"])
+	}
+
 	// Data update pattern
 	static requestUpdate() {
 		Data.updateNecessary = true
@@ -154,13 +163,5 @@ class Data {
 		date1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate())
 		date2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate())
 		return Math.floor((date1 - date2) / (1000 * 60 * 60 * 24))
-	}
-
-	static init() {
-		const data = JSON.parse(document.getElementById("data").innerText)
-		this.tasks = this.fromJSON(data["tasks"], Task)
-		this.events = this.fromJSON(data["events"], Event)
-		this.links = JSON.parse(data["links"])
-		this.settings = JSON.parse(data["settings"])
 	}
 }
