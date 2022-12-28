@@ -1,139 +1,102 @@
 class Timer extends Page {
 	static pauseImgPath = "/static/icons/Pause%20Icon.png"
 	static playImgPath = "/static/icons/Play%20Icon.png"
-
 	static sequenceButtons = Array.from(document.getElementById("sequence").getElementsByClassName("button"))
-	static stop = () => {}
-	static toggle = () => {}
+	static sequenceState = 0
+	static worker
 
 	static init() {
-		// Setup Variables
+		// Setup variables
 		this.pageName = "timer"
 		this.pageBody = document.getElementById("timer")
 
-		Timer.activateButtons()
+		// Set up worker
+		Timer.worker = new Worker("../static/timer/timer-worker.js")
 
-		// Start Timer
-		let [stop, toggle] = Timer.createTimer(25, Timer.sequenceButtons[1].click)
+		// Stop worker when page is closed
+		window.addEventListener("beforeunload", function() {
+			Timer.worker.postMessage("stop")
+			Timer.worker.terminate()
+		})
 
-		toggle()
+		// Handle messages from worker
+		Timer.worker.addEventListener("message", function(e) {
+			if (e.data == "next") {
+				Timer.nextSequence()
+			} else {
+				Timer.updateDisplay(e.data)
+			}
+		})
 
-		Timer.stop = stop
-		Timer.toggle = toggle
+		// Add basic navigation button functionality
+		const backButton = document.getElementById("back")
+		const playButton = document.getElementById("play")
+		const forwardButton = document.getElementById("fast-forward")
 
+		backButton.addEventListener("click", () => {Timer.previousSequence()})
+		playButton.addEventListener("click", () => {Timer.toggle()})
+		forwardButton.addEventListener("click", () => {Timer.nextSequence()})
+
+		// Add sequence button functionality
+		for (let i = 0; i < Timer.sequenceButtons.length; i++) {
+			const button = Timer.sequenceButtons[i]
+
+			// Get time on sequence button
+			const time = button.children[1].innerText.replace(" mins", "")
+
+			// Add sequence button functionality
+			button.addEventListener("click", () => {
+				// Deactivate all buttons
+				for (const otherButton of Timer.sequenceButtons) {
+					otherButton.classList.remove("active")
+				}
+
+				// Activate clicked button
+				button.classList.add("active")
+
+				// Update state
+				Timer.sequenceState = i
+
+				// Update worker
+				Timer.worker.postMessage(""+time)
+			})
+		}
+
+		// Complete page
 		super.init()
 	}
 
-	static activateButtons() {
-		for (let i = 0; i < Timer.sequenceButtons.length; i++) {
-			// Set temp variable
-			const button = Timer.sequenceButtons[i]
-
-			// Add event listener to each button
-			button.addEventListener("click", () => {
-				// Visually show active button
-				Timer.deactivateAllButtons()
-				button.classList.add("active")
-
-				// Stop current timer
-				Timer.stop()
-
-				// Create new timer
-				let [stop, toggle] = Timer.createTimer(
-					parseInt(button.children[1].innerText.replace(" mins", "")),
-					() => {
-						Timer.sequenceButtons[(i+1)%(Timer.sequenceButtons.length)].click()
-					})
-
-				// Set variables
-				Timer.stop = stop
-				Timer.toggle = toggle
-			})
-		}
-		
-		// Add play button functionality
-		document.getElementById("play").addEventListener("click", () => {
-			Timer.toggle()
-		})
+	static mod(a, b) {
+		return ((a % b) + b) % b
 	}
 
-	static deactivateAllButtons() {
-		for (const button of Timer.sequenceButtons) {
-			button.classList.remove("active")
+	static toggle() {
+		const buttonImg = document.getElementById("play").children[0]
+		const currentSrc = buttonImg.getAttribute("src")
+		if (currentSrc == Timer.pauseImgPath) {
+			buttonImg.setAttribute("src", Timer.playImgPath)
+		} else {
+			buttonImg.setAttribute("src", Timer.pauseImgPath)
 		}
+
+		Timer.worker.postMessage("toggle")
 	}
 
-	static createTimer(timerMinutes, callback) {
-		// Set constants
-		let init = new Date().getTime()
-		const MINUTE = 1000 * 60
-		let target = init + timerMinutes * MINUTE
+	static previousSequence() {
+		Timer.sequenceState = Timer.mod(Timer.sequenceState - 1, Timer.sequenceButtons.length)
+		Timer.sequenceButtons[Timer.sequenceState].click()
 
-		const intervalFunc = () => {
-			const now = new Date().getTime()
-
-			// Stop running if the timer is done
-			if (target < now) {
-				document.getElementById("time").innerText = "0:00"
-				clearInterval(interval)
-				callback()
-				return
-			}
-
-			// Calculate numbers for timer
-			let minutes = Math.floor((target - now) / MINUTE)
-			let seconds = Math.floor((target - now) % MINUTE / 1000)
-
-			// Ensure seconds are always 2 digits
-			if (seconds < 10) {
-				seconds = "0" + seconds
-			}
-
-			// Create the displayed time string
-			const newString = `${minutes}:${seconds}`
-
-			// Stop execution if the desired string is already present
-			if (document.getElementById("time").innerText == newString) return
-
-			// Update the displayed time
-			document.getElementById("time").innerText = newString
-		}
-
-		let interval = setInterval(intervalFunc, 100)
-
-		// Update control button
 		document.getElementById("play").children[0].setAttribute("src", Timer.pauseImgPath)
+	}
 
-		// Create control functions
-		let timeLeft = target - init
-		let paused = false
+	static nextSequence() {
+		Timer.sequenceState = Timer.mod(Timer.sequenceState + 1, Timer.sequenceButtons.length)
+		Timer.sequenceButtons[Timer.sequenceState].click()
 
-		const stop = () => {
-			clearInterval(interval)
-		}
+		document.getElementById("play").children[0].setAttribute("src", Timer.pauseImgPath)
+	}
 
-		const pause = () => {
-			clearInterval(interval)
-			timeLeft = target - new Date().getTime()
-		}
-
-		const play = () => {
-			init = new Date().getTime()
-			target = init + timeLeft
-			interval = setInterval(intervalFunc, 100)
-		}
-
-		const toggle = () => {
-			if (paused) {
-				play()
-				document.getElementById("play").children[0].setAttribute("src", Timer.pauseImgPath)
-			} else {
-				pause()
-				document.getElementById("play").children[0].setAttribute("src", Timer.playImgPath)
-			}
-			paused = !paused
-		}
-
-		return [stop, toggle]
+	static updateDisplay(time) {
+		document.getElementById("time").innerText = time
 	}
 }
