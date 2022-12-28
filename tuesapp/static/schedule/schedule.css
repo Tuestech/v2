@@ -4,6 +4,38 @@
 	grid-template-rows: auto min-content;
 }
 
+#timeline {
+	display: grid;
+	grid-auto-rows: min-content;
+	gap: 10px;
+	overflow: hidden;
+}
+
+#timeline .row {
+	display: grid;
+	margin: 0px -10%;
+	grid-auto-flow: row;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-areas: "a0 a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11";
+	gap: 10px;
+}
+
+#timeline #timeline-day-names p {
+	color: var(--dark-gray);
+	text-align: center;
+	font-weight: bold;
+	font-size: 22px;
+}
+
+#timeline .row .glass-panel {
+	border-radius: 10px;
+	text-align: center;
+}
+
+#timeline .row .glass-panel.overdue {
+	box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.5);
+}
+
 /* Graph containing */
 #s-graph-container {
 	/* Width - padding - border*/

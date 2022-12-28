@@ -6,10 +6,88 @@ class Schedule extends Page {
 	}
 
 	static onPageChange() {
-		super.onPageChange()
+		// Timeline
+		this.setTimelineDays()
+		this.setTimelineTasks()
+
+		// Workload testing
 		let testX = [1, 2, 3, 4, 5]
 		let testY = [0.2, 0.8, 0.5, 0.6, 0.1]
 		this.graph(testX, testY, [false, true, false, false, false])
+
+		super.onPageChange()
+	}
+
+	static setTimelineDays() {
+		// Setup
+		const dayNameDiv = document.getElementById("timeline-day-names")
+		Page.clearChildren(dayNameDiv)
+
+		const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+		const today = new Date().getDay()
+
+		// Set day names
+		for (let i = today; i < today + 10; i++) {
+			const day = document.createElement("p")
+			day.innerText = dayNames[i % 7]
+			day.setAttribute("style", `grid-area: a${i+1-today};`)
+
+			dayNameDiv.append(day)
+		}
+	}
+
+	static setTimelineTasks() {
+		// Setup
+		const timeline = document.getElementById("timeline")
+		Page.clearChildren(timeline, 1)
+
+		// Add tasks
+		for (const task of Data.getPrioritized(true)) {
+			// Create row
+			const row = document.createElement("div")
+			row.classList.add("row")
+
+			// Create task
+			const taskDiv = document.createElement("div")
+			taskDiv.classList.add("glass-panel")
+			taskDiv.innerText = task.name
+			taskDiv.setAttribute("style", "grid-area: b;")
+
+			// Calculate task div positioning
+			let startIndex = Math.max(-1, Data.daysBetween(task.start, new Date()))
+			let endIndex = Math.min(10, Data.daysBetween(task.end, new Date()))
+
+			// Handle overdue tasks
+			if (endIndex < 0) {
+				endIndex = 0
+				taskDiv.classList.add("overdue")
+			}
+
+			// Generate grid-template-areas property for row
+			let gridAreas = ""
+			for (let i = -1; i <= 10; i++) {
+				if (i < startIndex) {
+					gridAreas += "a "
+				} else if (i <= endIndex) {
+					gridAreas += "b "
+				} else {
+					gridAreas += "c "
+				}
+			}
+
+			row.setAttribute("style", `grid-template-areas: "${gridAreas}";`)
+
+			// Ensure task name is visible and centered
+			if (startIndex == -1) {
+				taskDiv.setAttribute("style", taskDiv.getAttribute("style")+`padding-left: ${100/(endIndex-startIndex+1)}%;`)
+			}
+			if (endIndex == 11) {
+				taskDiv.setAttribute("style", taskDiv.getAttribute("style")+`padding-right: ${100/(endIndex-startIndex+1)}%;`)
+			}
+
+			row.append(taskDiv)
+			timeline.append(row)
+		}
 	}
 
 	static setSVGDims(svg, parent) {
