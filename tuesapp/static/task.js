@@ -24,12 +24,13 @@ class Task {
 		this.score = null
 	}
 
-	getScore() {
-		// Task complete edge case
-		if (this.progress == 100) {this.score = 1000; return 1000}
-
-		// Use existing score if possible
-		if (this.score != null) return this.score
+	expectedProgress(date) {
+		// Timeless date
+		date = new Date(date.getTime()) // make copy before changing
+		date.setHours(this.end.getHours())
+		date.setMinutes(this.end.getMinutes())
+		date.setSeconds(this.end.getSeconds())
+		date.setMilliseconds(this.end.getMilliseconds())
 
 		// Progress prediction functions
 		const functionMap = {
@@ -41,24 +42,33 @@ class Task {
 		// Require completion on day before due date
 		const trueEnd = new Date(this.end - 1000*60*60*24)
 
-		// Get end of day
+		const taskLength = trueEnd - this.start
+		const taskElapsed = date - this.start
+		const timePercent = 100*taskElapsed/taskLength
+
+		return Math.max(0, Math.min(100, functionMap[Data.settings["scoreType"]](timePercent)))
+	}
+
+	getScore() {
+		// Task complete edge case
+		if (this.progress == 100) {this.score = 1000; return 1000}
+
+		// Use existing score if possible
+		if (this.score != null) return this.score
+
+		// Get today
 		const today = new Date()
 		today.setHours(this.end.getHours())
 		today.setMinutes(this.end.getMinutes())
 		today.setSeconds(this.end.getSeconds())
 		today.setMilliseconds(this.end.getMilliseconds())
 
-		// Precomputed time constants
-		const taskLength = trueEnd - this.start
-		const taskElapsed = today - this.start
-		const timePercent = 100*taskElapsed/taskLength
-
 		// Edge cases
-		if (taskElapsed < 0) {this.score = 0; return 0}
+		if (today - this.start < 0) {this.score = 0; return 0}
 		if (Data.daysBetween(this.end, today) < 0) {this.score=-1000; return -1000}
 
 		// Calculate Deviation
-		const deviation = this.progress - functionMap[Data.settings["scoreType"]](timePercent)
+		const deviation = this.progress - this.expectedProgress(today)
 
 		// Calculate score
 		this.score = deviation
