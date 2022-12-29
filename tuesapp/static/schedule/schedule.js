@@ -10,14 +10,13 @@ class Schedule extends Page {
 		this.setTimelineDays()
 		this.setTimelineTasks()
 
-		// Workload testing
-		let testX = [1, 2, 3, 4, 5]
-		let testY = [0.2, 0.8, 0.5, 0.6, 0.1]
-		this.graph(testX, testY, [false, true, false, false, false])
+		// Workload
+		this.updateWorkload()
 
 		super.onPageChange()
 	}
 
+	// Timeline
 	static setTimelineDays() {
 		// Setup
 		const dayNameDiv = document.getElementById("timeline-day-names")
@@ -90,6 +89,31 @@ class Schedule extends Page {
 		}
 	}
 
+	// Workload
+	static updateWorkload() {
+		// Generate x
+		let x = []
+		for (let i = 1; i <= 10; i++) {
+			x.push(i)
+		}
+
+		// Calculate y
+		let y = Data.calculateWorkload(10)
+
+		// Apply normalizer function to y
+		const normalizer = (x) => -1*Math.E**(-1*(x/70))+1
+		y = y.map(normalizer)
+
+		// TODO: Generate Warnings
+		let warnings = []
+		for (const a of x) {
+			warnings.push(false)
+		}
+
+		Schedule.graph(x, y, warnings)
+	}
+
+	// Graphing
 	static setSVGDims(svg, parent) {
 		const width = parent.offsetWidth
 		const height = parent.offsetHeight
