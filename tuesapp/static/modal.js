@@ -45,6 +45,7 @@ class Modal {
 
 			// Make buttons do something
 			const baseCallback = () => {
+				container.removeChild(modal)
 				container.classList.add("removed")
 				container.addEventListener("transitionend", () => {body.removeChild(container)})
 			}

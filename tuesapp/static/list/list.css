@@ -7,22 +7,34 @@
 		'todo events';
 }
 
-#list div {
+#list > .glass-panel {
 	align-items: start;
 	align-content: start;
 	gap: 10px;
 }
 
+#events {
+	grid-area: events;
+}
+
+/* Empty Text */
+#completed > p:not(.panel-title), #todo > p:not(.panel-title), #events > p:not(.panel-title) {
+	font-size: 18px;
+	padding: 0px 10px;
+}
+
+/* Todo */
 #todo {
 	grid-area: todo;
 }
 
-#completed {
-	grid-area: completed;
+#new-task {
+	justify-self: left;
 }
 
-#events {
-	grid-area: events;
+/* Completed */
+#completed {
+	grid-area: completed;
 }
 
 /* Task container */
@@ -33,11 +45,11 @@
 	gap: 10px;
 }
 
-.task-container .button {
+#list .button {
 	display: grid;
-	/* Same size as task card height - padding*/
-	width: calc(52px - 5px*2);
-	height: calc(52px - 5px*2);
+	/* Same size as task card height - padding - border*/
+	width: calc(45px - 5px*2 - 1px*2);
+	height: calc(45px - 5px*2 - 1px*2);
 	padding: 5px;
 	border-radius: 10px;
 	align-content: center !important;

@@ -7,6 +7,15 @@ class Data {
 	static timeoutActive = false
 	static TIMEOUT_LENGTH = 500
 
+	// Init
+	static init() {
+		const data = JSON.parse(document.getElementById("data").innerText)
+		this.tasks = this.fromJSON(data["tasks"], Task)
+		this.events = this.fromJSON(data["events"], Event)
+		this.links = JSON.parse(data["links"])
+		this.settings = JSON.parse(data["settings"])
+	}
+
 	// Data update pattern
 	static requestUpdate() {
 		Data.updateNecessary = true
@@ -39,7 +48,7 @@ class Data {
 		return temp
 	}
 
-	static getPrioritized() {
+	static getPrioritized(excludeCompleted=false) {
 		// Create indices to sort by
 		let indices = []
 		for (let i = 0; i < Data.tasks.length; i++) {
@@ -61,7 +70,56 @@ class Data {
 		for (let i = 0; i < Data.tasks.length; i++) {
 			out.push(Data.tasks[indices[i]])
 		}
+
+		// Exclude completed if needed
+		if (excludeCompleted) {
+			out = out.filter(x => x.progress != 100)
+		}
+
 		return out
+	}
+
+	static calculateWorkload(days=10) {
+		// Init day to today
+		let day = new Date()
+
+		// Setup
+		let workloads = []
+		let current = Data.tasks.map(x => x.progress)
+		let projectedEndOfDay = Data.tasks.map(x => x.expectedProgress(day))
+
+		// Array ops
+		const sub = (arr1, arr2) => {
+			let out = []
+			for (let i = 0; i < arr1.length; i++) {
+				out.push(arr1[i] - arr2[i])
+			}
+			return out
+		}
+		const max0 = (arr) => arr.map(x => Math.max(0, x))
+		const sum = (arr) => arr.reduce((a, b) => a + b, 0)
+
+		// Calculate workloads
+		for (let i = 0; i < days; i++) {
+			// Calculate cumulative progress deficit between current and next day
+			const deficits = max0(sub(projectedEndOfDay, current))
+			workloads.push(sum(deficits))
+
+			// Calculate actual progress of next day if projected work is done
+			let calcNext = []
+			for (let i = 0; i < current.length; i++) {
+				calcNext.push(Math.max(current[i], projectedEndOfDay[i]))
+			}
+
+			// Move day to next day
+			day = new Date(day.getTime() + (1000 * 60 * 60 * 24))
+
+			// Move progresses to next day
+			current = calcNext
+			projectedEndOfDay = Data.tasks.map(x => x.expectedProgress(day))
+		}
+
+		return workloads
 	}
 
 	// Links
@@ -145,14 +203,8 @@ class Data {
 
 	// Calculations
 	static daysBetween(date1, date2) {
-		return Math.floor((date1 - date2)/(1000 * 60 * 60 * 24))
-	}
-
-	static init() {
-		const data = JSON.parse(document.getElementById("data").innerText)
-		this.tasks = this.fromJSON(data["tasks"], Task)
-		this.events = this.fromJSON(data["events"], Event)
-		this.links = JSON.parse(data["links"])
-		this.settings = JSON.parse(data["settings"])
+		date1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate())
+		date2 = new Date(date2.getFullYear(), date2.getMonth(), date2.getDate())
+		return Math.floor((date1 - date2) / (1000 * 60 * 60 * 24))
 	}
 }

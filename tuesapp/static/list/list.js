@@ -2,6 +2,9 @@ class List extends Page {
 	static init() {
 		this.pageName = "list"
 		this.pageBody = document.getElementById("list")
+
+		this.functionalizeButtons()
+
 		super.init()
 	}
 
@@ -16,13 +19,22 @@ class List extends Page {
 
 	static updateToDo() {
 		const toDo = document.getElementById("todo")
+		const addButton = todo.children[todo.children.length - 1]
 		Page.clearChildren(toDo, 1)
 
 		const tasks = Data.tasks.filter((task) => task.progress != 100)
 
+		if (tasks.length == 0) {
+			const p = document.createElement("p")
+			p.innerText = "Nothing to do!"
+			toDo.append(p)
+		}
+
 		for (const task of tasks) {
 			toDo.append(List.generateTaskCard(task))
 		}
+
+		toDo.append(addButton)
 	}
 
 	static updateCompleted() {
@@ -30,6 +42,12 @@ class List extends Page {
 		Page.clearChildren(completed, 1)
 
 		const tasks = Data.tasks.filter((task) => task.progress == 100)
+
+		if (tasks.length == 0) {
+			const p = document.createElement("p")
+			p.innerText = "Nothing done yet!"
+			completed.append(p)
+		}
 
 		for (const task of tasks) {
 			completed.append(List.generateTaskCard(task))
@@ -64,5 +82,9 @@ class List extends Page {
 		container.append(deleteButton)
 
 		return container
+	}
+
+	static functionalizeButtons() {
+		document.getElementById("new-task").addEventListener("click", () => {Task.openEdit(null, true)})
 	}
 }
