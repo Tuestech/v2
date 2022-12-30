@@ -9,6 +9,7 @@
 	--blue: rgb(67, 139, 255);
 	/* 100vw - padding - nav width */
 	--main-width: calc(100vw - 36px*2 - 87px);
+	user-select: none;
 }
 
 /* Utility Classes */
