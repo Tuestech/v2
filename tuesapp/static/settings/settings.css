@@ -1,0 +1,20 @@
+/* Settings */
+#settings {
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto min-content;
+	grid-template-areas:
+		'preferences progress-curves'
+		'preferences actions';
+}
+
+#preferences {
+	grid-area: preferences;
+}
+
+#progress-curves {
+	grid-area: progress-curves;
+}
+
+#actions {
+	grid-area: actions;
+}
