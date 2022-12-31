@@ -3,11 +3,33 @@
 <div id="settings" class="grid hidden">
 	<div class="glass-panel" id="preferences">
 		<p class="panel-title">Preferences</p>
+
+		{% comment %} TODO: Add slider and toggle switches for each preference {% endcomment %}
+
+		<div class="preference hover-question"><p>Workload Limit</p><div class="hover-icon">?</div><p class="hover-description">{% comment %} Description {% endcomment %}</p></div>
+
+		<p class="preference">Progress Bar</p>
+
+		<div class="preference hover-question"><p>BETA Features</p><div class="hover-icon">?</div><p class="hover-description">{% comment %} Description {% endcomment %}</p></div>
+
+		<p class="preference">Default Links</p>
+
+		<p class="preference">Show Completed Tasks in Dashboard</p>
+
+		<div class="preference hover-question"><p>Data Collection</p><div class="hover-icon">?</div><p class="hover-description">{% comment %} Description {% endcomment %}</p></div>
 	</div>
 	<div class="glass-panel" id="progress-curves">
-		<p class="panel-title">Progress Curves</p>
+		<div class="panel-title hover-question"><p>Progress Curves</p><div class="hover-icon">?</div><p class="hover-description">{% comment %} Description {% endcomment %}</p></div>
+
+		{% comment %} TODO: Add progress curve selector {% endcomment %}
 	</div>
-	<div class="glass-panel" id="actions ">
+	<div class="glass-panel" id="actions">
 		<p class="panel-title">Actions</p>
+		<p>
+			Tuesday is an open source project. The complete source code of this app can be viewed with the “View Source” button.
+			If you would like a full reset of your account for any reason, you can click the 'Delete Data' button.
+		</p>
+
+		{% comment %} TODO: Add view source and delete data buttons {% endcomment %}
 	</div>
 </div>
