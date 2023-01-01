@@ -25,9 +25,48 @@
 	gap: 10px;
 }
 
+/* Preferences */
+.preference-container {
+	display: grid;
+	grid-template-columns: auto min-content;
+	align-items: center;
+}
+
 /* Preference header */
 .preference {
 	font-size: 18px;
+}
+
+/* Preference toggles */
+.toggle {
+	display: none;
+}
+
+.toggle + label {
+	position: relative;
+	background-color: var(--gray);
+	display: block;
+	width: 60px;
+	height: 30px;
+	border-radius: 15px;
+	cursor: pointer;
+}
+
+.toggle + label::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%) translateX(4px);
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	background-color: var(--red);
+	transition: 0.15s ease;
+}
+
+.toggle:checked + label::after {
+	transform: translateY(-50%) translateX(calc(60px - 22px - 4px));
+	background-color: var(--green);
 }
 
 /* Hover question */
