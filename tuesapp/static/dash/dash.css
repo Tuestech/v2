@@ -53,7 +53,7 @@
 /* Row 2 */
 
 #dash .row2 {
-	grid-template-columns: minmax(min-content, 3fr) minmax(min-content, 4fr);
+	grid-template-columns: minmax(min-content, 500px) auto;
 	height: 100%;
 }
 

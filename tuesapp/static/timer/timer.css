@@ -1,6 +1,6 @@
 /* Timer */
 #timer {
-	grid-template-columns: 5fr 7fr;
+	grid-template-columns: minmax(min-content, 400px) auto;
 	grid-template-rows: auto;
 }
 
