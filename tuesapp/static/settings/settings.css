@@ -1,0 +1,189 @@
+/* Settings */
+#settings {
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto min-content;
+	grid-template-areas:
+		'preferences progress-curves'
+		'preferences actions';
+}
+
+#preferences {
+	grid-area: preferences;
+}
+
+#progress-curves {
+	grid-area: progress-curves;
+}
+
+#actions {
+	grid-area: actions;
+}
+
+#settings > .glass-panel {
+	align-items: start;
+	align-content: start;
+	gap: 10px;
+}
+
+/* Preferences */
+.preference-container {
+	display: grid;
+	grid-template-columns: auto min-content;
+	align-items: center;
+	margin: 8px 0px;
+}
+
+/* Preference Slider */
+.slider-preference-container {
+	display: grid;
+	grid-template-areas:
+		'label label label'
+		'left slider right';
+	grid-template-columns: 60px auto 60px;
+	row-gap: 10px;
+	align-items: center;
+	margin-top: 15px;
+	margin-bottom: 8px;
+}
+
+.slider-preference-container {
+	text-align: center;
+}
+
+.slider-label {
+	grid-area: label;
+}
+
+.slider-preference-container input {
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: var(--gray);
+	height: 8px;
+	margin: 10px;
+	border-radius: 100px;
+	cursor: pointer;
+	grid-area: slider;
+}
+
+.slider-preference-container input:hover {
+	filter: brightness(0.9);
+}
+
+.slider-preference-container input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+	appearance: none;
+	height: 18px;
+	width: 18px;
+	border-radius: 100px;
+	background-color: var(--blue);
+	border: 0px;
+	margin-top: -5px;
+}
+
+.slider-preference-container input::-moz-range-thumb {
+	height: 14px;
+	width: 14px;
+	border-radius: 100px;
+	background-color: var(--blue);
+	border: 0px;
+}
+
+.slider-preference-container input::-webkit-slider-runnable-track {
+	background-color: var(--gray);
+	height: 8px;
+	border-radius: 100px;
+}
+
+.slider-preference-container input::-moz-range-track {
+	background-color: var(--gray);
+	border-radius: 100px;
+}
+
+
+/* Preference header */
+.preference {
+	font-size: 18px;
+}
+
+/* Preference toggles */
+.toggle {
+	display: none;
+}
+
+.toggle + label {
+	position: relative;
+	background-color: var(--gray);
+	display: block;
+	width: 60px;
+	height: 30px;
+	border-radius: 15px;
+	cursor: pointer;
+}
+
+.toggle + label::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%) translateX(4px);
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	background-color: var(--red);
+	transition: 0.15s ease;
+}
+
+.toggle:checked + label::after {
+	transform: translateY(-50%) translateX(calc(60px - 22px - 4px));
+	background-color: var(--green);
+}
+
+/* Hover question */
+.hover-question {
+	position: relative;
+	height: min-content;
+	width: max-content;
+}
+
+.hover-question .hover-icon {
+	content: "?";
+	display: block;
+	position: absolute;
+	right: -35px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: var(--gray);
+	font-size: 20px;
+	text-align: center;
+	line-height: 20px;
+	width: 20px;
+	border: 3px solid var(--gray);
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.hover-description {
+	display: none;
+	position: absolute;
+	left: calc(100% + 10px);
+	top: calc(100% + 3px);
+	z-index: 999;
+	width: 150px;
+	vertical-align: top;
+	font-size: 16px;
+	font-weight: normal;
+	pointer-events: none;
+	background: white;
+	box-shadow: 0px 0px 25px rgba(31, 97, 135, 0.2);
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.hover-question .hover-icon:hover ~ .hover-description {
+	display: block;
+}
+
+/* Actions */
+
+#actions p:not(.panel-title) {
+	margin: 0px 10px;
+}

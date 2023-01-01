@@ -59,6 +59,9 @@ class Timer extends Page {
 
 				// Update worker
 				Timer.worker.postMessage(""+time)
+
+				// Update toggle button icon
+				document.getElementById("play").children[0].setAttribute("src", Timer.pauseImgPath)
 			})
 		}
 

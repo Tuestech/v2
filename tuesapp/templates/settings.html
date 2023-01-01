@@ -1,5 +1,57 @@
 {% load static %}
 
-<div id="settings" class="hidden">
-	{% comment %} Schedule stuff {% endcomment %}
+<div id="settings" class="grid hidden">
+	<div class="glass-panel" id="preferences">
+		<p class="panel-title">Preferences</p>
+
+		{% comment %} TODO: Add slider and toggle switches for each preference {% endcomment %}
+
+		<div class="slider-preference-container">
+			<div class="preference hover-question slider-label"><p>Workload Limit</p><div class="hover-icon">?</div><p class="hover-description">The maximum projected tasks per day before workload warnings appear</p></div>
+			<p>Low (1)</p>
+			<input type="range" id="workload-limit">
+			<p>High (5)</p>
+		</div>
+
+		<div class="preference-container">
+			<div class="preference hover-question"><p>Data Collection</p><div class="hover-icon">?</div><p class="hover-description">Allows your anonymized data to be used in aggregate to develop our AI models</p></div>
+			<input type="checkbox" class="toggle" id="test">
+			<label for="test"></label>
+		</div>
+
+		<div class="preference-container">
+			<div class="preference hover-question"><p>BETA Features</p><div class="hover-icon">?</div><p class="hover-description">Experimental features that may be added later. Enabling BETA Features may cause unintended behaviors.</p></div>
+			<input type="checkbox" class="toggle" id="beta">
+			<label for="beta"></label>
+		</div>
+
+		<div class="preference-container">
+			<p class="preference">Default Links</p>
+			<input type="checkbox" class="toggle" id="default-links">
+			<label for="default-links"></label>
+		</div>
+
+		<div class="preference-container">
+			<p class="preference">Show Completed Tasks in Dashboard</p>
+			<input type="checkbox" class="toggle" id="show-completed">
+			<label for="show-completed"></label>
+		</div>
+
+	</div>
+
+	<div class="glass-panel" id="progress-curves">
+		<div class="panel-title hover-question"><p>Progress Curves</p><div class="hover-icon">?</div><p class="hover-description">Progress curves show your ideal progress over time when completing a task. They are used to calculate task priority.</p></div>
+
+		{% comment %} TODO: Add progress curve selector {% endcomment %}
+	</div>
+
+	<div class="glass-panel" id="actions">
+		<p class="panel-title">Actions</p>
+		<p>
+			Tuesday is an open source project. The complete source code of this app can be viewed with the “View Source” button.
+			If you would like a full reset of your account for any reason, you can click the 'Delete Data' button.
+		</p>
+
+		{% comment %} TODO: Add view source and delete data buttons {% endcomment %}
+	</div>
 </div>
