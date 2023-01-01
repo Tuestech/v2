@@ -6,17 +6,37 @@
 
 		{% comment %} TODO: Add slider and toggle switches for each preference {% endcomment %}
 
-		<div class="preference hover-question"><p>Workload Limit</p><div class="hover-icon">?</div><p class="hover-description">The maximum workload allowable before warnings appear on the workload graph</p></div>
+		<div class="slider-preference-container">
+			<div class="preference hover-question slider-label"><p>Workload Limit</p><div class="hover-icon">?</div><p class="hover-description">The maximum projected tasks per day before workload warnings appear</p></div>
+			<p>Low (1)</p>
+			<input type="range" id="workload-limit">
+			<p>High (5)</p>
+		</div>
 
-		<p class="preference">Progress Bar</p>
+		<div class="preference-container">
+			<div class="preference hover-question"><p>Data Collection</p><div class="hover-icon">?</div><p class="hover-description">Allows your anonymized data to be used in aggregate to develop our AI models</p></div>
+			<input type="checkbox" class="toggle" id="test">
+			<label for="test"></label>
+		</div>
 
-		<div class="preference hover-question"><p>BETA Features</p><div class="hover-icon">?</div><p class="hover-description">Experimental features that may be added later. Enabling BETA Features may cause unintended behaviors.</p></div>
+		<div class="preference-container">
+			<div class="preference hover-question"><p>BETA Features</p><div class="hover-icon">?</div><p class="hover-description">Experimental features that may be added later. Enabling BETA Features may cause unintended behaviors.</p></div>
+			<input type="checkbox" class="toggle" id="beta">
+			<label for="beta"></label>
+		</div>
 
-		<p class="preference">Default Links</p>
+		<div class="preference-container">
+			<p class="preference">Default Links</p>
+			<input type="checkbox" class="toggle" id="default-links">
+			<label for="default-links"></label>
+		</div>
 
-		<p class="preference">Show Completed Tasks in Dashboard</p>
+		<div class="preference-container">
+			<p class="preference">Show Completed Tasks in Dashboard</p>
+			<input type="checkbox" class="toggle" id="show-completed">
+			<label for="show-completed"></label>
+		</div>
 
-		<div class="preference hover-question"><p>Data Collection</p><div class="hover-icon">?</div><p class="hover-description">Allows your anonymized data to be used in aggregate to develop our AI models</p></div>
 	</div>
 
 	<div class="glass-panel" id="progress-curves">
@@ -24,7 +44,7 @@
 
 		{% comment %} TODO: Add progress curve selector {% endcomment %}
 	</div>
-	
+
 	<div class="glass-panel" id="actions">
 		<p class="panel-title">Actions</p>
 		<p>
