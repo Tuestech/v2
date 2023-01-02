@@ -1,7 +1,7 @@
 /* Settings */
 #settings {
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows: auto min-content;
+	grid-template-rows: 1fr min-content;
 	grid-template-areas:
 		'preferences progress-curves'
 		'preferences actions';
@@ -183,7 +183,39 @@
 }
 
 /* Actions */
+#actions {
+	grid-template-areas:
+		'panel-title panel-title'
+		'p p'
+		'view-source delete-data';
+}
+
+#actions .panel-title {
+	grid-area: panel-title;
+}
 
 #actions p:not(.panel-title) {
+	grid-area: p;
 	margin: 0px 10px;
+}
+
+#actions .button {
+	border-radius: 10px;
+	text-align: center;
+	padding: 5px 20px;
+	margin: 0px 10px;
+	width: max-content;
+}
+
+#actions #view-source {
+	grid-area: view-source;
+	justify-self: left;
+}
+
+#actions #delete-data {
+	grid-area: delete-data;
+	justify-self: right;
+	background-color: var(--red);
+	color: white;
+	font-weight: bold;
 }
