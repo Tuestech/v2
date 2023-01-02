@@ -46,7 +46,7 @@
 	margin-bottom: 8px;
 }
 
-.slider-preference-container {
+.slider-preference-container > p {
 	text-align: center;
 }
 
