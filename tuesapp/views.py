@@ -31,7 +31,7 @@ def setSampleData(request):
 
 	# Settings sample data
 	# No sample data because it's not implemented in frontend yet
-	settings = '{"scoreType": 0}'
+	settings = '{"scoreType":0, "workloadLimit":1.5, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false}'
 
 	# Combined sample data
 	SAMPLE = json.dumps(
