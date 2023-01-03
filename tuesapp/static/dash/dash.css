@@ -91,6 +91,11 @@
 	overflow: hidden
 }
 
+#current-tasks > p:not(.panel-title), #events-and-due-dates > p:not(.panel-title) {
+	font-size: 18px;
+	padding: 0px 10px;
+}
+
 /* Row 3 */
 
 #dash .row3 {

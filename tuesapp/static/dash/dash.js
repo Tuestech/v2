@@ -37,7 +37,12 @@ class Dash extends Page {
 				numDone++
 			}
 		}
-		const pDone = Math.floor(100 * numDone / Data.tasks.length)
+		let pDone = Math.floor(100 * numDone / Data.tasks.length)
+
+		// Hardcode no tasks behavior
+		if (Data.tasks.length == 0) {
+			pDone = 100
+		}
 
 		document.getElementById("p-complete").innerText = `${pDone}% Complete`
 
@@ -48,7 +53,12 @@ class Dash extends Page {
 				numOnTrack++
 			}
 		}
-		const pOnTrack = Math.floor(100 * numOnTrack / Data.tasks.length)
+		let pOnTrack = Math.floor(100 * numOnTrack / Data.tasks.length)
+
+		// Hardcode no tasks behavior
+		if (Data.tasks.length == 0) {
+			pOnTrack = 100
+		}
 
 		document.getElementById("p-on-track").innerText = `${pOnTrack}% On Track`
 	}
@@ -65,8 +75,14 @@ class Dash extends Page {
 		}
 
 		// Calculate percentages [0-100]
-		const pDone = doneProgress/Data.tasks.length
-		const pStarted = totalProgress/Data.tasks.length
+		let pDone = doneProgress/Data.tasks.length
+		let pStarted = totalProgress/Data.tasks.length
+
+		// Hardcode no tasks behavior
+		if (Data.tasks.length == 0) {
+			pDone = 100
+			pStarted = 100
+		}
 
 		// Update display
 		document.getElementById("green-progress").setAttribute("style", `transform: translateX(${pDone}%);`)
@@ -86,8 +102,14 @@ class Dash extends Page {
 		}
 
 		// Calculate percentages [0-100]
-		const pGood = 100 * numGood / Data.tasks.length
-		const pBad = 100 * numBad / Data.tasks.length
+		let pGood = 100 * numGood / Data.tasks.length
+		let pBad = 100 * numBad / Data.tasks.length
+
+		// Hardcode no tasks behavior
+		if (Data.tasks.length == 0) {
+			pGood = 100
+			pBad = 0
+		}
 
 		// Update display
 		document.getElementById("green-timing").setAttribute("style", `transform: translateX(${pGood}%);`)
@@ -100,8 +122,19 @@ class Dash extends Page {
 		// Prevents duplicate tasks
 		Page.clearChildren(currentTasks, 1)
 
+		// Prioritize tasks
+		const prioritized = Data.getPrioritized(true)
+
+		// No tasks behavior
+		if (prioritized.length == 0) {
+			const p = document.createElement("p")
+			p.innerText = "Nothing to do!"
+			currentTasks.append(p)
+			return
+		}
+
 		// Create task cards
-		for (const task of Data.getPrioritized(true)) {
+		for (const task of prioritized) {
 			currentTasks.append(task.generateTaskCard(() => {
 				Dash.updateBasicInfoPanel()
 				Dash.updateProgressBar()
@@ -114,6 +147,17 @@ class Dash extends Page {
 	static updateUpcoming() {
 		const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 		
+		// No tasks behavior
+		if (Data.tasks.length == 0) {
+			const panel = document.getElementById("events-and-due-dates")
+			Page.clearChildren(panel, 1)
+			
+			const p = document.createElement("p")
+			p.innerText = "Nothing to do!"
+			panel.append(p)
+			return
+		}
+
 		// Set day name headers
 		let idIndex = 1
 		for (let i = new Date().getDay(); i < new Date().getDay() + 5; i++) {

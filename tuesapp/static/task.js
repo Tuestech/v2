@@ -209,8 +209,12 @@ class Task {
 	delete() {
 		const filler = document.createElement("div")
 		new Modal(`Are you sure you want to delete \"${this.name}\"?`, filler, ["Keep", "Delete"], ["white", "red"], [() => {}, () => {
+			// Update data
 			Data.tasks = Data.tasks.filter((task) => task != this)
 			Data.requestUpdate()
+
+			// Update pages
+			document.dispatchEvent(new Event("pageChange"))
 		}])
 	}
 
