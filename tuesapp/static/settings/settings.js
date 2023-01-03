@@ -97,6 +97,10 @@ class Settings extends Page {
 		for (const button of [consistent, upFront, aggressive]) {
 			button.addEventListener("click", listener)
 		}
+
+		// Display active button
+		const activeButton = [consistent, upFront, aggressive][Data.settings["scoreType"]]
+		activeButton.classList.add("active")
 	}
 
 	static activateActions() {
