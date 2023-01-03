@@ -76,7 +76,7 @@ class Task {
 	}
 
 	// DOM element generation
-	generateTaskCard(callback) {
+	generateTaskCard(callback, tutorialMode=false) {
 		// Create new panel for the task
 		const taskDiv = document.createElement("div")
 		taskDiv.className = "task-card glass-panel"
@@ -114,6 +114,9 @@ class Task {
 
 		// Add progress bar event listener
 		taskProgress.addEventListener("change", () => {
+			// Exit if in tutorial
+			if (tutorialMode) return
+
 			this.progress = parseInt(taskProgress.value)
 			this.flagRecomputeScore()
 			Data.requestUpdate()
@@ -129,8 +132,13 @@ class Task {
 			if (e.target.tagName == "INPUT") {
 				return
 			}
+
 			// Open link
-			window.open(this.link, "_blank")
+			if (!tutorialMode) {
+				window.open(this.link, "_blank")
+			} else {
+				alert("Hello! You opened a link!")
+			}
 		})
 
 		return taskDiv

@@ -2,38 +2,37 @@
 
 <div id="settings" class="grid hidden">
 	<div class="glass-panel" id="preferences">
-		<p class="panel-title">Preferences</p>
 
-		{% comment %} TODO: Add slider and toggle switches for each preference {% endcomment %}
+		<p class="panel-title">Preferences</p>
 
 		<div class="slider-preference-container">
 			<div class="preference hover-question slider-label"><p>Workload Limit</p><div class="hover-icon">?</div><p class="hover-description">The maximum projected tasks per day before workload warnings appear</p></div>
 			<p>Low (1)</p>
-			<input type="range" id="workload-limit">
+			<input type="range" id="workload-limit" min="1" max="5" step="0.005">
 			<p>High (5)</p>
 		</div>
 
 		<div class="preference-container">
 			<div class="preference hover-question"><p>Data Collection</p><div class="hover-icon">?</div><p class="hover-description">Allows your anonymized data to be used in aggregate to develop our AI models</p></div>
-			<input type="checkbox" class="toggle" id="test">
-			<label for="test"></label>
+			<input type="checkbox" class="toggle" id="data-collection">
+			<label for="data-collection"></label>
 		</div>
 
 		<div class="preference-container">
 			<div class="preference hover-question"><p>BETA Features</p><div class="hover-icon">?</div><p class="hover-description">Experimental features that may be added later. Enabling BETA Features may cause unintended behaviors.</p></div>
-			<input type="checkbox" class="toggle" id="beta">
+			<input type="checkbox" class="toggle" id="beta" disabled>
 			<label for="beta"></label>
 		</div>
 
 		<div class="preference-container">
 			<p class="preference">Default Links</p>
-			<input type="checkbox" class="toggle" id="default-links">
+			<input type="checkbox" class="toggle" id="default-links" disabled>
 			<label for="default-links"></label>
 		</div>
 
 		<div class="preference-container">
 			<p class="preference">Show Completed Tasks in Dashboard</p>
-			<input type="checkbox" class="toggle" id="show-completed">
+			<input type="checkbox" class="toggle" id="show-completed" disabled>
 			<label for="show-completed"></label>
 		</div>
 
@@ -42,7 +41,19 @@
 	<div class="glass-panel" id="progress-curves">
 		<div class="panel-title hover-question"><p>Progress Curves</p><div class="hover-icon">?</div><p class="hover-description">Progress curves show your ideal progress over time when completing a task. They are used to calculate task priority.</p></div>
 
-		{% comment %} TODO: Add progress curve selector {% endcomment %}
+		<svg viewBox="-5 -5 110 110">
+			{% comment %} Curve {% endcomment %}
+			<path id="progress-curve-curve" vector-effect="non-scaling-stroke"/>
+
+			{% comment %} Axes {% endcomment %}
+			<path d="M100 100 L0 100 L 0 0" id="progress-curve-axes" vector-effect="non-scaling-stroke"/>
+		</svg>
+
+		<p>Select a Style</p>
+
+		<div class="glass-panel button" id="consistent" data-score-type="0">Consistent</div>
+		<div class="glass-panel button" id="up-front" data-score-type="1">Up Front</div>
+		<div class="glass-panel button" id="aggressive" data-score-type="2">Aggressive</div>
 	</div>
 
 	<div class="glass-panel" id="actions">
@@ -52,6 +63,7 @@
 			If you would like a full reset of your account for any reason, you can click the 'Delete Data' button.
 		</p>
 
-		{% comment %} TODO: Add view source and delete data buttons {% endcomment %}
+		<div class="glass-panel button" id="view-source">View Source</div>
+		<div class="glass-panel button" id="delete-data">Delete Data</div>
 	</div>
 </div>

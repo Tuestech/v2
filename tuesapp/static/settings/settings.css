@@ -1,7 +1,7 @@
 /* Settings */
 #settings {
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows: auto min-content;
+	grid-template-rows: 1fr min-content;
 	grid-template-areas:
 		'preferences progress-curves'
 		'preferences actions';
@@ -46,7 +46,7 @@
 	margin-bottom: 8px;
 }
 
-.slider-preference-container {
+.slider-preference-container > p {
 	text-align: center;
 }
 
@@ -99,7 +99,6 @@
 	border-radius: 100px;
 }
 
-
 /* Preference header */
 .preference {
 	font-size: 18px;
@@ -135,6 +134,22 @@
 .toggle:checked + label::after {
 	transform: translateY(-50%) translateX(calc(60px - 22px - 4px));
 	background-color: var(--green);
+}
+
+.toggle:disabled + label::after {
+	background-color: var(--dark-gray);
+}
+
+.toggle:disabled + label:hover::before {
+	content: "Feature locked";
+	left: calc(100% + 5px);
+	padding: 5px;
+	width: max-content;
+	position: absolute;
+	z-index: 9999;
+	border-radius: 5px;
+	background-color: white;
+	box-shadow: 0px 0px 25px rgba(31, 97, 135, 0.2);
 }
 
 /* Hover question */
@@ -182,8 +197,108 @@
 	display: block;
 }
 
+/* Progress Curves */
+#progress-curves {
+	grid-template-areas:
+		'panel-title panel-title panel-title'
+		'graph graph graph'
+		'p p p'
+		'option1 option2 option3';
+	grid-template-columns: repeat(3, 1fr);
+}
+
+#progress-curves .panel-title {
+	grid-area: panel-title;
+}
+
+#progress-curves svg {
+	max-width: 400px;
+	grid-area: graph;
+	justify-self: center;
+}
+
+#progress-curves svg path {
+	fill: transparent;
+	stroke-linecap: round;
+  stroke-linejoin: round;
+	stroke-width: 5px;
+}
+
+#progress-curve-axes {
+	stroke: var(--dark-gray);
+	fill: transparent;
+	stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#progress-curve-curve {
+	stroke: var(--blue);
+	fill: transparent;
+	stroke-linecap: round;
+  stroke-linejoin: round;
+	transition: 0.2s;
+}
+
+#progress-curve-curve.linear {
+	d: path("M0 100 Q 50 50 100 0");
+}
+
+#progress-curve-curve.slight-poly {
+	d: path("M0 100 Q 20.5 37 100 0");
+}
+
+#progress-curve-curve.strong-poly {
+	d: path("M0 100 Q 5.8 13.5 100 0");
+}
+
+#progress-curves p:not(.panel-title) {
+	grid-area: p;
+}
+
+#progress-curves .button {
+	border-radius: 10px;
+	text-align: center;
+	padding: 5px 20px;
+}
+
+#progress-curves .button.active {
+	box-shadow: 0px 0px 10px var(--blue);
+}
+
 /* Actions */
+#actions {
+	grid-template-areas:
+		'panel-title panel-title'
+		'p p'
+		'view-source delete-data';
+}
+
+#actions .panel-title {
+	grid-area: panel-title;
+}
 
 #actions p:not(.panel-title) {
+	grid-area: p;
 	margin: 0px 10px;
+}
+
+#actions .button {
+	border-radius: 10px;
+	text-align: center;
+	padding: 5px 20px;
+	margin: 0px 10px;
+	width: max-content;
+}
+
+#actions #view-source {
+	grid-area: view-source;
+	justify-self: left;
+}
+
+#actions #delete-data {
+	grid-area: delete-data;
+	justify-self: right;
+	background-color: var(--red);
+	color: white;
+	font-weight: bold;
 }

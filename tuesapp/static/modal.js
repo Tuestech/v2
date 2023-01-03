@@ -146,4 +146,20 @@ class Modal {
 		
 		// Implement later
 	}
+
+	static tutorialBlock(text, element=null) {
+		// Return a tutorial block with text describing the element below
+		const div = document.createElement("div")
+		div.classList.add("tutorial-block")
+
+		const p = document.createElement("p")
+		p.innerText = text
+		div.append(p)
+
+		if (element) {
+			div.append(element)
+		}
+
+		return div
+	}
 }

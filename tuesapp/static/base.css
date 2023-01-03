@@ -18,12 +18,12 @@
 }
 
 .button {
-	transition: backdrop-filter 0.15s;
+	transition: 0.15s;
 }
 
 .button:hover {
 	cursor: pointer;
-	backdrop-filter: brightness(0.85);
+	filter: brightness(0.85);
 }
 
 .empty-text {
@@ -235,7 +235,7 @@ body {
 	width: min-content;
 }
 
-.modal p {
+.modal > p {
 	font-size: 22px;
 	font-weight: bold;
 }
@@ -347,4 +347,49 @@ input:focus {
 
 .modal .form.stack {
 	row-gap: 25px;
+}
+
+.modal .tutorial-block {
+	display: grid;
+	user-select: text;
+	padding: 10px;
+	gap: 15px;
+	align-items: center;
+	min-width: 500px;
+	max-width: 100%;
+}
+
+.modal .tutorial-block img {
+	width: 100%;
+}
+
+/* No Mobile */
+.no-mobile {
+	display: none;
+	width: calc(100vw - 20px * 2);
+	height: calc(100vh - 20px * 2);
+	padding: 20px;
+}
+
+.no-mobile p {
+	font-size: 30px;
+}
+
+.no-mobile p:nth-child(1) {
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+@media screen and (max-width: 970px) {
+	.nav {
+		display: none !important;
+	}
+
+	#main-content {
+		display: none !important;
+	}
+
+	.no-mobile {
+		display: block;
+	}
 }

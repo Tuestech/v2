@@ -10,6 +10,7 @@ urlpatterns = [
 	path('privacy/', landing_views.privacy, name="privacy"),
 	path('app/', app_views.main, name="app"),
 	path('updateuser/', app_views.updateUser),
+	path('deletedata/', app_views.deleteData),
 	path('getuser/', app_views.getUser),
 	path('setsample/', app_views.setSampleData),
 	path('accounts/', include('allauth.urls')),
