@@ -53,6 +53,7 @@ body {
 	padding: 36px;
 	gap: 26px;
 	width: var(--main-width);
+	height: calc(100vh - 36px * 2);
 }
 
 #title {

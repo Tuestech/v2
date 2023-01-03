@@ -49,10 +49,6 @@ def main(request):
 	"""
 	Returns the main app page with the current logged-in user's data
 	"""
-	# Dev mode
-	if not request.user.is_superuser:
-		return HttpResponseRedirect("/")
-
 	uid = SocialAccount.objects.filter(user=request.user).first().uid
 
 	# Attempt to find user and get data, creates a new blank user otherwise
