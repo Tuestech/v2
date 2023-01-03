@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseServerError, HttpResponseRedirect, Http404
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -18,6 +18,11 @@ def setSampleData(request):
 	Sets current logged-in user's data with sample data
 	Returns "Good" HTTPResponse if successful
 	"""
+	# Pretend the page doesn't exist if not admin
+	if not request.user.is_superuser:
+		return Http404()
+	
+	# Generate sample data
 	SAMPLE = generate_sample_data()
 
 	# Get UID
