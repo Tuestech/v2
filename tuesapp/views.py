@@ -82,7 +82,7 @@ def main(request):
 		user = User(uid=uid, name=name, app_data="")
 		data = ""
 		is_new = True
-	return render(request, "base.html", {"data": data, "is_new": is_new})
+	return render(request, "base.html", {"data": data, "is_new": True})
 
 
 @login_required

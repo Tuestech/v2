@@ -43,12 +43,9 @@
 	<script defer src="{% static 'timer/timer.js' %}"></script>
 	<script defer src="{% static 'settings/settings.js' %}"></script>
 	<script defer src="{% static 'modal.js' %}"></script>
+	
+	{% comment %} Initer {% endcomment %}
 	<script defer src="{% static 'initer.js' %}" ></script>
-
-	{% comment %} External {% endcomment %}
-	{% if is_new == True %}
-		<script defer src="https://cdn.jsdelivr.net/npm/intro.js@6.0.0/intro.min.js"></script>
-	{% endif %}
 
 	<style>
 		* {
@@ -61,10 +58,11 @@
 <body>
 	{% comment %} User Data {% endcomment %}
 	<div id="data" hidden>{{ data }}</div>
+	<div id="is-new" hidden>{{ is_new }}</div>
 
 	{% include 'nav.html' %}
 
-	<div id="main-content">
+	<div id="main-content" data-hint="Navigate through pages using these buttons">
 		<p id="title">Loading...</p>
 		{% include 'dash.html' %}
 		{% include 'list.html' %}
