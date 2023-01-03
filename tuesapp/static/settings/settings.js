@@ -36,7 +36,6 @@ class Settings extends Page {
 	static connectInput(input, settingsKey) {
 		input.addEventListener("change", () => {
 			Data.settings[settingsKey] = Settings.getInputValue(input)
-			console.log(Settings.getInputValue(input), Data.settings)
 			Data.requestUpdate()
 		})
 	}
