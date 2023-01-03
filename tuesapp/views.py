@@ -160,18 +160,15 @@ def generate_sample_data():
 		return (datetime.datetime.now() + datetime.timedelta(days=n)).strftime("%Y-%m-%d")
 
 	# Task sample data
-	tasks = f'[["Task 1","Class","{days_after(0)}","{days_after(3)}",10,"https://example.com"],["Task 2","Class","{days_after(0)}","{days_after(2)}",80,"https://example.com"],["Task 3","Class 3","{days_after(1)}","{days_after(8)}",60,"https://example.com"]]'
+	tasks = f'[["Task 1","","{days_after(0)}","{days_after(3)}",10,"https://example.com"],["Task 2","","{days_after(0)}","{days_after(2)}",80,"https://example.com"],["Task 3","","{days_after(1)}","{days_after(8)}",60,"https://example.com"]]'
 
 	# Events sample data
-	# No sample data because it's not implemented in frontend yet
 	events = '[]'
 
 	# Links sample data
-	# No sample data because it's not implemented in frontend yet
-	links = '[["Google", "https://www.google.com"]]'
+	links = '[["Google Classroom", "https://classroom.google.com"]]'
 
 	# Settings sample data
-	# No sample data because it's not implemented in frontend yet
 	settings = '{"scoreType":1, "workloadLimit":1.5, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false}'
 
 	# Combined sample data
