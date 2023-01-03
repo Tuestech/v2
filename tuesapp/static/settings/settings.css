@@ -212,7 +212,8 @@
 }
 
 #progress-curves svg {
-	max-width: 400px;
+	height: calc(100vh - 500px);
+	max-height: 400px;
 	grid-area: graph;
 	justify-self: center;
 }
