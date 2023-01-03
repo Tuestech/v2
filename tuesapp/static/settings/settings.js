@@ -14,6 +14,9 @@ class Settings extends Page {
 		// Preferences
 		Settings.activatePreferences()
 
+		// Progress Curve
+		Settings.activateProgressCurves()
+
 		// Actions
 		Settings.activateActions()
 
@@ -49,6 +52,50 @@ class Settings extends Page {
 			const input = document.getElementById(id)
 			Settings.setInputValue(input, Data.settings[key])
 			Settings.connectInput(input, key)
+		}
+	}
+
+	static updateProgressCurveGraph() {
+		const curve = document.getElementById("progress-curve-curve")
+
+		const curveClassNames = [
+			"linear",
+			"slight-poly",
+			"strong-poly"
+		]
+
+		curve.classList.remove(...curveClassNames)
+		curve.classList.add(curveClassNames[Data.settings["scoreType"]])
+	}
+
+	static activateProgressCurves() {
+		// Update graph
+		Settings.updateProgressCurveGraph()
+
+		// Activate buttons
+		const consistent = document.getElementById("consistent")
+		const upFront = document.getElementById("up-front")
+		const aggressive = document.getElementById("aggressive")
+
+		const listener = (e) => {
+			// Deactive other buttons
+			for (const button of [consistent, upFront, aggressive]) {
+				button.classList.remove("active")
+			}
+
+			// Activate clicked button
+			e.target.classList.add("active")
+
+			// Update data
+			Data.settings["scoreType"] = e.target.getAttribute("data-score-type")
+			Data.requestUpdate()
+
+			// Update graph
+			Settings.updateProgressCurveGraph()
+		}
+
+		for (const button of [consistent, upFront, aggressive]) {
+			button.addEventListener("click", listener)
 		}
 	}
 
