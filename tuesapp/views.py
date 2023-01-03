@@ -18,29 +18,7 @@ def setSampleData(request):
 	Sets current logged-in user's data with sample data
 	Returns "Good" HTTPResponse if successful
 	"""
-	# Days
-	def days_after(n):
-		return (datetime.datetime.now() + datetime.timedelta(days=n)).strftime("%Y-%m-%d")
-
-	# Task sample data
-	tasks = f'[["Task 1","Class","{days_after(0)}","{days_after(3)}",10,"https://example.com"],["Task 2","Class","{days_after(0)}","{days_after(2)}",80,"https://example.com"],["Task 3","Class 3","{days_after(1)}","{days_after(8)}",60,"https://example.com"]]'
-
-	# Events sample data
-	# No sample data because it's not implemented in frontend yet
-	events = '[]'
-
-	# Links sample data
-	# No sample data because it's not implemented in frontend yet
-	links = '[["Google", "https://www.google.com"]]'
-
-	# Settings sample data
-	# No sample data because it's not implemented in frontend yet
-	settings = '{"scoreType":0, "workloadLimit":1.5, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false}'
-
-	# Combined sample data
-	SAMPLE = json.dumps(
-		{"tasks": tasks, "events": events, "links": links, "settings": settings}
-	)
+	SAMPLE = generate_sample_data()
 
 	# Get UID
 	uid = SocialAccount.objects.filter(user=request.user).first().uid
@@ -79,10 +57,14 @@ def main(request):
 		data = user.app_data
 	except:
 		name = request.user.username
-		user = User(uid=uid, name=name, app_data="")
-		data = ""
+		data = generate_sample_data()
+		user = User(uid=uid, name=name, app_data=data)
+		user.save()
+
 		is_new = True
-	return render(request, "base.html", {"data": data, "is_new": True})
+	
+	# Return
+	return render(request, "base.html", {"data": data, "is_new": is_new})
 
 
 @login_required
@@ -166,3 +148,28 @@ def valid_post(request, keys):
 		if key not in data:
 			return False
 	return data
+
+def generate_sample_data():
+	# Days
+	def days_after(n):
+		return (datetime.datetime.now() + datetime.timedelta(days=n)).strftime("%Y-%m-%d")
+
+	# Task sample data
+	tasks = f'[["Task 1","Class","{days_after(0)}","{days_after(3)}",10,"https://example.com"],["Task 2","Class","{days_after(0)}","{days_after(2)}",80,"https://example.com"],["Task 3","Class 3","{days_after(1)}","{days_after(8)}",60,"https://example.com"]]'
+
+	# Events sample data
+	# No sample data because it's not implemented in frontend yet
+	events = '[]'
+
+	# Links sample data
+	# No sample data because it's not implemented in frontend yet
+	links = '[["Google", "https://www.google.com"]]'
+
+	# Settings sample data
+	# No sample data because it's not implemented in frontend yet
+	settings = '{"scoreType":0, "workloadLimit":1.5, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false}'
+
+	# Combined sample data
+	return json.dumps(
+		{"tasks": tasks, "events": events, "links": links, "settings": settings}
+	)
