@@ -45,6 +45,11 @@
 	<script defer src="{% static 'modal.js' %}"></script>
 	<script defer src="{% static 'initer.js' %}" ></script>
 
+	{% comment %} External {% endcomment %}
+	{% if is_new == True %}
+		<script defer src="https://cdn.jsdelivr.net/npm/intro.js@6.0.0/intro.min.js"></script>
+	{% endif %}
+
 	<style>
 		* {
 			margin: 0px;

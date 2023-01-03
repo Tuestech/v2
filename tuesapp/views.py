@@ -73,6 +73,7 @@ def main(request):
 	uid = SocialAccount.objects.filter(user=request.user).first().uid
 
 	# Attempt to find user and get data, creates a new blank user otherwise
+	is_new = False
 	try:
 		user = User.objects.get(uid=uid)
 		data = user.app_data
@@ -80,7 +81,8 @@ def main(request):
 		name = request.user.username
 		user = User(uid=uid, name=name, app_data="")
 		data = ""
-	return render(request, "base.html", {"data": data})
+		is_new = True
+	return render(request, "base.html", {"data": data, "is_new": is_new})
 
 
 @login_required
