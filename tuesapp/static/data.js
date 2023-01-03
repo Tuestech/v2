@@ -201,6 +201,17 @@ class Data {
 		Data.post("/updateuser/", data, csrfToken)
 	}
 
+	static deleteAll() {
+		// Get latest CSRF token
+		const csrfToken = document.querySelector("meta[name='csrf_token']").content
+
+		// Send delete data request
+		Data.post("/deletedata/", null, csrfToken)
+
+		// Redirect to landing page
+		window.open("https://tues.tech/", "_self")
+	}
+
 	// Calculations
 	static daysBetween(date1, date2) {
 		date1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate())

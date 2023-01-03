@@ -14,6 +14,9 @@ class Settings extends Page {
 		// Preferences
 		Settings.activatePreferences()
 
+		// Actions
+		Settings.activateActions()
+
 		super.init()
 	}
 
@@ -47,5 +50,20 @@ class Settings extends Page {
 			Settings.setInputValue(input, Data.settings[key])
 			Settings.connectInput(input, key)
 		}
+	}
+
+	static activateActions() {
+		// Activate view source
+		document.getElementById("view-source").addEventListener("click", () => {
+			window.open("https://github.com/Tuestech/v2", "_blank")
+		})
+
+		// Activate delete data
+		document.getElementById("delete-data").addEventListener("click", () => {
+			const filler = document.createElement("div")
+			new Modal(`Are you sure you want to delete all of your data? This cannot be undone.`, filler, ["Keep", "Delete"], ["white", "red"], [() => {}, () => {
+				Data.deleteAll()
+			}])
+		})
 	}
 }

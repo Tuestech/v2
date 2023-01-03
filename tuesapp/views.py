@@ -112,6 +112,12 @@ def updateUser(request):
 	# Return
 	return HttpResponse("Good")
 
+@login_required
+@require_http_methods(["POST"])
+def deleteData(request):
+	# TODO: Implement deleting user data
+	raise NotImplementedError
+
 # Determines of a post body is valid
 # Returns parsed object if valid and False if not
 def valid_post(request, keys):
