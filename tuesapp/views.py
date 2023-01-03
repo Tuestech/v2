@@ -14,6 +14,10 @@ import datetime
 # DEVELOPMENT PURPOSES ONLY
 @login_required
 def setSampleData(request):
+	"""
+	Sets current logged-in user's data with sample data
+	Returns "Good" HTTPResponse if successful
+	"""
 	# Days
 	def days_after(n):
 		return (datetime.datetime.now() + datetime.timedelta(days=n)).strftime("%Y-%m-%d")
@@ -55,9 +59,13 @@ def setSampleData(request):
 	# Return
 	return HttpResponse("Good")
 
+
 @login_required
 @require_http_methods(["GET"])
 def main(request):
+	"""
+	Returns the main app page with the current logged-in user's data
+	"""
 	# Dev mode
 	if not request.user.is_superuser:
 		return HttpResponseRedirect("/")
@@ -74,9 +82,14 @@ def main(request):
 		data = ""
 	return render(request, "base.html", {"data": data})
 
+
 @login_required
 @require_http_methods(["GET"])
 def getUser(request):
+	"""
+	Gets the current logged-in user's data
+	Returns HTTPResponse with user's data if successful, ServerError response if not
+	"""
 	uid = SocialAccount.objects.filter(user=request.user).first().uid
 
 	# Attempt to find user and return data
@@ -86,9 +99,14 @@ def getUser(request):
 	except:
 		return HttpResponseServerError("Invalid Request: User does not exist")
 
+
 @login_required
 @require_http_methods(["POST"])
 def updateUser(request):
+	"""
+	Replaces current logged-in user's data with data present in the request
+	Returns "Good" HTTPResponse if successful, ServerError response if not
+	"""
 	# Convert request data to dict
 	data = valid_post(request, ["appData"])
 	
@@ -112,15 +130,19 @@ def updateUser(request):
 	# Return
 	return HttpResponse("Good")
 
+
 @login_required
 @require_http_methods(["POST"])
 def deleteData(request):
 	# TODO: Implement deleting user data
 	raise NotImplementedError
 
-# Determines of a post body is valid
-# Returns parsed object if valid and False if not
+
 def valid_post(request, keys):
+	"""
+	Determines of a post body is valid
+	Returns parsed object if valid and False if not
+	"""
 	data = json.loads(request.body)
 	for key in keys:
 		if key not in data:
