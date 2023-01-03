@@ -172,7 +172,7 @@ def generate_sample_data():
 
 	# Settings sample data
 	# No sample data because it's not implemented in frontend yet
-	settings = '{"scoreType":0, "workloadLimit":1.5, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false}'
+	settings = '{"scoreType":1, "workloadLimit":1.5, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false}'
 
 	# Combined sample data
 	return json.dumps(
