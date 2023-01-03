@@ -362,3 +362,34 @@ input:focus {
 .modal .tutorial-block img {
 	width: 100%;
 }
+
+/* No Mobile */
+.no-mobile {
+	display: none;
+	width: calc(100vw - 20px * 2);
+	height: calc(100vh - 20px * 2);
+	padding: 20px;
+}
+
+.no-mobile p {
+	font-size: 30px;
+}
+
+.no-mobile p:nth-child(1) {
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+@media screen and (max-width: 970px) {
+	.nav {
+		display: none !important;
+	}
+
+	#main-content {
+		display: none !important;
+	}
+
+	.no-mobile {
+		display: block;
+	}
+}
