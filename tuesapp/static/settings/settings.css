@@ -197,6 +197,74 @@
 	display: block;
 }
 
+/* Progress Curves */
+#progress-curves {
+	grid-template-areas:
+		'panel-title panel-title panel-title'
+		'graph graph graph'
+		'p p p'
+		'option1 option2 option3';
+	grid-template-columns: repeat(3, 1fr);
+}
+
+#progress-curves .panel-title {
+	grid-area: panel-title;
+}
+
+#progress-curves svg {
+	max-width: 400px;
+	grid-area: graph;
+	justify-self: center;
+}
+
+#progress-curves svg path {
+	fill: transparent;
+	stroke-linecap: round;
+  stroke-linejoin: round;
+	stroke-width: 5px;
+}
+
+#progress-curve-axes {
+	stroke: var(--dark-gray);
+	fill: transparent;
+	stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#progress-curve-curve {
+	stroke: var(--blue);
+	fill: transparent;
+	stroke-linecap: round;
+  stroke-linejoin: round;
+	transition: 0.2s;
+}
+
+#progress-curve-curve.linear {
+	d: path("M0 100 Q 50 50 100 0");
+}
+
+#progress-curve-curve.slight-poly {
+	d: path("M0 100 Q 20.5 37 100 0");
+}
+
+#progress-curve-curve.strong-poly {
+	d: path("M0 100 Q 5.8 13.5 100 0");
+}
+
+#progress-curves p:not(.panel-title) {
+	grid-area: p;
+}
+
+#progress-curves .button {
+	border-radius: 10px;
+	text-align: center;
+	padding: 5px 20px;
+}
+
+#progress-curves .button.active {
+	box-shadow: 0px 0px 10px var(--blue);
+}
+
 /* Actions */
 #actions {
 	grid-template-areas:
