@@ -134,8 +134,24 @@ def updateUser(request):
 @login_required
 @require_http_methods(["POST"])
 def deleteData(request):
-	# TODO: Implement deleting user data
-	raise NotImplementedError
+	"""
+	Deletes current logged-in user's data
+	Returns "Good" HTTPResponse if successful, ServerError response if not
+	"""
+	# Save user
+	uid = SocialAccount.objects.filter(user=request.user).first().uid
+	name = request.user.username
+
+	# Attempt to update an existing user, creates a new user otherwise
+	try:
+		user = User.objects.get(uid=uid)
+	except:
+		return HttpResponseServerError(f"Invalid POST Request: User with uid {uid} and name {name} not found")
+	
+	# Delete user's data
+	user.delete()
+
+	return HttpResponse("Good")
 
 
 def valid_post(request, keys):
