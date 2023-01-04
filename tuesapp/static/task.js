@@ -42,11 +42,20 @@ class Task {
 		// Require completion on day before due date
 		const trueEnd = new Date(this.end - 1000*60*60*24)
 
+		// Clamping Function
+		const clamp = (min, val, max) => Math.max(min, Math.min(max, val))
+
+		// Calculate Timings
 		const taskLength = trueEnd - this.start
 		const taskElapsed = date - this.start
-		const timePercent = 100*taskElapsed/taskLength
+		let timePercent = clamp(0, 100*taskElapsed/taskLength, 100)
+		
+		// Edge cases
+		if (taskLength <= 0 && taskElapsed >= 0) { // Task is 1 day or less and task has started
+			timePercent = 100
+		}
 
-		return Math.max(0, Math.min(100, functionMap[Data.settings["scoreType"]](timePercent)))
+		return clamp(0, functionMap[Data.settings["scoreType"]](timePercent), 100)
 	}
 
 	getScore() {
