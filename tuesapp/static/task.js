@@ -181,8 +181,8 @@ class Task {
 		// Create modal
 		new Modal(modalTitle, form, ["Cancel", "Save"], ["white", "green"], [() => {}, () => {
 			let nameValue = name.children[0].value
-			let startValue = new Date(start.children[0].value)
-			let endValue = new Date(end.children[0].value)
+			let startValue = start.children[0].value
+			let endValue = end.children[0].value
 			let linkValue = link.children[0].value
 			// Validate input
 			if (!(nameValue && !!startValue && !!endValue)) {
@@ -197,10 +197,10 @@ class Task {
 				return true
 			}
 
-			task.name = name.children[0].value
-			task.start = new Date(start.children[0].value)
-			task.end = new Date(end.children[0].value)
-			task.link = link.children[0].value
+			task.name = nameValue
+			task.start = Task.dateFromFormat(startValue, "yyyy-mm-dd")
+			task.end = Task.dateFromFormat(endValue, "yyyy-mm-dd")
+			task.link = linkValue
 
 			if (isNew) {
 				Data.tasks.push(task)
@@ -244,6 +244,19 @@ class Task {
 	static formatDate(date, mode) {
 		if (mode == "yyyy-mm-dd") {
 			return `${date.getFullYear()}-${Task.prependZeroes(date.getMonth()+1, 2)}-${Task.prependZeroes(date.getDate(), 2)}`
+		}
+	}
+
+	static dateFromFormat(string, mode) {
+		if (mode == "yyyy-mm-dd") {
+			const [year, month, day] = string.split("-")
+
+			const out = new Date()
+			out.setFullYear(parseInt(year))
+			out.setMonth(parseInt(month)-1)
+			out.setDate(parseInt(day))
+
+			return out
 		}
 	}
 
