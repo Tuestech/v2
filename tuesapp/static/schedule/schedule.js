@@ -40,8 +40,20 @@ class Schedule extends Page {
 		const timeline = document.getElementById("timeline")
 		Page.clearChildren(timeline, 1)
 
+		// Calculate tasks that can be displayed
+		const prioritized = Data.getPrioritized(true)
+		const filtered = prioritized.filter(task => Data.daysBetween(task.start, new Date()) < 10)
+
+		// No tasks in range behavior
+		if (filtered.length == 0) {		
+			const p = document.createElement("p")
+			p.innerText = "Nothing to see here!"
+			timeline.append(p)
+			return
+		}
+
 		// Add tasks
-		for (const task of Data.getPrioritized(true)) {
+		for (const task of filtered) {
 			// Create row
 			const row = document.createElement("div")
 			row.classList.add("row")
@@ -80,7 +92,7 @@ class Schedule extends Page {
 			if (startIndex == -1) {
 				taskDiv.setAttribute("style", taskDiv.getAttribute("style")+`padding-left: ${100/(endIndex-startIndex+1)}%;`)
 			}
-			if (endIndex == 11) {
+			if (endIndex == 10) {
 				taskDiv.setAttribute("style", taskDiv.getAttribute("style")+`padding-right: ${100/(endIndex-startIndex+1)}%;`)
 			}
 

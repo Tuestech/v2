@@ -42,11 +42,20 @@ class Task {
 		// Require completion on day before due date
 		const trueEnd = new Date(this.end - 1000*60*60*24)
 
+		// Clamping Function
+		const clamp = (min, val, max) => Math.max(min, Math.min(max, val))
+
+		// Calculate Timings
 		const taskLength = trueEnd - this.start
 		const taskElapsed = date - this.start
-		const timePercent = 100*taskElapsed/taskLength
+		let timePercent = clamp(0, 100*taskElapsed/taskLength, 100)
+		
+		// Edge cases
+		if (taskLength <= 0 && taskElapsed >= 0) { // Task is 1 day or less and task has started
+			timePercent = 100
+		}
 
-		return Math.max(0, Math.min(100, functionMap[Data.settings["scoreType"]](timePercent)))
+		return clamp(0, functionMap[Data.settings["scoreType"]](timePercent), 100)
 	}
 
 	getScore() {
@@ -172,8 +181,8 @@ class Task {
 		// Create modal
 		new Modal(modalTitle, form, ["Cancel", "Save"], ["white", "green"], [() => {}, () => {
 			let nameValue = name.children[0].value
-			let startValue = new Date(start.children[0].value)
-			let endValue = new Date(end.children[0].value)
+			let startValue = start.children[0].value
+			let endValue = end.children[0].value
 			let linkValue = link.children[0].value
 			// Validate input
 			if (!(nameValue && !!startValue && !!endValue)) {
@@ -188,10 +197,10 @@ class Task {
 				return true
 			}
 
-			task.name = name.children[0].value
-			task.start = new Date(start.children[0].value)
-			task.end = new Date(end.children[0].value)
-			task.link = link.children[0].value
+			task.name = nameValue
+			task.start = Task.dateFromFormat(startValue, "yyyy-mm-dd")
+			task.end = Task.dateFromFormat(endValue, "yyyy-mm-dd")
+			task.link = linkValue
 
 			if (isNew) {
 				Data.tasks.push(task)
@@ -235,6 +244,19 @@ class Task {
 	static formatDate(date, mode) {
 		if (mode == "yyyy-mm-dd") {
 			return `${date.getFullYear()}-${Task.prependZeroes(date.getMonth()+1, 2)}-${Task.prependZeroes(date.getDate(), 2)}`
+		}
+	}
+
+	static dateFromFormat(string, mode) {
+		if (mode == "yyyy-mm-dd") {
+			const [year, month, day] = string.split("-")
+
+			const out = new Date()
+			out.setFullYear(parseInt(year))
+			out.setMonth(parseInt(month)-1)
+			out.setDate(parseInt(day))
+
+			return out
 		}
 	}
 
