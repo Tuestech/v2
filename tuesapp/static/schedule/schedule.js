@@ -92,7 +92,7 @@ class Schedule extends Page {
 			if (startIndex == -1) {
 				taskDiv.setAttribute("style", taskDiv.getAttribute("style")+`padding-left: ${100/(endIndex-startIndex+1)}%;`)
 			}
-			if (endIndex == 11) {
+			if (endIndex == 10) {
 				taskDiv.setAttribute("style", taskDiv.getAttribute("style")+`padding-right: ${100/(endIndex-startIndex+1)}%;`)
 			}
 
