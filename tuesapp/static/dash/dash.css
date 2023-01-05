@@ -7,18 +7,23 @@
 	width: 100%;
 	background-color: var(--gray);
 }
+
 .multi-progress .child.green {
 	background-color: var(--green);
 }
+
 .multi-progress .child.yellow {
 	background-color: var(--yellow);
 }
+
 .multi-progress .child.red {
 	background-color: var(--red);
 }
+
 .multi-progress .child.gray {
 	background-color: var(--gray);
 }
+
 .multi-progress .child {
 	position: absolute;
 	top: 0px;
@@ -28,6 +33,7 @@
 	height: 46px;
 	width: 100%;
 	margin-left: -100%;
+	transition: ease 0.3s;
 }
 
 /* Dash */
