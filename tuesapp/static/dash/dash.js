@@ -118,12 +118,13 @@ class Dash extends Page {
 
 	static updateCurrentTasks() {
 		const currentTasks = document.getElementById("current-tasks")
+		const originalNameTopMap = Object.fromEntries(Array.from(currentTasks.children).slice(1, ).map(x => [x.children[0].innerText, x.getBoundingClientRect().top]))
 
 		// Prevents duplicate tasks
 		Page.clearChildren(currentTasks, 1)
 
 		// Prioritize tasks
-		const prioritized = Data.getPrioritized(true)
+		const prioritized = Data.getPrioritized(false)
 
 		// No tasks behavior
 		if (prioritized.length == 0) {
@@ -135,12 +136,44 @@ class Dash extends Page {
 
 		// Create task cards
 		for (const task of prioritized) {
-			currentTasks.append(task.generateTaskCard(() => {
+			const taskCard = task.generateTaskCard(() => {
 				Dash.updateBasicInfoPanel()
 				Dash.updateProgressBar()
 				Dash.updateTimingBar()
 				Dash.updateCurrentTasks()
-			}))
+			})
+			currentTasks.append(taskCard)
+		}
+
+		// Calculate new mappings
+		const newNameTopMap = Object.fromEntries(Array.from(currentTasks.children).slice(1, ).map(x => [x.children[0].innerText, x.getBoundingClientRect().top]))
+
+		const newNameDivMap = Object.fromEntries(Array.from(currentTasks.children).slice(1, ).map(x => [x.children[0].innerText, x]))
+
+		// If tasks are the same but are in a different order
+		const originalNames = Object.keys(originalNameTopMap)
+		const newNames = Object.keys(newNameTopMap)
+		if ((originalNames.join("") != newNames.join("")) && (originalNames.sort().join("") == newNames.sort().join(""))) {
+			for (let i = 0; i < prioritized.length; i++) {
+				// Temp variables
+				const name = newNames[i]
+
+				// Calculate delta
+				const topDelta = originalNameTopMap[name] - newNameTopMap[name]
+
+				// Define animation
+				const animation = [
+					{transform: `translateY(${topDelta}px)`},
+					{transform: "translateY(0px)"}
+				]
+				const timing = {
+					duration: 300,
+					interations: 1
+				}
+
+				// Apply animation
+				newNameDivMap[name].animate(animation, timing)
+			}
 		}
 	}
 
