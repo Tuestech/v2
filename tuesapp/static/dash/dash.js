@@ -171,7 +171,8 @@ class Dash extends Page {
 				]
 				const timing = {
 					duration: 300,
-					interations: 1
+					interations: 1,
+					easing:"ease"
 				}
 
 				// Apply animation
