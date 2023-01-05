@@ -197,6 +197,12 @@ class Task {
 				return true
 			}
 
+			if (nameValue in Data.tasks.map(x => x.name)) {
+				const dummy = document.createElement("div")
+				new Modal("Task names must be unique", dummy, ["Ok"], ["white"])
+				return true
+			}
+
 			task.name = nameValue
 			task.start = Task.dateFromFormat(startValue, "yyyy-mm-dd")
 			task.end = Task.dateFromFormat(endValue, "yyyy-mm-dd")
