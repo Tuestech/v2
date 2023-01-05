@@ -12,6 +12,25 @@
 	user-select: none;
 }
 
+/* Scrollbar */
+*::-webkit-scrollbar {
+	position: absolute;
+  width: 8px;
+}
+ 
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+ 
+*::-webkit-scrollbar-thumb {
+  background-color: #aaaaaa;
+	border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+	background-color: #888888;
+}
+
 /* Utility Classes */
 .hidden {
 	display: none !important;
@@ -54,6 +73,11 @@ body {
 	gap: 26px;
 	width: var(--main-width);
 	height: calc(100vh - 36px * 2);
+}
+
+#main-content > div {
+	/* 100% - panel title - gap - padding */
+	height: calc(100vh - 54px - 26px - 72px);
 }
 
 #title {

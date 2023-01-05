@@ -5,6 +5,7 @@
 	grid-template-areas:
 		'todo completed'
 		'todo events';
+	height: calc(100vh - 54px - 26px - 72px);
 }
 
 #list > .glass-panel {
@@ -26,6 +27,8 @@
 /* Todo */
 #todo {
 	grid-area: todo;
+	height: calc(100vh - 54px - 26px - 2*11px - 72px);
+	overflow-y: scroll;
 }
 
 #new-task {

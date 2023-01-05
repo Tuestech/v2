@@ -161,6 +161,9 @@ class Dash extends Page {
 				// Calculate delta
 				const topDelta = originalNameTopMap[name] - newNameTopMap[name]
 
+				// Don't animate cards that don't move
+				if (topDelta == 0) continue
+
 				// Define animation
 				const animation = [
 					{transform: `translateY(${topDelta}px)`},
@@ -168,7 +171,8 @@ class Dash extends Page {
 				]
 				const timing = {
 					duration: 300,
-					interations: 1
+					interations: 1,
+					easing:"ease"
 				}
 
 				// Apply animation

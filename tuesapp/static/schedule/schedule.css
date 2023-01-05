@@ -1,14 +1,18 @@
 /* Schedule */
 #schedule {
-	/* height: 100%; */
 	grid-template-rows: auto min-content;
+}
+
+#schedule .glass-panel:nth-child(1) {
+	overflow: hidden;
 }
 
 #timeline {
 	display: grid;
 	grid-auto-rows: min-content;
 	gap: 10px;
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: scroll;
 }
 
 #timeline .row {

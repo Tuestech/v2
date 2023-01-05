@@ -38,7 +38,7 @@
 
 /* Dash */
 #dash {
-	grid-template-rows: min-content auto min-content;
+	grid-template-rows: min-content calc(100% - 103px - 98px - 28px*2) min-content;
 }
 
 /* Row 1 */
@@ -95,6 +95,14 @@
 	text-align: center;
 	overflow-wrap: break-word;
 	overflow: hidden
+}
+
+#current-tasks {
+	overflow-y: scroll;
+}
+
+#events-and-due-dates {
+	overflow-y: scroll;
 }
 
 #current-tasks > p:not(.panel-title), #events-and-due-dates > p:not(.panel-title) {

@@ -197,7 +197,7 @@ class Task {
 				return true
 			}
 
-			if (nameValue in Data.tasks.map(x => x.name)) {
+			if (Data.tasks.filter(x => x != task).map(x => x.name).includes(nameValue)) {
 				const dummy = document.createElement("div")
 				new Modal("Task names must be unique", dummy, ["Ok"], ["white"])
 				return true
