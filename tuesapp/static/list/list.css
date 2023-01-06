@@ -1,17 +1,17 @@
 /* List */
 #list {
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows: min-content auto;
+	grid-template-rows: 4fr 3fr;
 	grid-template-areas:
 		'todo completed'
 		'todo events';
-	height: calc(100vh - 54px - 26px - 72px);
 }
 
 #list > .glass-panel {
 	align-items: start;
 	align-content: start;
 	gap: 10px;
+	overflow-y: scroll;
 }
 
 #events {
@@ -28,7 +28,6 @@
 #todo {
 	grid-area: todo;
 	height: calc(100vh - 54px - 26px - 2*11px - 72px);
-	overflow-y: scroll;
 }
 
 #new-task {
@@ -38,6 +37,7 @@
 /* Completed */
 #completed {
 	grid-area: completed;
+
 }
 
 /* Task container */
