@@ -4,6 +4,7 @@ class Timer extends Page {
 	static sequenceButtons = Array.from(document.getElementById("sequence").getElementsByClassName("button"))
 	static sequenceState = 0
 	static worker
+	static originalTitle = document.title
 
 	static init() {
 		// Setup variables
@@ -78,6 +79,7 @@ class Timer extends Page {
 		const currentSrc = buttonImg.getAttribute("src")
 		if (currentSrc == Timer.pauseImgPath) {
 			buttonImg.setAttribute("src", Timer.playImgPath)
+			document.title = Timer.originalTitle
 		} else {
 			buttonImg.setAttribute("src", Timer.pauseImgPath)
 		}
@@ -101,5 +103,7 @@ class Timer extends Page {
 
 	static updateDisplay(time) {
 		document.getElementById("time").innerText = time
+
+		document.title = `${time} - ${Timer.originalTitle}`
 	}
 }
