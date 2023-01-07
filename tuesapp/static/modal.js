@@ -153,7 +153,7 @@ class Modal {
 		div.classList.add("tutorial-block")
 
 		const p = document.createElement("p")
-		p.innerText = text
+		p.innerHTML = text
 		div.append(p)
 
 		if (element) {
