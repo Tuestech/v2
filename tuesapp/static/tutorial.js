@@ -66,13 +66,12 @@ class Tutorial {
 			new Modal("Tutorial (6/7)", block, ["Exit", "Next"], ["white", "green"], [() => {}, Tutorial.next])
 
 		} else {
-			
 			const block = Modal.tutorialBlock(
-				`That's it! 🎉
+				`That's it! 🎉<br><br>
 
-				Privacy Policy: https://tues.tech/privacy
-				Github: https://github.com/Tuestech/v2
-				Contact: contact@tues.tech`
+				Privacy Policy: <a href="https://tues.tech/privacy">https://tues.tech/privacy</a><br>
+				Github: <a href="https://github.com/Tuestech/v2">https://github.com/Tuestech/v2</a><br>
+				Contact: <a href="mailto:contact@tues.tech?subject=Hello!">contact@tues.tech</a>`
 			)
 			new Modal("Tutorial (7/7)", block, ["Complete"], ["green"], [() => {}])
 

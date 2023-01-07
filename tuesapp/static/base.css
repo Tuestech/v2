@@ -384,6 +384,10 @@ input:focus {
 	max-width: 100%;
 }
 
+.modal .tutorial-block a {
+	color: var(--blue);
+}
+
 .modal .tutorial-block img {
 	width: 100%;
 }

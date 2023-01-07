@@ -89,6 +89,7 @@
 .dash-cal div .glass-panel {
 	border-radius: 10px;
 	font-size: 18px;
+	height: min-content;
 }
 
 .dash-cal div .glass-panel p{
