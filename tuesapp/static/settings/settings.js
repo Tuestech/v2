@@ -6,9 +6,19 @@ class Settings extends Page {
 		this.preferences_input_id_key_pairs = {
 			"workload-limit": "workloadLimit",
 			"data-collection": "dataCollection",
+			"double-click": "doubleClick",
 			"beta": "beta",
 			"default-links": "defaultLinks",
 			"show-completed": "showCompleted"
+		}
+
+		this.defaultValues = {
+			"workloadLimit": 1.5,
+			"dataCollection": false,
+			"doubleClick": false,
+			"beta": false,
+			"defaultLinks": false,
+			"showCompleted": false
 		}
 
 		// Preferences
@@ -50,6 +60,11 @@ class Settings extends Page {
 		// Set the current states of inputs and connect with data
 		for (const [id, key] of Object.entries(Settings.preferences_input_id_key_pairs)) {
 			const input = document.getElementById(id)
+
+			if (!(key in Data.settings)) {
+				Data.settings[key] = Settings.defaultValues[key]
+			}
+
 			Settings.setInputValue(input, Data.settings[key])
 			Settings.connectInput(input, key)
 		}

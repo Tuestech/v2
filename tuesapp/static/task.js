@@ -136,7 +136,12 @@ class Task {
 		taskDiv.append(taskProgress)
 
 		// Add link clickability
-		taskDiv.addEventListener("click", (e) => {
+		let eventName = "click"
+		if (Data.settings["doubleClick"]) {
+			eventName = "dblclick"
+		}
+
+		taskDiv.addEventListener("dblclick", (e) => {
 			// Block clicks on progress bar
 			if (e.target.tagName == "INPUT") {
 				return
