@@ -7,6 +7,7 @@ class Settings extends Page {
 			"workload-limit": "workloadLimit",
 			"data-collection": "dataCollection",
 			"double-click": "doubleClick",
+			"offline-resync": "offlineResync",
 			"beta": "beta",
 			"default-links": "defaultLinks",
 			"show-completed": "showCompleted"
@@ -16,6 +17,7 @@ class Settings extends Page {
 			"workloadLimit": 1.5,
 			"dataCollection": false,
 			"doubleClick": false,
+			"offline-resync": false,
 			"beta": false,
 			"defaultLinks": false,
 			"showCompleted": false

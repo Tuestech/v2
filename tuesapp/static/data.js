@@ -9,11 +9,29 @@ class Data {
 
 	// Init
 	static init() {
-		const data = JSON.parse(document.getElementById("data").innerText)
-		this.tasks = this.fromJSON(data["tasks"], Task)
-		this.events = this.fromJSON(data["events"], Event)
-		this.links = JSON.parse(data["links"])
-		this.settings = JSON.parse(data["settings"])
+		// Get data from server
+		const data = document.getElementById("data").innerText
+		Data.parseRaw(data)
+
+		// Offline banner when offline
+		window.addEventListener("offline", () => {
+			document.getElementById("online").classList.remove("shown")
+			document.getElementById("offline").classList.add("shown")
+		})
+
+		// Sync when back online
+		window.addEventListener("online", () => {
+			document.getElementById("offline").classList.remove("shown")
+			document.getElementById("online").classList.add("shown")
+
+			if (!Data.settings["offlineResync"]) return
+			
+			Data.get((value) => {
+				Data.parseRaw(value)
+				window.setTimeout(() => {document.getElementById("online").classList.remove("shown")}, 500)
+				document.dispatchEvent(new Event("pageChange"))
+			})
+		})
 	}
 
 	// Data update pattern
@@ -38,7 +56,15 @@ class Data {
 		}
 	}
 
-	// Task Processing
+	// Data parsing
+	static parseRaw(data) {
+		data = JSON.parse(data)
+		Data.tasks = Data.fromJSON(data["tasks"], Task)
+		Data.events = Data.fromJSON(data["events"], Event)
+		Data.links = JSON.parse(data["links"])
+		Data.settings = JSON.parse(data["settings"])
+	}
+
 	static fromJSON(json, class_) {
 		const arr = JSON.parse(json)
 		let temp = []
@@ -164,10 +190,11 @@ class Data {
 		xhr.send(JSON.stringify(data))
 	}
 
-	static get(callback) {
+	static get(callback = () => {}) {
 		fetch("/getuser/").then(result => {
-			Data.tasks = Data.fromJSON(result, Task)
-			callback()
+			result.text().then(value => {
+				callback(value)
+			})
 		})
 	}
 
@@ -188,7 +215,7 @@ class Data {
 		}
 
 		const data = {
-			"appData": JSON.stringify({
+				"appData": JSON.stringify({
 				"tasks": JSON.stringify(arrTasks),
 				"events": JSON.stringify(arrEvents),
 				// No need to use converted versions because they will not be special objects
