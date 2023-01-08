@@ -41,12 +41,17 @@
 	<script defer src="{% static 'list/list.js' %}"></script>
 	<script defer src="{% static 'schedule/schedule.js' %}"></script>
 	<script defer src="{% static 'timer/timer.js' %}"></script>
+	<script defer src="{% static 'timer/timer-worker.js' %}"></script>
 	<script defer src="{% static 'settings/settings.js' %}"></script>
 	<script defer src="{% static 'modal.js' %}"></script>
 
 	{% comment %} Tutorial {% endcomment %}
 	{% if is_new == True %}
 		<script defer src="{% static 'tutorial.js' %}"></script>
+		<link rel="preload" href="{% static 'tutorial/Dashboard.png' %}" as="image">
+		<link rel="preload" href="{% static 'tutorial/Lists.png' %}" as="image">
+		<link rel="preload" href="{% static 'tutorial/Schedule.png' %}" as="image">
+		<link rel="preload" href="{% static 'tutorial/Timer.png' %}" as="image">
 	{% endif %}
 
 	{% comment %} Initer {% endcomment %}
