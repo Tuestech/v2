@@ -38,7 +38,7 @@ Make sure you put `[BUG]` at the beginning of your title.
 Make a descriptive but concise title and write a brief couple sentences about a bug you found.
 When you're done, just submit. 
 
-After a bug is submited, you can track our progress and make sure everything is fixed.
+After a bug is submitted, you can track our progress and make sure everything is fixed.
 
 &nbsp;
 
@@ -51,7 +51,7 @@ Make sure you put `[SUGGESTION]` at the beginning of your title.
 Make a descriptive but concise title and write a brief couple sentences about your suggestion.
 When you're done, just submit. 
 
-After a suggestion is submited, you can track out progress and see your idea come to life!
+After a suggestion is submitted, you can track out progress and see your idea come to life!
 
 &nbsp;
 
@@ -81,6 +81,11 @@ Run the following command and follow the instructions:
 python manage.py createsuperuser
 ```
 
+Make the static files with this command:
+```
+python manage.py collectstatic
+```
+
 Start the local server with this command:
 ```
 python manage.py runserver
@@ -97,21 +102,33 @@ Once you're done with the admin page, you must log out with the link in the top 
 
 Now, go to `http://127.0.0.1:8000/setsample/`.
 You should be prompted to sign in with Google.
+Note that the Google sign-in page wil redirect you to `https://...` instead of `http://...`.
+This is easily remedied by changing the url when this issue occurs.
 If the page says `Good`, your dev environment is all set up!
+
+To restart the local server once you've made changes, run these 2 command again:
+```
+python manage.py collectstatic
+python manage.py runserver
+```
 
 &nbsp;
 
 ### Implementation
 
-This app is implemented with a vanilla HTML, CSS, and JS frontend with a Django backend and Postgres database, all hosted on Heroku.
+This app is implemented with a templated HTML, vanilla CSS, and vanilla JS frontend with a Django backend and PostgreSQL database, all hosted on Heroku.
 
-`tuesapp` is the actual app and `landing` is the landing page. The following details are about `tuesapp`:
+`tuesapp` is the actual app and `landing` is the landing page.
+
+`tuesapp` is implemented as follows:
 
 The frontend is templated HTML, with one template for each page and a central base template with nav items.
 
 The CSS and JS are split similarly, with a few central files and various other files for each page.
 
-The landing page is not yet implemented, but will be done with static HTML, CSS, and JS.
+`landing` is implemented as follows:
+
+The entire landing page is static HTML, CSS, and JS.
 
 &nbsp;
 
@@ -120,14 +137,15 @@ The landing page is not yet implemented, but will be done with static HTML, CSS,
 The title of a pull request should briefly describe your changes at a high level.
 If you added a button in the dashboard, just put `Added a {name} button to dashboard`
 
-The description of a pull request should explain why something was added, removed, or changed.
-This time, you can include any other information you think necessary.
+The description of a pull request should explain in more detail what it is you changed.
+Here, you can include any additional information that may be necessary for the reviewer,
+such as the reasoning behind the changes or the issues that the changes intend to address.
 
 If your pull request addresses an issue, be sure to provide a link to the issue in the pull request.
 
-Sometimes, your pull request may not be up to our standards.
-Don't worry, we will always explain what was wrong and how it can be fixed.
-You can always submit another pull request
+Upon review, we will either approve and merge your code or reject your request.
+If your pull request is rejected, make sure you read the comments to understand why we rejected it.
+It's possible we suggested minor revisions that, if fixed, can change the approval status of your request.
 
 &nbsp;
 

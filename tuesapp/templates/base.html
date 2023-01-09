@@ -11,9 +11,7 @@
 	<title>Tuesday - App</title>
 
 	{% comment %} Fonts {% endcomment %}
-	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 	
 	{% comment %} Favicon {% endcomment %}
 	<link rel="icon" href="{% static 'favicons/Light.png'%}" media="(prefers-color-scheme:no-preference)">
@@ -41,12 +39,17 @@
 	<script defer src="{% static 'list/list.js' %}"></script>
 	<script defer src="{% static 'schedule/schedule.js' %}"></script>
 	<script defer src="{% static 'timer/timer.js' %}"></script>
+	<script defer src="{% static 'timer/timer-worker.js' %}"></script>
 	<script defer src="{% static 'settings/settings.js' %}"></script>
 	<script defer src="{% static 'modal.js' %}"></script>
 
 	{% comment %} Tutorial {% endcomment %}
 	{% if is_new == True %}
 		<script defer src="{% static 'tutorial.js' %}"></script>
+		<link rel="preload" href="{% static 'tutorial/Dashboard.png' %}" as="image">
+		<link rel="preload" href="{% static 'tutorial/Lists.png' %}" as="image">
+		<link rel="preload" href="{% static 'tutorial/Schedule.png' %}" as="image">
+		<link rel="preload" href="{% static 'tutorial/Timer.png' %}" as="image">
 	{% endif %}
 
 	{% comment %} Initer {% endcomment %}
@@ -57,6 +60,32 @@
 			margin: 0px;
 			padding: 0px;
 			font-family: Roboto, sans-serif;
+		}
+
+		@font-face {
+			font-family: 'Roboto';
+			font-style: normal;
+			font-weight: 400;
+			font-display: swap;
+			src: url(https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2');
+			unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+		}
+
+		@font-face {
+			font-family: 'Roboto';
+			font-style: normal;
+			font-weight: 700;
+			src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlfBBc4.woff2) format('woff2');
+			unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+		}
+
+		@font-face {
+			font-family: 'Roboto Mono';
+			font-style: normal;
+			font-weight: 700;
+			font-display: swap;
+			src: url(https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_Of2_ROW4.woff2) format('woff2');
+			unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 		}
 	</style>
 </head>
@@ -69,7 +98,7 @@
 
 	{% include 'nav.html' %}
 
-	<div id="main-content" data-hint="Navigate through pages using these buttons">
+	<div id="main-content">
 		<p id="title">Loading...</p>
 		{% include 'dash.html' %}
 		{% include 'list.html' %}
@@ -77,5 +106,8 @@
 		{% include 'timer.html' %}
 		{% include 'settings.html' %}
 	</div>
+
+	<div id="offline" class="network-banner">Network disconnected - Your changes will not be saved.</div>
+	<div id="online" class="network-banner">Reconnecting...</div>
 </body>
 </html>

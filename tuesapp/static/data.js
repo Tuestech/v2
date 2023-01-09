@@ -6,22 +6,62 @@ class Data {
 	static updateNecessary = false
 	static timeoutActive = false
 	static TIMEOUT_LENGTH = 500
+	static lastUpdated = new Date()
 
 	// Init
 	static init() {
+		// Get data from server
 		const data = JSON.parse(document.getElementById("data").innerText)
-		this.tasks = this.fromJSON(data["tasks"], Task)
-		this.events = this.fromJSON(data["events"], Event)
-		this.links = JSON.parse(data["links"])
-		this.settings = JSON.parse(data["settings"])
+		Data.updateFromJSON(data)
+
+		// Offline banner when offline
+		window.addEventListener("offline", () => {
+			document.getElementById("online").classList.remove("shown")
+			document.getElementById("offline").classList.add("shown")
+		})
+
+		// Sync when back online
+		window.addEventListener("online", () => {
+			document.getElementById("offline").classList.remove("shown")
+			document.getElementById("online").classList.add("shown")
+
+			// Do not resync if setting is off
+			if (!Data.settings["offlineResync"]) return
+
+			Data.sync(() => {
+				window.setTimeout(() => {document.getElementById("online").classList.remove("shown")}, 500)
+				document.dispatchEvent(new Event("pageChange"))
+			})
+		})
 	}
 
 	// Data update pattern
+	static sync(callback = () => {}) {
+		Data.get((value) => {
+			const parsedValue = JSON.parse(value)
+			const dbLastUpdated = parsedValue["lastUpdated"]
+
+			if (dbLastUpdated && (Data.lastUpdated.getTime() > new Date(dbLastUpdated).getTime())) {
+				// Update db instead of instance if instance was updated after the last logged update in db
+				Data.requestUpdate()
+				callback()
+			} else {
+				// Update instance instead of db if instance was updated before the last logged update in db
+				// Also handle case of no last updated time stored in db
+				Data.updateFromJSON(parsedValue)
+				callback()
+			}
+		})
+	}
+
 	static requestUpdate() {
+		// Flag update
 		Data.updateNecessary = true
 
+		// Allow update loop to run if active
 		if (Data.timeoutActive) return
 
+		// Send request and start loop
 		Data.set()
 		Data.updateNecessary = false
 		Data.timeoutActive = true
@@ -38,7 +78,14 @@ class Data {
 		}
 	}
 
-	// Task Processing
+	// Data parsing
+	static updateFromJSON(JSONdata) {
+		Data.tasks = Data.fromJSON(JSONdata["tasks"], Task)
+		Data.events = Data.fromJSON(JSONdata["events"], Event)
+		Data.links = JSON.parse(JSONdata["links"])
+		Data.settings = JSON.parse(JSONdata["settings"])
+	}
+
 	static fromJSON(json, class_) {
 		const arr = JSON.parse(json)
 		let temp = []
@@ -164,10 +211,11 @@ class Data {
 		xhr.send(JSON.stringify(data))
 	}
 
-	static get(callback) {
+	static get(callback = () => {}) {
 		fetch("/getuser/").then(result => {
-			Data.tasks = Data.fromJSON(result, Task)
-			callback()
+			result.text().then(value => {
+				callback(value)
+			})
 		})
 	}
 
@@ -188,17 +236,21 @@ class Data {
 		}
 
 		const data = {
-			"appData": JSON.stringify({
+				"appData": JSON.stringify({
 				"tasks": JSON.stringify(arrTasks),
 				"events": JSON.stringify(arrEvents),
 				// No need to use converted versions because they will not be special objects
 				"links": JSON.stringify(Data.links),
-				"settings": JSON.stringify(Data.settings)
+				"settings": JSON.stringify(Data.settings),
+				"lastUpdated": Data.lastUpdated.toString()
 			})
 		}
 
 		// Send Post request
 		Data.post("/updateuser/", data, csrfToken)
+
+		// Log update
+		Data.lastUpdated = new Date()
 	}
 
 	static deleteAll() {

@@ -31,6 +31,41 @@
 	background-color: #888888;
 }
 
+/* Network banners */
+.network-banner {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	padding: 5px 5px;
+	border-top-left-radius: 10px;
+	font-weight: bold;
+	pointer-events: none;
+	opacity: 0;
+	transition: ease 0.5s;
+}
+
+.network-banner.shown {
+	opacity: 1;
+}
+
+.network-banner::before {
+	content: "";
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	width: 100vw;
+	height: 5px;
+}
+
+#offline, #offline::before {
+	color: white;
+	background-color: var(--red);
+}
+
+#online, #online::before {
+	background-color: var(--green);
+}
+
 /* Utility Classes */
 .hidden {
 	display: none !important;
