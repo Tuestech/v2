@@ -177,7 +177,7 @@ class Schedule extends Page {
 
 	static updatePath(x, y, xScale, yScale, pathElement, padding) {
 		// Generate path
-		let path = `M ${x[0] + padding} ${(1 - y[0]) * yScale} `
+		let path = `M ${x[0] + padding} ${(1 - y[0]) * yScale + padding} `
 		const xIncrement = 1/(x.length - 1)/2
 
 		for (let i = 1; i < x.length; i++) {
