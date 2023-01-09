@@ -6,12 +6,13 @@ class Data {
 	static updateNecessary = false
 	static timeoutActive = false
 	static TIMEOUT_LENGTH = 500
+	static lastUpdated = new Date()
 
 	// Init
 	static init() {
 		// Get data from server
-		const data = document.getElementById("data").innerText
-		Data.parseRaw(data)
+		const data = JSON.parse(document.getElementById("data").innerText)
+		Data.updateFromJSON(data)
 
 		// Offline banner when offline
 		window.addEventListener("offline", () => {
@@ -24,10 +25,10 @@ class Data {
 			document.getElementById("offline").classList.remove("shown")
 			document.getElementById("online").classList.add("shown")
 
+			// Do not resync if setting is off
 			if (!Data.settings["offlineResync"]) return
-			
-			Data.get((value) => {
-				Data.parseRaw(value)
+
+			Data.sync(() => {
 				window.setTimeout(() => {document.getElementById("online").classList.remove("shown")}, 500)
 				document.dispatchEvent(new Event("pageChange"))
 			})
@@ -35,11 +36,32 @@ class Data {
 	}
 
 	// Data update pattern
+	static sync(callback = () => {}) {
+		Data.get((value) => {
+			const parsedValue = JSON.parse(value)
+			const dbLastUpdated = parsedValue["lastUpdated"]
+
+			if (dbLastUpdated && (Data.lastUpdated.getTime() > new Date(dbLastUpdated).getTime())) {
+				// Update db instead of instance if instance was updated after the last logged update in db
+				Data.requestUpdate()
+				callback()
+			} else {
+				// Update instance instead of db if instance was updated before the last logged update in db
+				// Also handle case of no last updated time stored in db
+				Data.updateFromJSON(parsedValue)
+				callback()
+			}
+		})
+	}
+
 	static requestUpdate() {
+		// Flag update
 		Data.updateNecessary = true
 
+		// Allow update loop to run if active
 		if (Data.timeoutActive) return
 
+		// Send request and start loop
 		Data.set()
 		Data.updateNecessary = false
 		Data.timeoutActive = true
@@ -57,12 +79,11 @@ class Data {
 	}
 
 	// Data parsing
-	static parseRaw(data) {
-		data = JSON.parse(data)
-		Data.tasks = Data.fromJSON(data["tasks"], Task)
-		Data.events = Data.fromJSON(data["events"], Event)
-		Data.links = JSON.parse(data["links"])
-		Data.settings = JSON.parse(data["settings"])
+	static updateFromJSON(JSONdata) {
+		Data.tasks = Data.fromJSON(JSONdata["tasks"], Task)
+		Data.events = Data.fromJSON(JSONdata["events"], Event)
+		Data.links = JSON.parse(JSONdata["links"])
+		Data.settings = JSON.parse(JSONdata["settings"])
 	}
 
 	static fromJSON(json, class_) {
@@ -220,12 +241,16 @@ class Data {
 				"events": JSON.stringify(arrEvents),
 				// No need to use converted versions because they will not be special objects
 				"links": JSON.stringify(Data.links),
-				"settings": JSON.stringify(Data.settings)
+				"settings": JSON.stringify(Data.settings),
+				"lastUpdated": Data.lastUpdated.toString()
 			})
 		}
 
 		// Send Post request
 		Data.post("/updateuser/", data, csrfToken)
+
+		// Log update
+		Data.lastUpdated = new Date()
 	}
 
 	static deleteAll() {

@@ -17,7 +17,7 @@ class Settings extends Page {
 			"workloadLimit": 1.5,
 			"dataCollection": false,
 			"doubleClick": false,
-			"offline-resync": false,
+			"offline-resync": true,
 			"beta": false,
 			"defaultLinks": false,
 			"showCompleted": false
