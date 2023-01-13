@@ -10,9 +10,15 @@ class Data {
 
 	// Init
 	static init() {
-		// Get data from server
+		// Get data from "server"
 		const data = JSON.parse(document.getElementById("data").innerText)
 		Data.updateFromJSON(data)
+		Data.lastUpdated = new Date(data["lastUpdated"])
+
+		// Get data from real server async
+		Data.sync(() => {
+			document.dispatchEvent(new Event("pageChange"))
+		})
 
 		// Offline banner when offline
 		window.addEventListener("offline", () => {
