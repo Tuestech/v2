@@ -110,16 +110,16 @@ class Schedule extends Page {
 		}
 
 		// Calculate y
-		let y = Data.calculateWorkload(10)
+		const originalY = Data.calculateWorkload(10)
 
 		// Apply normalizer function to y
 		const normalizer = (x) => -1*Math.E**(-1*(x/(30 * parseFloat(Data.settings["workloadLimit"]))))+1
-		y = y.map(normalizer)
+		const y = originalY.map(normalizer)
 
-		// TODO: Generate Warnings
+		// Generate Warnings
 		let warnings = []
-		for (const a of x) {
-			warnings.push(false)
+		for (const yValue of originalY) {
+			warnings.push(yValue > 100*parseFloat(Data.settings["workloadLimit"]))
 		}
 
 		Schedule.graph(x, y, warnings)
