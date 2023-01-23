@@ -195,11 +195,7 @@ body {
 	filter: brightness(0.95);
 }
 
-.task-card input {
-	transition: 0.1s linear;
-}
-
-.task-card:hover input {
+.task-card:hover input.progress {
 	transform: scaleY(1.5);
 }
 
@@ -220,15 +216,15 @@ input.progress {
 	overflow: hidden;
 	border-radius: 100px;
 	cursor: w-resize;
-	transition: box-shadow 0s linear;
+	transition: transform 0.1s linear;
 	box-shadow: inset var(--gray-len) 0 0 0px var(--gray);
 }
 
-.progress:hover {
+input.progress:hover {
 	filter: brightness(0.9);
 }
 
-.progress::-webkit-slider-thumb {
+input.progress::-webkit-slider-thumb {
   -webkit-appearance: none;
 	height: 8px;
 	width: 8px;
@@ -238,7 +234,7 @@ input.progress {
 	box-shadow: -1004px 0 0 1000px var(--blue);
 }
 
-.progress::-moz-range-thumb {
+input.progress::-moz-range-thumb {
 	height: 8px;
 	width: 8px;
 	border-radius: 100px;
