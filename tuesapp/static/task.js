@@ -26,11 +26,7 @@ class Task {
 
 	expectedProgress(date) {
 		// Timeless date
-		date = new Date(date.getTime()) // make copy before changing
-		date.setHours(this.end.getHours())
-		date.setMinutes(this.end.getMinutes())
-		date.setSeconds(this.end.getSeconds())
-		date.setMilliseconds(this.end.getMilliseconds())
+		date = Task.timelessDate(date, false)
 
 		// Progress prediction functions
 		const functionMap = {
@@ -39,14 +35,15 @@ class Task {
 			2: Task.strongPoly
 		}
 
-		// Require completion on day before due date
-		const trueEnd = new Date(this.end - 1000*60*60*24)
-
 		// Clamping Function
 		const clamp = (min, val, max) => Math.max(min, Math.min(max, val))
 
+		// Ensure start and end dates are at start of day
+		this.start = Task.timelessDate(this.start)
+		this.end = Task.timelessDate(this.end)
+
 		// Calculate Timings
-		const taskLength = trueEnd - this.start
+		const taskLength = this.end - this.start
 		const taskElapsed = date - this.start
 		let timePercent = clamp(0, 100*taskElapsed/taskLength, 100)
 		
@@ -66,11 +63,7 @@ class Task {
 		if (this.score != null) return this.score
 
 		// Get today
-		const today = new Date()
-		today.setHours(this.end.getHours())
-		today.setMinutes(this.end.getMinutes())
-		today.setSeconds(this.end.getSeconds())
-		today.setMilliseconds(this.end.getMilliseconds())
+		const today = Task.timelessDate(new Date())
 
 		// Edge cases
 		if (today - this.start < 0) {this.score = 0; return 0}
@@ -119,6 +112,10 @@ class Task {
 		taskProgress.setAttribute("min", "0")
 		taskProgress.setAttribute("max", "100")
 		taskProgress.setAttribute("value", this.progress)
+		window.requestAnimationFrame(() => {
+			// --gray-len property is dependent on width so must be after 1 frame
+			taskProgress.style.setProperty("--gray-len", -(100-this.expectedProgress(new Date()))/100*taskProgress.clientWidth + "px")
+		})
 		taskProgress.className = "progress"
 
 		// Add progress bar event listener
@@ -130,6 +127,11 @@ class Task {
 			this.flagRecomputeScore()
 			Data.requestUpdate()
 			callback()
+		})
+
+		// Dynamically set projected progress
+		window.addEventListener("resize", (e) => {
+			taskProgress.style.setProperty("--gray-len", -(100-this.expectedProgress(new Date()))/100*taskProgress.clientWidth + "px")
 		})
 
 		// Add progress bar
@@ -209,8 +211,8 @@ class Task {
 			}
 
 			task.name = nameValue
-			task.start = Task.dateFromFormat(startValue, "yyyy-mm-dd")
-			task.end = Task.dateFromFormat(endValue, "yyyy-mm-dd")
+			task.start = Task.timelessDate(Task.dateFromFormat(startValue, "yyyy-mm-dd"))
+			task.end = Task.timelessDate(Task.dateFromFormat(endValue, "yyyy-mm-dd"))
 			task.link = linkValue
 
 			if (isNew) {
@@ -249,6 +251,17 @@ class Task {
 
 	static strongPoly(t) {
 		return 100*(-800*(t**(0.748301)) + 812.105*(t**(0.7459)))/99.6199552061
+	}
+
+	// Preprocessors
+	static timelessDate(date, startOfDay=true) {
+		date = new Date(date.getTime()) // make copy before changing
+		if (startOfDay) {
+			date.setHours(0, 0, 0, 0)
+		} else {
+			date.setHours(23, 59, 59, 999)
+		}
+		return date
 	}
 
 	// Formatters
