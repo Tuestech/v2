@@ -195,32 +195,36 @@ body {
 	filter: brightness(0.95);
 }
 
-.task-card input {
-	transition: 0.1s linear;
-}
-
-.task-card:hover input {
+.task-card:hover input.progress {
 	transform: scaleY(1.5);
 }
 
 /* Progress */
-.progress {
+input.progress {
 	-webkit-appearance: none;
 	appearance: none;
-	background-color: var(--gray);
+	background: repeating-linear-gradient(
+		135deg,
+		rgb(209, 226, 252),
+		rgb(209, 226, 252) 5px,
+		rgb(147, 188, 255) 5px,
+		rgb(147, 188, 255) 10px
+	);
 	height: 8px;
 	width: 100%;
 	grid-area: progress;
 	overflow: hidden;
 	border-radius: 100px;
 	cursor: w-resize;
+	transition: transform 0.1s linear;
+	box-shadow: inset var(--gray-len) 0 0 0px var(--gray);
 }
 
-.progress:hover {
+input.progress:hover {
 	filter: brightness(0.9);
 }
 
-.progress::-webkit-slider-thumb {
+input.progress::-webkit-slider-thumb {
   -webkit-appearance: none;
 	height: 8px;
 	width: 8px;
@@ -230,21 +234,13 @@ body {
 	box-shadow: -1004px 0 0 1000px var(--blue);
 }
 
-.progress::-moz-range-thumb {
+input.progress::-moz-range-thumb {
 	height: 8px;
 	width: 8px;
 	border-radius: 100px;
 	background-color: var(--blue);
 	border: 0px;
 	box-shadow: -1004px 0 0 1000px var(--blue);
-}
-
-.progress::-webkit-slider-runnable-track {
-	background-color: var(--gray);
-}
-
-.progress::-moz-range-track {
-	background-color: var(--gray);
 }
 
 /* Modals */
