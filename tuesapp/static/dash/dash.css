@@ -72,11 +72,12 @@
 
 .dash-cal {
 	display: grid;
+	align-items: start;
 	grid-template-columns: repeat(5, 1fr);
 	gap: 10px;
 }
 
-.day-labels{
+.day-labels {
 	font-size: 22px;
 	text-align: center;
 }
@@ -92,7 +93,7 @@
 	height: min-content;
 }
 
-.dash-cal div .glass-panel p{
+.dash-cal div .glass-panel p {
 	text-align: center;
 	overflow-wrap: break-word;
 	overflow: hidden
