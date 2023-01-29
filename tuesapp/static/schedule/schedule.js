@@ -176,19 +176,19 @@ class Schedule extends Page {
 	}
 
 	static updatePath(x, y, xScale, yScale, pathElement, padding) {
-		// Generate path
-		let path = `M ${x[0] + padding} ${(1 - y[0]) * yScale + padding} `
-		const xIncrement = 1/(x.length - 1)/2
+		// Scale and pad x; scale, pad, and invert y
+		x = x.map(x_ => x_*xScale + padding)
+		y = y.map(y_ => (1-y_)*yScale + padding)
+
+		// Find path starting point
+		let path = `M ${x[0]} ${y[0]} `
+		const xIncrement = xScale/(x.length - 1)/2
 
 		for (let i = 1; i < x.length; i++) {
-			const controlX = (x[i] - xIncrement) * xScale
-			path += Schedule.generatePath(controlX, y[i-1]*yScale, controlX, y[i]*yScale, x[i]*xScale, y[i]*yScale, yScale, padding)
+			const controlX = x[i] - xIncrement
+			path += `C ${controlX} ${y[i-1]}, ${controlX} ${y[i]}, ${x[i]} ${y[i]} `
 		}
 
 		pathElement.setAttribute("d", path)
-	}
-
-	static generatePath(xc1, yc1, xc2, yc2, x, y, height, padding) {
-		return `C ${xc1 + padding} ${height - yc1 - padding}, ${xc2 + padding} ${height - yc2 - padding}, ${x + padding} ${height - y - padding} `
 	}
 }
