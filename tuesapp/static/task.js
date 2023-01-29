@@ -275,12 +275,7 @@ class Task {
 		if (mode == "yyyy-mm-dd") {
 			const [year, month, day] = string.split("-")
 
-			const out = new Date()
-			out.setFullYear(parseInt(year))
-			out.setMonth(parseInt(month)-1)
-			out.setDate(parseInt(day))
-
-			return out
+			return new Date(parseInt(year), parseInt(month)-1, parseInt(day))
 		}
 	}
 
