@@ -219,6 +219,8 @@ class Task {
 				Data.tasks.push(task)
 			}
 
+			task.flagRecomputeScore()
+
 			Data.requestUpdate()
 			document.dispatchEvent(new Event("pageChange"))
 		}])
