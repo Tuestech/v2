@@ -143,7 +143,7 @@ class Task {
 			eventName = "dblclick"
 		}
 
-		taskDiv.addEventListener("dblclick", (e) => {
+		taskDiv.addEventListener(eventName, (e) => {
 			// Block clicks on progress bar
 			if (e.target.tagName == "INPUT") {
 				return
@@ -218,6 +218,8 @@ class Task {
 			if (isNew) {
 				Data.tasks.push(task)
 			}
+
+			task.flagRecomputeScore()
 
 			Data.requestUpdate()
 			document.dispatchEvent(new Event("pageChange"))

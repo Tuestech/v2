@@ -16,7 +16,7 @@ class Settings extends Page {
 		this.defaultValues = {
 			"workloadLimit": 1.5,
 			"dataCollection": false,
-			"doubleClick": false,
+			"doubleClick": true,
 			"offline-resync": true,
 			"beta": false,
 			"defaultLinks": false,

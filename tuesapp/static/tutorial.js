@@ -20,7 +20,7 @@ class Tutorial {
 		} else if (Tutorial.step == 2) {
 
 			const block = Modal.tutorialBlock(
-				"This is a task. It has a name, start date, due date, and progress. If you provide a link, you can also click the task to open it later.\n\nThe striped blue bar is your progress goal for today. Try sliding the solid blue progress bar below, then click the task itself.",
+				"This is a task. It has a name, start date, due date, and progress. If you provide a link, you can also click the task to open it later.\n\nThe striped blue bar is your progress goal for today. Try sliding the solid blue progress bar below, then double click the task to open the link.",
 				new Task(["Tutorial Task", "", new Date(), new Date(new Date().getTime() + (3*1000*60*60*24)), 20, "https://tues.tech"]).generateTaskCard(() => {}, true)
 			)
 			new Modal("Tutorial (2/7)", block, ["Exit", "Next"], ["white", "green"], [() => {}, Tutorial.next])
