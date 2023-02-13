@@ -143,7 +143,7 @@ class Task {
 			eventName = "dblclick"
 		}
 
-		taskDiv.addEventListener("dblclick", (e) => {
+		taskDiv.addEventListener(eventName, (e) => {
 			// Block clicks on progress bar
 			if (e.target.tagName == "INPUT") {
 				return
