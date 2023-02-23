@@ -123,6 +123,9 @@ class Dash extends Page {
 		// Prevents duplicate tasks
 		Page.clearChildren(currentTasks, 1)
 
+		// Exit if there are no tasks
+		if (Data.tasks.length == 0) return
+
 		// Prioritize tasks
 		const prioritized = Data.getPrioritized(false)
 
