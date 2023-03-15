@@ -125,7 +125,7 @@ class Dash extends Page {
 
 		// Exit if there are no tasks
 		if (Data.tasks.length == 0) return
-
+		
 		// Prioritize tasks
 		const prioritized = Data.getPrioritized(false)
 
