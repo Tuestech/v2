@@ -118,13 +118,14 @@ class Dash extends Page {
 
 	static updateCurrentTasks() {
 		const currentTasks = document.getElementById("current-tasks")
-		const originalNameTopMap = Object.fromEntries(Array.from(currentTasks.children).slice(1, ).map(x => [x.children[0].innerText, x.getBoundingClientRect().top]))
+		const taskCards = Array.from(currentTasks.children).slice(1, ).filter((e) => e.classList.contains("task-card"))
+		let originalNameTopMap
+		if (taskCards.length != 0) {
+			originalNameTopMap = Object.fromEntries(taskCards.map(x => [x.children[0].innerText, x.getBoundingClientRect().top]))
+		}
 
 		// Prevents duplicate tasks
 		Page.clearChildren(currentTasks, 1)
-
-		// Exit if there are no tasks
-		if (Data.tasks.length == 0) return
 		
 		// Prioritize tasks
 		const prioritized = Data.getPrioritized(false)
