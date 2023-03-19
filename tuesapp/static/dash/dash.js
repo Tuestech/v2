@@ -149,6 +149,9 @@ class Dash extends Page {
 			currentTasks.append(taskCard)
 		}
 
+		// Don't animate cards that don't exist
+		if (taskCards.length == 0) return
+
 		// Calculate new mappings
 		const newNameTopMap = Object.fromEntries(Array.from(currentTasks.children).slice(1, ).map(x => [x.children[0].innerText, x.getBoundingClientRect().top]))
 
@@ -175,7 +178,7 @@ class Dash extends Page {
 				]
 				const timing = {
 					duration: 300,
-					interations: 1,
+					iterations: 1,
 					easing:"ease"
 				}
 
@@ -187,14 +190,18 @@ class Dash extends Page {
 
 	static updateUpcoming() {
 		const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+		const panel = document.getElementById("events-and-due-dates")
+
+		// Prevents duplicate elements
+		Page.clearChildren(panel, 3)
+		for (let i = 1; i <= 5; i++) {
+			Page.clearChildren(document.getElementById(`day-${i}`))
+		}
 		
 		// No tasks behavior
-		if (Data.tasks.length == 0) {
-			const panel = document.getElementById("events-and-due-dates")
-			Page.clearChildren(panel, 1)
-			
+		if (Data.tasks.length == 0) {			
 			const p = document.createElement("p")
-			p.innerText = "Nothing to do!"
+			p.innerText = "Nothing to see here!"
 			panel.append(p)
 			return
 		}
@@ -211,8 +218,6 @@ class Dash extends Page {
 		for (let i = 1; i <= 5; i++) {
 			const dayDiv = document.getElementById(`day-${i}`)
 
-			// Prevents duplicate tasks
-			Page.clearChildren(dayDiv)
 			for (const task of Data.tasks) {
 				// Creates element if the due date matches the date of the calendar
 				if (task.end.toDateString() == currDate.toDateString()) {
