@@ -148,11 +148,11 @@ class Schedule extends Page {
 
 		// Resize observer
 		let xScale = parent.offsetWidth - 2 * pathWidth
-		let yScale = parent.offsetHeight - 2 * pathWidth
+		let yScale = parent.offsetHeight - 2 * pathWidth - 35
 
 		const resizeObserver = new ResizeObserver((entries) => {
 			xScale = entries[0].target.offsetWidth - 2 * pathWidth
-			yScale = entries[0].target.offsetHeight - 2 * pathWidth
+			yScale = entries[0].target.offsetHeight - 2 * pathWidth - 35
 
 			Schedule.setSVGDims(svg, entries[0].target)
 			Schedule.updatePath(x, y, xScale, yScale, pathElement, pathWidth)
@@ -178,7 +178,7 @@ class Schedule extends Page {
 	static updatePath(x, y, xScale, yScale, pathElement, padding) {
 		// Scale and pad x; scale, pad, and invert y
 		x = x.map(x_ => x_*xScale + padding)
-		y = y.map(y_ => (1-y_)*yScale + padding)
+		y = y.map(y_ => (1-y_)*yScale + padding + 35)
 
 		// Find path starting point
 		let path = `M ${x[0]} ${y[0]} `
@@ -208,13 +208,8 @@ class Schedule extends Page {
 		}
 
 		// Transform warning coordinates to be image coordinates
-		// TODO: Improve transformation to fit data
-		warnY = warnY.map(y => y - 0.1)
-
 		warnX = warnX.map(x_ => x_*xScale + padding)
 		warnY = warnY.map(y_ => (1-y_)*yScale + padding)
-
-		console.log(warnX, xScale, padding)
 
 		// Add warning images to transformed coordinates
 		const xmlns = "http://www.w3.org/2000/svg"
