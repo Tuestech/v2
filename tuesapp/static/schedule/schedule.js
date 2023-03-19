@@ -138,8 +138,6 @@ class Schedule extends Page {
 		// y must be on [0, 1]
 		// w is an array of booleans corresponding to points that indicate if a warning is needed
 
-		// TODO: implement warnings
-
 		// Elements
 		const parent = document.getElementById("s-graph-container")
 		const svg = document.getElementById("svg")
@@ -158,9 +156,8 @@ class Schedule extends Page {
 
 			Schedule.setSVGDims(svg, entries[0].target)
 			Schedule.updatePath(x, y, xScale, yScale, pathElement, pathWidth)
+			Schedule.updateWarnings(x, y, xScale, yScale, svg, pathWidth)
 		})
-
-		resizeObserver.observe(parent)
 
 		// Normalize all x-values on [0, 1]
 		const xMin = Math.min(...x)
@@ -170,9 +167,12 @@ class Schedule extends Page {
 			x[i] = (x[i] - xMin)/(xMax - xMin)
 		}
 
+		resizeObserver.observe(parent)
+
 		// Update path
 		Schedule.setSVGDims(svg, parent)
 		Schedule.updatePath(x, y, xScale, yScale, pathElement, pathWidth)
+		Schedule.updateWarnings(x, y, xScale, yScale, svg, pathWidth)
 	}
 
 	static updatePath(x, y, xScale, yScale, pathElement, padding) {
@@ -190,5 +190,49 @@ class Schedule extends Page {
 		}
 
 		pathElement.setAttribute("d", path)
+	}
+
+	static updateWarnings(x, y, xScale, yScale, svgElement, padding) {
+		// Remove all existing warnings
+		const warnings = Array.from(document.getElementsByClassName("warning-image"))
+		warnings.map(warning => warning.remove())
+
+		// Find the coordinates of points that require warning
+		let warnX = []
+		let warnY = []
+		for (let i = 0; i < x.length; i++) {
+			if (y[i] > 0.8) {
+				warnX.push(x[i])
+				warnY.push(y[i])
+			}
+		}
+
+		// Transform warning coordinates to be image coordinates
+		// TODO: Improve transformation to fit data
+		warnY = warnY.map(y => y - 0.1)
+
+		warnX = warnX.map(x_ => x_*xScale + padding)
+		warnY = warnY.map(y_ => (1-y_)*yScale + padding)
+
+		console.log(warnX, xScale, padding)
+
+		// Add warning images to transformed coordinates
+		const xmlns = "http://www.w3.org/2000/svg"
+		const imgUrl = "/static/icons/Warning.png"
+		for (let i = 0; i < warnX.length; i++) {
+			const warningImage = document.createElementNS(xmlns, "image")
+
+			warningImage.setAttribute("href", imgUrl)
+			warningImage.setAttributeNS(xmlns, "xlink:href", imgUrl)
+
+			warningImage.setAttribute("x", warnX[i] - 12.5)
+			warningImage.setAttribute("y", warnY[i])
+			warningImage.setAttribute("width", 25)
+			warningImage.setAttribute("height", 25)
+
+			warningImage.classList.add("warning-image")
+
+			svgElement.append(warningImage)
+		}
 	}
 }
