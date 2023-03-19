@@ -138,8 +138,6 @@ class Schedule extends Page {
 		// y must be on [0, 1]
 		// w is an array of booleans corresponding to points that indicate if a warning is needed
 
-		// TODO: implement warnings
-
 		// Elements
 		const parent = document.getElementById("s-graph-container")
 		const svg = document.getElementById("svg")
@@ -150,17 +148,16 @@ class Schedule extends Page {
 
 		// Resize observer
 		let xScale = parent.offsetWidth - 2 * pathWidth
-		let yScale = parent.offsetHeight - 2 * pathWidth
+		let yScale = parent.offsetHeight - 2 * pathWidth - 35
 
 		const resizeObserver = new ResizeObserver((entries) => {
 			xScale = entries[0].target.offsetWidth - 2 * pathWidth
-			yScale = entries[0].target.offsetHeight - 2 * pathWidth
+			yScale = entries[0].target.offsetHeight - 2 * pathWidth - 35
 
 			Schedule.setSVGDims(svg, entries[0].target)
 			Schedule.updatePath(x, y, xScale, yScale, pathElement, pathWidth)
+			Schedule.updateWarnings(x, y, xScale, yScale, svg, pathWidth)
 		})
-
-		resizeObserver.observe(parent)
 
 		// Normalize all x-values on [0, 1]
 		const xMin = Math.min(...x)
@@ -170,15 +167,18 @@ class Schedule extends Page {
 			x[i] = (x[i] - xMin)/(xMax - xMin)
 		}
 
+		resizeObserver.observe(parent)
+
 		// Update path
 		Schedule.setSVGDims(svg, parent)
 		Schedule.updatePath(x, y, xScale, yScale, pathElement, pathWidth)
+		Schedule.updateWarnings(x, y, xScale, yScale, svg, pathWidth)
 	}
 
 	static updatePath(x, y, xScale, yScale, pathElement, padding) {
 		// Scale and pad x; scale, pad, and invert y
 		x = x.map(x_ => x_*xScale + padding)
-		y = y.map(y_ => (1-y_)*yScale + padding)
+		y = y.map(y_ => (1-y_)*yScale + padding + 35)
 
 		// Find path starting point
 		let path = `M ${x[0]} ${y[0]} `
@@ -190,5 +190,44 @@ class Schedule extends Page {
 		}
 
 		pathElement.setAttribute("d", path)
+	}
+
+	static updateWarnings(x, y, xScale, yScale, svgElement, padding) {
+		// Remove all existing warnings
+		const warnings = Array.from(document.getElementsByClassName("warning-image"))
+		warnings.map(warning => warning.remove())
+
+		// Find the coordinates of points that require warning
+		let warnX = []
+		let warnY = []
+		for (let i = 0; i < x.length; i++) {
+			if (y[i] > 0.8) {
+				warnX.push(x[i])
+				warnY.push(y[i])
+			}
+		}
+
+		// Transform warning coordinates to be image coordinates
+		warnX = warnX.map(x_ => x_*xScale + padding)
+		warnY = warnY.map(y_ => (1-y_)*yScale + padding)
+
+		// Add warning images to transformed coordinates
+		const xmlns = "http://www.w3.org/2000/svg"
+		const imgUrl = "/static/icons/Warning.png"
+		for (let i = 0; i < warnX.length; i++) {
+			const warningImage = document.createElementNS(xmlns, "image")
+
+			warningImage.setAttribute("href", imgUrl)
+			warningImage.setAttributeNS(xmlns, "xlink:href", imgUrl)
+
+			warningImage.setAttribute("x", warnX[i] - 12.5)
+			warningImage.setAttribute("y", warnY[i])
+			warningImage.setAttribute("width", 25)
+			warningImage.setAttribute("height", 25)
+
+			warningImage.classList.add("warning-image")
+
+			svgElement.append(warningImage)
+		}
 	}
 }
