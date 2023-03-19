@@ -149,6 +149,9 @@ class Dash extends Page {
 			currentTasks.append(taskCard)
 		}
 
+		// Don't animate cards that don't exist
+		if (taskCards.length == 0) return
+
 		// Calculate new mappings
 		const newNameTopMap = Object.fromEntries(Array.from(currentTasks.children).slice(1, ).map(x => [x.children[0].innerText, x.getBoundingClientRect().top]))
 
@@ -175,7 +178,7 @@ class Dash extends Page {
 				]
 				const timing = {
 					duration: 300,
-					interations: 1,
+					iterations: 1,
 					easing:"ease"
 				}
 
