@@ -193,6 +193,9 @@ class Schedule extends Page {
 	}
 
 	static updateWarnings(x, y, xScale, yScale, svgElement, padding) {
+		// Constants
+		const warningSize = 25
+
 		// Remove all existing warnings
 		const warnings = Array.from(document.getElementsByClassName("warning-image"))
 		warnings.map(warning => warning.remove())
@@ -207,8 +210,11 @@ class Schedule extends Page {
 			}
 		}
 
+		// minmax
+		const minmax = (n, min_, max_) => Math.min(max_, Math.max(min_, n))
+
 		// Transform warning coordinates to be image coordinates
-		warnX = warnX.map(x_ => x_*xScale + padding)
+		warnX = warnX.map(x_ => minmax(x_*xScale + padding - warningSize/2, 0, xScale - 25))
 		warnY = warnY.map(y_ => (1-y_)*yScale + padding)
 
 		// Add warning images to transformed coordinates
@@ -220,10 +226,10 @@ class Schedule extends Page {
 			warningImage.setAttribute("href", imgUrl)
 			warningImage.setAttributeNS(xmlns, "xlink:href", imgUrl)
 
-			warningImage.setAttribute("x", warnX[i] - 12.5)
+			warningImage.setAttribute("x", warnX[i])
 			warningImage.setAttribute("y", warnY[i])
-			warningImage.setAttribute("width", 25)
-			warningImage.setAttribute("height", 25)
+			warningImage.setAttribute("width", warningSize)
+			warningImage.setAttribute("height", warningSize)
 
 			warningImage.classList.add("warning-image")
 
