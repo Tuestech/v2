@@ -146,17 +146,20 @@ class Schedule extends Page {
 		// Get properties
 		const pathWidth = parseInt(pathElement.getAttribute("stroke-width").replace("px", ""))
 
+		// Warning constants
+		const warningSize = 25
+
 		// Resize observer
 		let xScale = parent.offsetWidth - 2 * pathWidth
-		let yScale = parent.offsetHeight - 2 * pathWidth - 35
+		let yScale = parent.offsetHeight - 2 * pathWidth - warningSize - 10
 
 		const resizeObserver = new ResizeObserver((entries) => {
 			xScale = entries[0].target.offsetWidth - 2 * pathWidth
-			yScale = entries[0].target.offsetHeight - 2 * pathWidth - 35
+			yScale = entries[0].target.offsetHeight - 2 * pathWidth - warningSize - 10
 
 			Schedule.setSVGDims(svg, entries[0].target)
-			Schedule.updatePath(x, y, xScale, yScale, pathElement, pathWidth)
-			Schedule.updateWarnings(x, y, xScale, yScale, svg, pathWidth)
+			Schedule.updatePath(x, y, xScale, yScale, pathElement, pathWidth, warningSize)
+			Schedule.updateWarnings(x, y, xScale, yScale, svg, pathWidth, warningSize)
 		})
 
 		// Normalize all x-values on [0, 1]
@@ -171,14 +174,14 @@ class Schedule extends Page {
 
 		// Update path
 		Schedule.setSVGDims(svg, parent)
-		Schedule.updatePath(x, y, xScale, yScale, pathElement, pathWidth)
-		Schedule.updateWarnings(x, y, xScale, yScale, svg, pathWidth)
+		Schedule.updatePath(x, y, xScale, yScale, pathElement, pathWidth, warningSize)
+		Schedule.updateWarnings(x, y, xScale, yScale, svg, pathWidth, warningSize)
 	}
 
-	static updatePath(x, y, xScale, yScale, pathElement, padding) {
+	static updatePath(x, y, xScale, yScale, pathElement, padding, warningSize) {
 		// Scale and pad x; scale, pad, and invert y
 		x = x.map(x_ => x_*xScale + padding)
-		y = y.map(y_ => (1-y_)*yScale + padding + 35)
+		y = y.map(y_ => (1-y_)*yScale + padding + warningSize + 10)
 
 		// Find path starting point
 		let path = `M ${x[0]} ${y[0]} `
@@ -192,10 +195,7 @@ class Schedule extends Page {
 		pathElement.setAttribute("d", path)
 	}
 
-	static updateWarnings(x, y, xScale, yScale, svgElement, padding) {
-		// Constants
-		const warningSize = 25
-
+	static updateWarnings(x, y, xScale, yScale, svgElement, padding, warningSize) {
 		// Remove all existing warnings
 		const warnings = Array.from(document.getElementsByClassName("warning-image"))
 		warnings.map(warning => warning.remove())
@@ -214,7 +214,7 @@ class Schedule extends Page {
 		const minmax = (n, min_, max_) => Math.min(max_, Math.max(min_, n))
 
 		// Transform warning coordinates to be image coordinates
-		warnX = warnX.map(x_ => minmax(x_*xScale + padding - warningSize/2, 0, xScale - 25))
+		warnX = warnX.map(x_ => minmax(x_*xScale + padding - warningSize/2, 0, xScale - warningSize))
 		warnY = warnY.map(y_ => (1-y_)*yScale + padding)
 
 		// Add warning images to transformed coordinates
