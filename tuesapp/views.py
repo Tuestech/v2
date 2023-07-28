@@ -70,6 +70,31 @@ def main(request):
 
 @login_required
 @require_http_methods(["GET"])
+def prepme(request):
+	"""
+	Returns Prepme's modified app page with the current logged-in user's data
+	"""
+	uid = SocialAccount.objects.filter(user=request.user).first().uid
+
+	# Attempt to find user and get data, creates a new blank user otherwise
+	is_new = False
+	try:
+		user = User.objects.get(uid=uid)
+		data = user.app_data
+	except:
+		name = request.user.username
+		data = generate_sample_data()
+		user = User(uid=uid, name=name, app_data=data)
+		user.save()
+
+		is_new = True
+	
+	# Return
+	return render(request, "base.html", {"data": data, "is_new": is_new})
+
+
+@login_required
+@require_http_methods(["GET"])
 def getUser(request):
 	"""
 	Gets the current logged-in user's data
