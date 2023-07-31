@@ -83,7 +83,7 @@ def prepme(request):
 		data = user.app_data
 	except:
 		name = request.user.username
-		data = generate_sample_data()
+		data = generate_sample_data(prepme=True)
 		user = User(uid=uid, name=name, app_data=data)
 		user.save()
 
@@ -175,7 +175,7 @@ def valid_post(request, keys):
 			return False
 	return data
 
-def generate_sample_data():
+def generate_sample_data(prepme=False):
 	# Days
 	def days_after(n):
 		return (datetime.datetime.now() + datetime.timedelta(days=n)).strftime("%Y-%m-%d")
@@ -190,8 +190,11 @@ def generate_sample_data():
 	links = '[["Google Classroom", "https://classroom.google.com"]]'
 
 	# Settings sample data
-	settings = '{"scoreType":1, "workloadLimit":1.5, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false}'
-
+	if prepme:
+		settings = '{"scoreType":1, "workloadLimit":1.5, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false, "prepme":true}'
+	else:
+		settings = '{"scoreType":1, "workloadLimit":1.5, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false, "prepme":false}'
+	
 	# Combined sample data
 	return json.dumps(
 		{"tasks": tasks, "events": events, "links": links, "settings": settings}
