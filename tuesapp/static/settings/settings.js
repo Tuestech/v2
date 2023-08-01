@@ -17,7 +17,7 @@ class Settings extends Page {
 			"workloadLimit": 1.5,
 			"dataCollection": false,
 			"doubleClick": true,
-			"offline-resync": true,
+			"offlineResync": true,
 			"beta": false,
 			"defaultLinks": false,
 			"showCompleted": false
@@ -33,6 +33,19 @@ class Settings extends Page {
 		Settings.activateActions()
 
 		super.init()
+	}
+
+	static onPageChange() {
+		// Preferences
+		Settings.activatePreferences()
+
+		// Progress Curve
+		Settings.activateProgressCurves()
+
+		// Actions
+		Settings.activateActions()
+
+		super.onPageChange()
 	}
 
 	static setInputValue(input, value) {

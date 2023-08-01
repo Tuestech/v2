@@ -1,10 +1,10 @@
 Data.init()
 Nav.init()
+Settings.init()
 Dash.init()
 List.init()
 Schedule.init()
 Timer.init()
-Settings.init()
 
 document.addEventListener("DOMContentLoaded", function(event) {
   Dash.externalLoaded()
