@@ -10,6 +10,7 @@ class Task {
 				this[Task.keys[i]] = new Date(arr[i])
 			}
 		}
+		this.score = null
 	}
 
 	toArray() {
@@ -66,7 +67,7 @@ class Task {
 		const today = Task.timelessDate(new Date())
 
 		// Edge cases
-		if (today - this.start < 0) {this.score = 0; return 0}
+		if (today - Task.timelessDate(this.start) < 0) {this.score = 0; return 0}
 		if (Data.daysBetween(this.end, today) < 0) {this.score=-1000; return -1000}
 
 		// Calculate Deviation
