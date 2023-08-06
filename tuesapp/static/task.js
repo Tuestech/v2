@@ -1,6 +1,6 @@
 class Task {
-	static keys = ["name", "course", "start", "end", "progress", "link"]
-	static types = ["s", "s", "d", "d", "n", "s"]
+	static keys = ["name", "time", "start", "end", "progress", "link"]
+	static types = ["s", "n", "d", "d", "n", "s"]
 	
 	constructor(arr) {
 		for (let i = 0; i < Task.keys.length; i++) {
