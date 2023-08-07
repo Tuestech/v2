@@ -79,9 +79,19 @@ def prepme(request):
 	# Attempt to find user and get data, creates a new blank user otherwise
 	is_new = False
 	try:
-		user = User.objects.get(uid=uid)
+		user = User.objects.filter(uid=uid).first()
 		data = user.app_data
+
+		parsed_data = json.loads(data)
+		temp = json.loads(parsed_data["settings"])
+		temp["prepme"] = True
+		parsed_data["settings"] = json.dumps(temp)
+		data = json.dumps(parsed_data)
+		user.app_data = data
+
+		user.save()
 	except:
+		print("bruh")
 		name = request.user.username
 		data = generate_sample_data(prepme=True)
 		user = User(uid=uid, name=name, app_data=data)
@@ -104,10 +114,10 @@ def getUser(request):
 
 	# Attempt to find user and return data
 	try:
-		user = User.objects.get(uid=uid)
+		user = User.objects.filter(uid=uid).first()
 		return HttpResponse(user.app_data)
 	except:
-		return HttpResponseServerError("Invalid Request: User does not exist")
+		return HttpResponseServerError(f"Invalid Request: User with uid {uid} not exist")
 
 
 @login_required

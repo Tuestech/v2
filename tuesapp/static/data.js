@@ -39,6 +39,21 @@ class Data {
 				document.dispatchEvent(new Event("pageChange"))
 			})
 		})
+
+		// Prep Me update loop
+		if (Data.settings["prepme"]) {
+			Data.prepmeUpdate()
+		}
+	}
+
+	// Prep Me data update pattern
+	static prepmeUpdate() {
+		Data.get(x => {
+			Data.updateFromJSON(JSON.parse(x))
+			document.dispatchEvent(new Event("pageChange"))
+		})
+		
+		if (Data.settings["prepme"]) setTimeout(Data.prepmeUpdate, 1000*60*30)
 	}
 
 	// Data update pattern
