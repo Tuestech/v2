@@ -263,11 +263,14 @@ class Dash extends Page {
 			const img = document.createElement("img")
 
 			// Dynamic icons to match favicon of website
-			try {
-				img.setAttribute("src", `https://s2.googleusercontent.com/s2/favicons?domain=${link[1]}&sz=32`)
-			} catch {
-				img.setAttribute("src", defaultWebIcon)
+			img.setAttribute("src", `https://s2.googleusercontent.com/s2/favicons?domain=${link[1]}&sz=32`)
+
+			img.onload = () => {
+				if (img.naturalHeight == 16) {
+					img.setAttribute("src", defaultWebIcon)
+				}
 			}
+			
 			container.append(img)
 
 			// Label
