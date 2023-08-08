@@ -15,15 +15,15 @@
 /* Scrollbar */
 *::-webkit-scrollbar {
 	position: absolute;
-  width: 8px;
+	width: 8px;
 }
  
 *::-webkit-scrollbar-track {
-  background-color: transparent;
+	background-color: transparent;
 }
  
 *::-webkit-scrollbar-thumb {
-  background-color: #aaaaaa;
+	background-color: #aaaaaa;
 	border-radius: 4px;
 }
 
