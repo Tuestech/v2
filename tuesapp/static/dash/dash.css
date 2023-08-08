@@ -117,6 +117,15 @@
 #dash .row3 {
 	grid-template-rows: repeat(2, min-content);
 	gap: 5px;
+	overflow-x: scroll;
+}
+
+#dash .row3::-webkit-scrollbar {
+	height: 8px;
+}
+
+#dash .row3::-webkit-scrollbar-track {
+	background-color: transparent;
 }
 
 #links {
