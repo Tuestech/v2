@@ -200,7 +200,7 @@ body {
 }
 
 /* Progress */
-input.progress {
+input[type="range"].progress {
 	-webkit-appearance: none;
 	appearance: none;
 	background: repeating-linear-gradient(
@@ -220,11 +220,11 @@ input.progress {
 	box-shadow: inset var(--gray-len) 0 0 0px var(--gray);
 }
 
-input.progress:hover {
+input[type="range"].progress:hover {
 	filter: brightness(0.9);
 }
 
-input.progress::-webkit-slider-thumb {
+input[type="range"].progress::-webkit-slider-thumb {
   -webkit-appearance: none;
 	height: 8px;
 	width: 8px;
@@ -234,13 +234,53 @@ input.progress::-webkit-slider-thumb {
 	box-shadow: -1004px 0 0 1000px var(--blue);
 }
 
-input.progress::-moz-range-thumb {
+input[type="range"].progress::-moz-range-thumb {
 	height: 8px;
 	width: 8px;
 	border-radius: 100px;
 	background-color: var(--blue);
 	border: 0px;
 	box-shadow: -1004px 0 0 1000px var(--blue);
+}
+
+input[type="range"]:not(.progress) {
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: var(--gray);
+	height: 8px;
+	border-radius: 100px;
+	cursor: pointer;
+	grid-area: slider;
+}
+
+input[type="range"]:not(.progress)::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	height: 18px;
+	width: 18px;
+	border-radius: 100px;
+	background-color: var(--blue);
+	border: 0px;
+	margin-top: -5px;
+}
+  
+input[type="range"]:not(.progress)::-moz-range-thumb {
+	height: 14px;
+	width: 14px;
+	border-radius: 100px;
+	background-color: var(--blue);
+	border: 0px;
+}
+
+input[type="range"]:not(.progress)::-webkit-slider-runnable-track {
+	background-color: var(--gray);
+	height: 8px;
+	border-radius: 100px;
+}
+
+input[type="range"]:not(.progress)::-moz-range-track {
+	background-color: var(--gray);
+	border-radius: 100px;
 }
 
 /* Modals */
@@ -348,7 +388,7 @@ input:focus {
 	outline: none;
 }
 
-.modal .input input {
+.modal .input input[type="text"], .modal .input input[type="date"] {
 	background-color: var(--gray);
 	height: 18px;
 	border: none;
@@ -361,8 +401,56 @@ input:focus {
 	width: calc(100% - 10px * 2); /* 100% - padding */
 }
 
-.modal .input input.wide {
+.modal .input input.wide:not(input[type="range"]) {
 	min-width: 500px;
+}
+
+.modal .input.slider {
+	display: grid;
+	align-items: center;
+	grid-template-areas:
+		"l s r"
+		"label label label";
+	grid-template-columns: max-content auto max-content;
+	column-gap: 10px;
+	position: relative;
+}
+
+.modal .input.slider .tooltip {
+	position: absolute;
+	opacity: 0;
+	transition: opacity 0.15s linear;
+	background-color: white;
+	border-radius: 10px;
+	padding: 5px 10px;
+	box-shadow: 0px 0px 25px rgba(31, 97, 135, 0.1);
+}
+
+.modal .input.slider:active .tooltip {
+	opacity: 1;
+}
+
+.modal .input.slider .l, .modal .input.slider .r {
+	font-weight: normal;
+	font-size: 16px;
+}
+
+.modal .input.slider .l {
+	grid-area: l;
+	padding-left: 10px;
+}
+
+.modal .input.slider .s {
+	grid-area: s;
+}
+
+.modal .input.slider .r {
+	grid-area: r;
+	padding-right: 10px;
+}
+
+.modal .input.slider .label {
+	grid-area: label;
 }
 
 .modal .form {
@@ -375,6 +463,7 @@ input:focus {
 	grid-template-areas:
 		'top top'
 		'left right'
+		'mid mid'
 		'bottom bottom';
 	grid-template-columns: 1fr 1fr;
 	row-gap: 25px;
@@ -391,6 +480,10 @@ input:focus {
 
 .modal .form.sandwich .right {
 	grid-area: right;
+}
+
+.modal .form.sandwich .mid {
+	grid-area: mid;
 }
 
 .modal .form.sandwich .bottom {

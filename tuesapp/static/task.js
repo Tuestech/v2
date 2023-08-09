@@ -167,14 +167,19 @@ class Task {
 			task = new Task(["", "", "", "", 0, ""])
 		}
 
+		// Set hours intervals
+		const intervals = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 25, 30]
+
 		// Set form elements
 		const name = Modal.textInput("Name", true, task.name)
 		const start = Modal.dateInput("Start Date", task.start)
 		const end = Modal.dateInput("Due Date", task.end)
+		const hours = Modal.sliderInput("Hours Needed", intervals, 2)
 		const link = Modal.textInput("Link (optional)", true, task.link)
 		const form = Modal.sandwichForm(
 			name,
 			start, end,
+			hours,
 			link
 		)
 
@@ -214,6 +219,7 @@ class Task {
 			task.name = nameValue
 			task.start = Task.timelessDate(Task.dateFromFormat(startValue, "yyyy-mm-dd"))
 			task.end = Task.timelessDate(Task.dateFromFormat(endValue, "yyyy-mm-dd"))
+			task.time = intervals[Math.round(hours.children[0].value)]
 			task.link = linkValue
 
 			if (isNew) {
