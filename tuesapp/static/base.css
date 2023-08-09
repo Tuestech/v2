@@ -162,6 +162,7 @@ body {
 /* Task Cards */
 .task-card {
 	display: grid;
+	position: relative;
 	grid-template-areas: 
 		'name days'
 		'progress progress';
@@ -170,7 +171,7 @@ body {
 	border-radius: 10px;
 	background-color: white;
 	cursor: pointer;
-	transition: 0.2s;
+	transition: filter 0.2s ease, padding 0.2s ease;
 	row-gap: 3px;
 	padding: 5px;
 }
@@ -191,8 +192,30 @@ body {
 	grid-area: days;
 }
 
+.task-card .hover-time {
+	display: flex;
+	position: absolute;
+	left: 5px;
+	bottom: 5px;
+	width: calc(100% - 10px);
+	justify-content: space-between;
+	opacity: 0;
+	user-select: none;
+	transition: opacity 0.2s ease;
+}
+
+.task-card .hover-time p {
+	display: block;
+	font-size: 14px;
+}
+
+.task-card:hover .hover-time {
+	opacity: 1;
+}
+
 .task-card:hover {
 	filter: brightness(0.95);
+	padding-bottom: 30px;
 }
 
 .task-card:hover input.progress {

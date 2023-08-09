@@ -163,6 +163,39 @@ class Task {
 			}
 		})
 
+		// Add hover time indicator
+		const hoverTime = document.createElement("div")
+		hoverTime.classList.add("hover-time")
+
+		const hoverTimeMapping = {
+			0.5: [0, 0.5, 1],
+			1: [0, 0.5, 1, 1.5],
+			1.5: [0, 0.5, 1, 1.5],
+			2: [0, 0.5, 1, 1.5, 2],
+			2.5: [0, 0.5, 1, 1.5, 2, 2.5],
+			3: [0, 1, 2, 3],
+			4: [0, 1, 2, 3, 4],
+			5: [0, 1, 2, 3, 4, 5],
+			6: [0, 2, 4, 6],
+			8: [0, 2, 4, 6, 8],
+			10: [0, 2, 4, 6, 8, 10],
+			12: [0, 3, 6, 9, 12],
+			15: [0, 5, 10, 15],
+			20: [0, 5, 10, 15, 20],
+			25: [0, 5, 10, 15, 20, 25]
+		}
+
+		const times = hoverTimeMapping[this.time]
+
+		for (const time of times) {
+			const el = document.createElement("p")
+			el.innerText = Modal.addHours(time)
+
+			hoverTime.append(el)
+		}
+
+		taskDiv.append(hoverTime)
+
 		return taskDiv
 	}
 
@@ -173,7 +206,7 @@ class Task {
 		}
 
 		// Set hours intervals
-		const intervals = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20, 25, 30]
+		const intervals = [0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25]
 
 		// Set form elements
 		const name = Modal.textInput("Name", true, task.name)
