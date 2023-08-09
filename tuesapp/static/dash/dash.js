@@ -270,7 +270,11 @@ class Dash extends Page {
 					img.setAttribute("src", defaultWebIcon)
 				}
 			}
-			
+
+			img.onerror = () => {
+				img.setAttribute("src", defaultWebIcon)
+			}
+
 			container.append(img)
 
 			// Label
