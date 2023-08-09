@@ -11,6 +11,11 @@ class Task {
 			}
 		}
 		this.score = null
+
+		// Data fixing
+		if (!this.time) {
+			this.time = 2
+		}
 	}
 
 	toArray() {
@@ -164,7 +169,7 @@ class Task {
 	static openEdit(task, isNew=false) {
 		// Create dummy task if new
 		if (!task) {
-			task = new Task(["", "", "", "", 0, ""])
+			task = new Task(["", 2, "", "", 0, ""])
 		}
 
 		// Set hours intervals
@@ -174,7 +179,7 @@ class Task {
 		const name = Modal.textInput("Name", true, task.name)
 		const start = Modal.dateInput("Start Date", task.start)
 		const end = Modal.dateInput("Due Date", task.end)
-		const hours = Modal.sliderInput("Hours Needed", intervals, 2)
+		const hours = Modal.sliderInput("Hours Needed", intervals, task.time)
 		const link = Modal.textInput("Link (optional)", true, task.link)
 		const form = Modal.sandwichForm(
 			name,
@@ -196,6 +201,7 @@ class Task {
 			let nameValue = name.children[0].value
 			let startValue = start.children[0].value
 			let endValue = end.children[0].value
+			let hoursValue = hours.children[0].value
 			let linkValue = link.children[0].value
 			// Validate input
 			if (!(nameValue && !!startValue && !!endValue)) {
@@ -219,7 +225,7 @@ class Task {
 			task.name = nameValue
 			task.start = Task.timelessDate(Task.dateFromFormat(startValue, "yyyy-mm-dd"))
 			task.end = Task.timelessDate(Task.dateFromFormat(endValue, "yyyy-mm-dd"))
-			task.time = intervals[Math.round(hours.children[0].value)]
+			task.time = intervals[Math.round(hoursValue)]
 			task.link = linkValue
 
 			if (isNew) {
