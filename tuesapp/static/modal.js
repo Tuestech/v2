@@ -200,7 +200,7 @@ class Modal {
 					observer.disconnect()
 				}
 			})
-		}).observe(input);
+		}).observe(input)
 
 		out.append(input)
 		out.append(rightP)
