@@ -143,6 +143,11 @@ class Modal {
 		return out
 	}
 
+	static addHours(num) {
+		if (num == 1) return `${num} hr`
+		return `${num} hrs`
+	}
+
 	static sliderInput(label, intervals, initialValue) {
 		// Return div with slider input
 		const out = document.createElement("div")
@@ -167,7 +172,7 @@ class Modal {
 
 		const tooltip = document.createElement("div")
 		tooltip.classList.add("tooltip")
-		tooltip.innerText = initialValue
+		tooltip.innerText = Modal.addHours(initialValue)
 
 		input.min = 0
 		input.max = intervals.length - 1
@@ -183,7 +188,7 @@ class Modal {
 		}
 
 		input.addEventListener("input", () => {
-			tooltip.innerText = intervals[Math.round(input.value)]
+			tooltip.innerText = Modal.addHours(intervals[Math.round(input.value)])
 			updateTooltip()
 		})
 
