@@ -5,6 +5,7 @@ class Timer extends Page {
 	static sequenceState = 0
 	static worker
 	static originalTitle = document.title
+	static sound = new Audio("/static/timer/timer-sound.mp3")
 
 	static init() {
 		// Setup variables
@@ -24,6 +25,7 @@ class Timer extends Page {
 		Timer.worker.addEventListener("message", function(e) {
 			if (e.data == "next") {
 				Timer.nextSequence()
+				Timer.sound.play()
 			} else {
 				Timer.updateDisplay(e.data)
 			}
