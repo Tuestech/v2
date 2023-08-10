@@ -76,7 +76,10 @@ class Task {
 		if (Data.daysBetween(this.end, today) < 0) {this.score=-1000; return -1000}
 
 		// Calculate Deviation
-		const deviation = this.progress - this.expectedProgress(today)
+		let deviation = this.progress - this.expectedProgress(today)
+
+		// Weight Deviation by time needed to complete the task
+		deviation *= this.time
 
 		// Calculate score
 		this.score = deviation
