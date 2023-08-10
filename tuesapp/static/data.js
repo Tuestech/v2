@@ -153,8 +153,8 @@ class Data {
 
 		// Setup
 		let workloads = []
-		let current = Data.tasks.map(x => x.progress)
-		let projectedEndOfDay = Data.tasks.map(x => x.expectedProgress(day))
+		let current = Data.tasks.map(x => x.time*x.progress/100)
+		let projectedEndOfDay = Data.tasks.map(x => x.time*x.expectedProgress(day)/100)
 
 		// Array ops
 		const sub = (arr1, arr2) => {
@@ -184,7 +184,7 @@ class Data {
 
 			// Move progresses to next day
 			current = calcNext
-			projectedEndOfDay = Data.tasks.map(x => x.expectedProgress(day))
+			projectedEndOfDay = Data.tasks.map(x => x.time*x.expectedProgress(day)/100)
 		}
 
 		return workloads

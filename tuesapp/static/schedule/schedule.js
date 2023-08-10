@@ -113,7 +113,7 @@ class Schedule extends Page {
 		const originalY = Data.calculateWorkload(10)
 
 		// Apply normalizer function to y
-		const normalizer = (x) => -1*Math.E**(-1*(x/(30 * parseFloat(Data.settings["workloadLimit"]))))+1
+		const normalizer = (x) => -1*Math.E**(x*Math.log(0.2)/parseFloat(Data.settings["workloadLimit"]))+1
 		const y = originalY.map(normalizer)
 
 		// Generate Warnings
