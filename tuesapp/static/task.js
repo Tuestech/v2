@@ -13,8 +13,26 @@ class Task {
 		this.score = null
 
 		// Data fixing
+		const intervals = [0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25]
 		if (!this.time) {
 			this.time = 2
+		} else if (!intervals.includes(this.time)) {
+			// Find nearest time in interval and set it
+			let delta = 1/0
+			let best = intervals[0]
+
+			for (const interval of intervals) {
+				let newDelta = Math.abs(interval - this.time)
+
+				if (newDelta < delta) {
+					delta = newDelta
+					best = interval
+				} else {
+					break
+				}
+			}
+
+			this.time = best
 		}
 	}
 
