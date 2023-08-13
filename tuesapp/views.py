@@ -191,7 +191,7 @@ def generate_sample_data(prepme=False):
 		return (datetime.datetime.now() + datetime.timedelta(days=n)).strftime("%Y-%m-%d")
 
 	# Task sample data
-	tasks = f'[["Task 1","","{days_after(0)}","{days_after(3)}",10,"https://example.com"],["Task 2","","{days_after(0)}","{days_after(2)}",80,"https://example.com"],["Task 3","","{days_after(1)}","{days_after(8)}",60,"https://example.com"]]'
+	tasks = f'[["Task 1",2,"{days_after(0)}","{days_after(3)}",10,"https://example.com"],["Task 2",3,"{days_after(0)}","{days_after(2)}",80,"https://example.com"],["Task 3",0.5,"{days_after(1)}","{days_after(8)}",60,"https://example.com"]]'
 
 	# Events sample data
 	events = '[]'
@@ -201,9 +201,9 @@ def generate_sample_data(prepme=False):
 
 	# Settings sample data
 	if prepme:
-		settings = '{"scoreType":1, "workloadLimit":1.5, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false, "prepme":true}'
+		settings = '{"scoreType":1, "workloadLimit":3, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false, "prepme":true}'
 	else:
-		settings = '{"scoreType":1, "workloadLimit":1.5, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false, "prepme":false}'
+		settings = '{"scoreType":1, "workloadLimit":3, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false, "prepme":false}'
 	
 	# Combined sample data
 	return json.dumps(
