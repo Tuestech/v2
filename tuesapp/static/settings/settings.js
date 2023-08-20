@@ -40,6 +40,7 @@ class Settings extends Page {
 	static onPageChange() {
 		// Preferences
 		Settings.activatePreferences()
+		Settings.updateBetaLock()
 
 		// Progress Curve
 		Settings.activateProgressCurves()
@@ -48,6 +49,16 @@ class Settings extends Page {
 		Settings.activateActions()
 
 		super.onPageChange()
+	}
+
+	static updateBetaLock() {
+		const locked = Array.from(document.getElementsByClassName("beta-lock"))
+
+		if (Data.settings["betaFeatures"]) {
+			locked.forEach(x => x.removeAttribute("disabled"))
+		} else {
+			locked.forEach(x => x.setAttribute("disabled", true))
+		}
 	}
 
 	static setInputValue(input, value) {
@@ -70,6 +81,8 @@ class Settings extends Page {
 		input.addEventListener("change", () => {
 			Data.settings[settingsKey] = Settings.getInputValue(input)
 			Data.requestUpdate()
+
+			Settings.updateBetaLock()
 		})
 	}
 
