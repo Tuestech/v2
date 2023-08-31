@@ -176,6 +176,14 @@ class Task {
 				return
 			}
 
+			// Alert if no link
+			if (this.link == 0) {
+				const dummy = document.createElement("div")
+				dummy.innerText = "Please add a link to your task."
+				new Modal("There is no link to open!", dummy, ["Ok"], ["white"])
+				return
+			}
+
 			// Open link
 			if (!tutorialMode) {
 				window.open(this.link, "_blank")
