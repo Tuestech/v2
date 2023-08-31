@@ -9,7 +9,7 @@ class Settings extends Page {
 			"double-click": "doubleClick",
 			"prepme": "prepme",
 			"offline-resync": "offlineResync",
-			"beta": "beta",
+			"beta": "betaFeatures",
 			"default-links": "defaultLinks",
 			"show-completed": "showCompleted"
 		}
