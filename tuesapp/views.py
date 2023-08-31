@@ -197,7 +197,7 @@ def generate_sample_data(prepme=False):
 	events = '[]'
 
 	# Links sample data
-	links = '[["Google Classroom", "https://classroom.google.com"]]'
+	links = '[["Capacities", "https://app.capacities.io"], ["Schoology", "https://elmhurst205.schoology.com/home"]]'
 
 	# Settings sample data
 	if prepme:
