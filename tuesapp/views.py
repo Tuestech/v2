@@ -192,6 +192,12 @@ def generate_sample_data(prepme=False):
 	# Task sample data
 	tasks = f'[["Task 1",2,"{days_after(0)}","{days_after(3)}",10,"https://example.com"],["Task 2",3,"{days_after(0)}","{days_after(2)}",80,"https://example.com"],["Task 3",0.5,"{days_after(1)}","{days_after(8)}",60,"https://example.com"]]'
 
+	# PREPME TEMP
+	if prepme:
+		default_data = User.objects.filter(metadata="prepme default").first()
+		tasks = eval(default_data.app_data)
+	# END PREPME TEMP
+
 	# Events sample data
 	events = '[]'
 
