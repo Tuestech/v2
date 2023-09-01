@@ -91,10 +91,9 @@ def prepme(request):
 
 		user.save()
 	except:
-		print("bruh")
 		name = request.user.username
 		data = generate_sample_data(prepme=True)
-		user = User(uid=uid, name=name, app_data=data)
+		user = User(uid=uid, name=name, app_data=data, metadata="trial")
 		user.save()
 
 		is_new = True
