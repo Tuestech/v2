@@ -53,7 +53,7 @@ class Data {
 			document.dispatchEvent(new Event("pageChange"))
 		})
 		
-		if (Data.settings["prepme"]) setTimeout(Data.prepmeUpdate, 1000*60*30)
+		if (Data.settings["prepme"]) setTimeout(Data.prepmeUpdate, 1000*60*5)
 	}
 
 	// Data update pattern
