@@ -45,9 +45,6 @@ class Settings extends Page {
 		// Progress Curve
 		Settings.activateProgressCurves()
 
-		// Actions
-		Settings.activateActions()
-
 		super.onPageChange()
 	}
 
