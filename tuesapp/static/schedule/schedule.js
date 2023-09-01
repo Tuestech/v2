@@ -61,7 +61,7 @@ class Schedule extends Page {
 			// Create task
 			const taskDiv = document.createElement("div")
 			taskDiv.classList.add("glass-panel")
-			taskDiv.innerText = task.name
+			taskDiv.innerText = task.getName() // PREPME TEMP
 			taskDiv.setAttribute("style", "grid-area: b;")
 
 			// Calculate task div positioning

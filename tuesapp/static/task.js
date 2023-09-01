@@ -104,6 +104,17 @@ class Task {
 		return this.score
 	}
 
+	// PREPME TEMP
+	isPrepme() {
+		return this.name.substring(0, 10) == "~[PREPME]~"
+	}
+
+	getName() {
+		if (this.isPrepme()) return this.name.substring(10)
+		return this.name
+	}
+	// END PREPME TEMP
+
 	// DOM element generation
 	generateTaskCard(callback, tutorialMode=false) {
 		// Create new panel for the task
@@ -112,8 +123,14 @@ class Task {
 
 		// Set task name
 		const taskName = document.createElement("p")
-		taskName.innerText = this.name
+		taskName.innerText = this.getName() // PREPME TEMP
 		taskDiv.append(taskName)
+
+		// PREPME TEMP
+		if (this.name.substring(0, 10) == "~[PREPME]~") {
+			taskDiv.classList.add("prepme")
+		}
+		// END PREPME TEMP
 
 		// Set days left display
 		const timeLeft = document.createElement("p")
@@ -238,7 +255,7 @@ class Task {
 		const intervals = [0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25]
 
 		// Set form elements
-		const name = Modal.textInput("Name", true, task.name)
+		const name = Modal.textInput("Name", true, task.getName()) // PREPME TEMP
 		const start = Modal.dateInput("Start Date", task.start)
 		const end = Modal.dateInput("Due Date", task.end)
 		const hours = Modal.sliderInput("Hours Needed", intervals, task.time)
@@ -283,6 +300,12 @@ class Task {
 				new Modal("Task names must be unique", dummy, ["Ok"], ["white"])
 				return true
 			}
+
+			// PREPME TEMP
+			if (task.isPrepme()) {
+				nameValue = `~[PREPME]~${nameValue}`
+			}
+			// END PREPME TEMP
 
 			task.name = nameValue
 			task.start = Task.timelessDate(Task.dateFromFormat(startValue, "yyyy-mm-dd"))

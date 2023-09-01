@@ -306,6 +306,32 @@ input[type="range"]:not(.progress)::-moz-range-track {
 	border-radius: 100px;
 }
 
+/* PREPME TEMP */
+.task-card.prepme {
+	grid-template-areas: 
+		'icon name days'
+		'progress progress progress';
+	grid-template-columns: 16px auto min-content;
+	grid-template-rows: min-content min-content;
+	background-color: rgb(228, 238, 255);
+}
+
+.task-card.prepme::after {
+	content: "";
+	grid-area: icon;
+	width: 16px;
+	height: 16px;
+	align-self: center;
+	justify-self: center;
+	background-image: url("/static/icons/Prepme.png");
+	background-size: cover;
+}
+
+.prepme input[type="range"].progress {
+	box-shadow: inset var(--gray-len) 0 0 0px white;
+}
+/* END PREPME TEMP */
+
 /* Modals */
 @keyframes modal-container-append-animate {
 	from {

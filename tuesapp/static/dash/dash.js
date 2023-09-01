@@ -227,7 +227,7 @@ class Dash extends Page {
 
 					// Create the task name
 					const textP = document.createElement("p")
-					textP.innerText = `${task.name} Due`
+					textP.innerText = `${task.getName()} Due` // PREPME TEMP
 					taskDiv.append(textP)
 
 					// Add task to the page
