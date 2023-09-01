@@ -260,6 +260,15 @@ class Task {
 		const end = Modal.dateInput("Due Date", task.end)
 		const hours = Modal.sliderInput("Hours Needed", intervals, task.time)
 		const link = Modal.textInput("Link (optional)", true, task.link)
+
+		// PREPME TEMP
+		// Disable name change for prepme tasks
+		if (task.isPrepme()) {
+			name.children[0].disabled = true
+			name.children[1].innerText = "Name (locked)"
+		}
+		// PREPME TEMP END
+
 		const form = Modal.sandwichForm(
 			name,
 			start, end,

@@ -437,6 +437,11 @@ input:focus {
 	outline: none;
 }
 
+.modal input:disabled {
+	filter: brightness(0.8);
+	cursor: not-allowed;
+}
+
 .modal .input input[type="text"], .modal .input input[type="date"] {
 	background-color: var(--gray);
 	height: 18px;
