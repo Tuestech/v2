@@ -2,7 +2,7 @@ from django.db import models
 
 class User(models.Model):
 	app_data = models.TextField()
-	uid = models.CharField(max_length=255)
+	uid = models.CharField(max_length=255, primary_key=True)
 	name = models.CharField(max_length=255)
 	metadata = models.TextField(default="")
 
