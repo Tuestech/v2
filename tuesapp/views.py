@@ -65,7 +65,7 @@ def main(request):
 		is_new = True
 	
 	# Return
-	return render(request, "base.html", {"data": data, "is_new": is_new})
+	return render(request, "base.html", {"data": data, "is_new": is_new, "prepme": False})
 
 
 @login_required
@@ -99,7 +99,7 @@ def prepme(request):
 		is_new = True
 	
 	# Return
-	return render(request, "base.html", {"data": data, "is_new": is_new})
+	return render(request, "base.html", {"data": data, "is_new": is_new, "prepme": True})
 
 
 @login_required
