@@ -89,8 +89,13 @@ def prepme(request):
 		data = json.dumps(parsed_data)
 		user.app_data = data
 
+		if user.metadata == "":
+			user.app_data = merge_prepme(user)
+			user.metadata = "trial"
+
 		user.save()
-	except:
+	except Exception as e:
+		print(e)
 		name = request.user.username
 		data = generate_sample_data(prepme=True)
 		user = User(uid=uid, name=name, app_data=data, metadata="trial")
@@ -184,16 +189,36 @@ def valid_post(request, keys):
 			return False
 	return data
 
-def generate_sample_data(prepme=False):
-	# Days
-	def days_after(n):
-		return (datetime.datetime.now() + datetime.timedelta(days=n)).strftime("%Y-%m-%d")
+# PREPME TEMP
+def merge_prepme(user):
+	default_user = User.objects.filter(metadata="prepme default").first()
+	default_tasks = json.loads(eval(default_user.app_data))
 
+	data = json.loads(user.app_data)
+	tasks = json.loads(data["tasks"])
+	task_names = [x[0] for x in tasks]
+
+	for task in default_tasks:
+		if task[0] in task_names:
+			continue
+		tasks.append(task)
+	
+	data["tasks"] = json.dumps(tasks)
+
+	return json.dumps(data)
+
+# END PREPME TEMP
+
+# Days
+def days_after(n):
+	return (datetime.datetime.now() + datetime.timedelta(days=n)).strftime("%Y-%m-%d")
+
+def generate_sample_data(prepme=False):
 	# Task sample data
 	tasks = f'[["Task 1",2,"{days_after(0)}","{days_after(3)}",10,"https://example.com"],["Task 2",3,"{days_after(0)}","{days_after(2)}",80,"https://example.com"],["Task 3",0.5,"{days_after(1)}","{days_after(8)}",60,"https://example.com"]]'
 
 	# PREPME TEMP
-	if prepme:
+	if prepme: 
 		default_data = User.objects.filter(metadata="prepme default").first()
 		tasks = eval(default_data.app_data)
 	# END PREPME TEMP
