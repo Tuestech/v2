@@ -170,6 +170,20 @@ class Task {
 			this.progress = parseInt(taskProgress.value)
 			this.flagRecomputeScore()
 			Data.requestUpdate()
+
+			// Confetti if done
+			if (this.progress == 100) {
+				const rect = taskProgress.getBoundingClientRect()
+				confetti({
+					particleCount: 60,
+					spread: 360,
+					origin: {
+						x: (rect.x + rect.width)/window.innerWidth,
+						y: (rect.y + rect.height/2)/window.innerHeight
+					},
+				})
+			}
+
 			callback()
 		})
 

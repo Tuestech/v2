@@ -43,6 +43,9 @@
 	<script defer src="{% static 'settings/settings.js' %}"></script>
 	<script defer src="{% static 'modal.js' %}"></script>
 
+	{% comment %} External JS {% endcomment %}
+	<script defer src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.12.0/tsparticles.confetti.bundle.min.js"></script>
+
 	{% comment %} Tutorial {% endcomment %}
 	{% if is_new == True %}
 		<script defer src="{% static 'tutorial.js' %}"></script>
