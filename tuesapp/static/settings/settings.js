@@ -38,12 +38,8 @@ class Settings extends Page {
 	}
 
 	static onPageChange() {
-		// Preferences
-		Settings.activatePreferences()
+		// Beta Lock
 		Settings.updateBetaLock()
-
-		// Progress Curve
-		Settings.activateProgressCurves()
 
 		super.onPageChange()
 	}
@@ -63,6 +59,7 @@ class Settings extends Page {
 			input.checked = value
 		} else {
 			input.value = value
+			input.oninput()
 		}
 	}
 
@@ -84,6 +81,12 @@ class Settings extends Page {
 	}
 
 	static activatePreferences() {
+		// Add workload slider
+		const cont = document.getElementById("workload-limit-container")
+		const slider = Modal.sliderInput("", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 4, false)
+		slider.getElementsByTagName("input")[0].id = "workload-limit"
+		cont.append(slider)
+
 		// Set the current states of inputs and connect with data
 		for (const [id, key] of Object.entries(Settings.preferences_input_id_key_pairs)) {
 			const input = document.getElementById(id)

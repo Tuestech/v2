@@ -148,7 +148,7 @@ class Modal {
 		return `${num} hrs`
 	}
 
-	static sliderInput(label, intervals, initialValue) {
+	static sliderInput(label, intervals, initialValue, topTooltip=true) {
 		// Return div with slider input
 		const out = document.createElement("div")
 		out.classList.add("input", "slider")
@@ -184,13 +184,18 @@ class Modal {
 			let prog = 9+(input.getBoundingClientRect().width-18) * (input.value/(intervals.length-1))
 			let halfWidth = tooltip.getBoundingClientRect().width/2
 
-			tooltip.style = `transform: translate(${xOff + prog - halfWidth}px, -40px)`
+			let yOff = -40
+			if (!topTooltip) {
+				yOff = 30
+			}
+
+			tooltip.style = `transform: translate(${xOff + prog - halfWidth}px, ${yOff}px)`
 		}
 
-		input.addEventListener("input", () => {
+		input.oninput = () => {
 			tooltip.innerText = Modal.addHours(intervals[Math.round(input.value)])
 			updateTooltip()
-		})
+		}
 
 		// Update tooltip when visible
 		new IntersectionObserver((entries, observer) => {
@@ -202,10 +207,10 @@ class Modal {
 			})
 		}).observe(input)
 
-		out.append(input)
 		out.append(rightP)
 		out.append(leftP)
 		out.append(labelP)
+		out.append(input)
 		out.append(tooltip)
 
 		return out

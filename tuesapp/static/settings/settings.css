@@ -37,9 +37,8 @@
 .slider-preference-container {
 	display: grid;
 	grid-template-areas:
-		'label label label'
-		'left slider right';
-	grid-template-columns: 60px auto 60px;
+		'label'
+		'slider';
 	row-gap: 10px;
 	align-items: center;
 	margin-top: 15px;
