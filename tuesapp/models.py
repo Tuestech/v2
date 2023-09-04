@@ -7,4 +7,4 @@ class User(models.Model):
 	metadata = models.TextField(default="")
 
 	def __str__(self):
-		return f"<User uid='{self.uid}' name='{self.name}'>"
+		return f"<User uid='{self.uid}' name='{self.name}' meta='{self.metadata}'>"
