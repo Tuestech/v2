@@ -289,7 +289,7 @@ class Task {
 			let nameValue = name.children[0].value
 			let startValue = start.children[0].value
 			let endValue = end.children[0].value
-			let hoursValue = hours.children[0].value
+			let hoursValue = hours.children[3].value
 			let linkValue = link.children[0].value
 			// Validate input
 			if (!(nameValue && !!startValue && !!endValue)) {
