@@ -231,9 +231,9 @@ def generate_sample_data(prepme=False):
 
 	# Settings sample data
 	if prepme:
-		settings = '{"scoreType":0, "workloadLimit":3, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false, "prepme":true}'
+		settings = '{"scoreType":0, "workloadLimit":4, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false, "prepme":true}'
 	else:
-		settings = '{"scoreType":1, "workloadLimit":3, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false, "prepme":false}'
+		settings = '{"scoreType":1, "workloadLimit":4, "dataCollection":false, "betaFeatures":false, "defaultLinks":false, "showCompleted":false, "prepme":false}'
 	
 	# Combined sample data
 	return json.dumps(
