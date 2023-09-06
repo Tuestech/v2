@@ -17,7 +17,7 @@ STATIC_URL = "/static/"
 SECRET_KEY = os.getenv('SECRET_KEY', 'development-only-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -111,7 +111,8 @@ SOCIALACCOUNT_AUTO_SIGNUP = True
 WSGI_APPLICATION = 'tuesday.wsgi.application'
 
 CSRF_TRUSTED_ORIGINS = [
-	"https://tues.tech"
+	"https://tues.tech",
+  "https://app.prepme.us"
 ]
 
 # Database
