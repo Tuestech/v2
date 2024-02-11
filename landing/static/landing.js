@@ -53,12 +53,10 @@ for (const img of clusterImages) {
 // Network edge pulses
 const networkSvg = document.getElementById("network")
 
-let edges = []
-
 networkSvg.addEventListener("load", () => {
 	let svg = networkSvg
 
-	edges = Array.from(svg.getElementsByClassName("network-edge"))
+	let edges = Array.from(svg.getElementsByClassName("network-edge"))
 
 	for (let i = 0; i < edges.length; i++) {
 		const edge = edges[i]
