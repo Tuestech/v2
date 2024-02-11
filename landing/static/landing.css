@@ -15,8 +15,15 @@ html {
 }
 
 a {
+	display: inline-block;
+	width: max-content;
 	text-decoration: none;
 	color: unset;
+	transition: 0.1s linear;
+}
+
+a:hover {
+	opacity: 0.7;
 }
 
 img {
@@ -160,10 +167,6 @@ main > div{
 	font-weight: bold;
 }
 
-.img-desc-block .link:hover {
-	opacity: 0.6;
-}
-
 .img-desc-block .img {
 	grid-area: img;
 	width: 30rem;
@@ -295,4 +298,19 @@ main > div{
 	width: calc(100%);
 	margin-top: 2rem;
 	box-shadow: 0px 0px 25px 0px rgba(31, 97, 135, 0.1);
+}
+
+footer {
+	background: #434343;
+	width: calc(100% - 16rem);
+	padding: 2rem 8rem;
+	color: #FFFFFF;
+	font-size: 1.6rem;
+	display: grid;
+	grid-template-columns: auto repeat(3, max-content);
+	gap: 3rem;
+}
+
+footer a {
+	text-decoration: underline;
 }
