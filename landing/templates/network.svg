@@ -1,0 +1,35 @@
+<svg id="network" width="336" height="195" viewBox="0 0 336 195" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<path class="network-edge" d="M53 62L89 131.5" stroke="#438BFF" stroke-width="4" stroke-linecap="round"/>
+<path class="network-edge" d="M89 62L53 131.5" stroke="#438BFF" stroke-width="4" stroke-linecap="round"/>
+<path class="network-edge" d="M283 28L247 97.5" stroke="#438BFF" stroke-width="4" stroke-linecap="round"/>
+<path class="network-edge" d="M247 28L283 97.5" stroke="#438BFF" stroke-width="4" stroke-linecap="round"/>
+<path class="network-edge" d="M283 97L247 166.5" stroke="#438BFF" stroke-width="4" stroke-linecap="round"/>
+<path class="network-edge" d="M247 97L283 166.5" stroke="#438BFF" stroke-width="4" stroke-linecap="round"/>
+<path class="network-edge" d="M283 28L247 167" stroke="#438BFF" stroke-width="4" stroke-linecap="round"/>
+<path class="network-edge" d="M247 28L283 167" stroke="#438BFF" stroke-width="4" stroke-linecap="round"/>
+<circle class="network-node" cx="27.5" cy="62.5" r="24.5" fill="#F1F1F1" stroke="#438BFF" stroke-width="6"/>
+<circle class="network-node" cx="27.5" cy="132.5" r="24.5" fill="#F1F1F1" stroke="#438BFF" stroke-width="6"/>
+<circle class="network-node" cx="308.5" cy="27.5" r="24.5" fill="#F1F1F1" stroke="#438BFF" stroke-width="6"/>
+<circle class="network-node" cx="308.5" cy="97.5" r="24.5" fill="#F1F1F1" stroke="#438BFF" stroke-width="6"/>
+<circle class="network-node" cx="308.5" cy="167.5" r="24.5" fill="#F1F1F1" stroke="#438BFF" stroke-width="6"/>
+<rect x="90" y="5" width="156" height="186" rx="17" fill="#F1F1F1" stroke="#438BFF" stroke-width="6"/>
+<g filter="url(#filter0_d_917_375)">
+<rect x="120" y="53" width="88" height="88" fill="url(#pattern0)" shape-rendering="crispEdges"/>
+</g>
+<defs>
+<filter id="filter0_d_917_375" x="107" y="46" width="114" height="114" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="6"/>
+<feGaussianBlur stdDeviation="6.5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_917_375"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_917_375" result="shape"/>
+</filter>
+<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_917_375" transform="scale(0.00115)"/>
+</pattern>
+<image id="image0_917_375" width="864" height="864" xlink:href="/static/images/network-logo.png"/>
+</defs>
+</svg>

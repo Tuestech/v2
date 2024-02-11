@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Tuesday Technologies - Work Management Tools for Students</title>
+	<title>Tuesday Technologies</title>
 	<meta name="description" content="Transform the way you work with automatic task prioritization, study tools, and workload management. Get started with our free tools in seconds.">
 	<meta name="robots" content="index, nofollow">
 
@@ -29,66 +29,93 @@
 	<script defer src="{% static 'landing.js' %}"></script>
 </head>
 <body>
-	<div class="hero">
-		<div class="content-container">
-			<div class="navbar">
-				<img src="{% static 'images/Logo.png' %}" alt="Logo">
-				{% comment %} <p class="underline">Impact</p> {% endcomment %}
-				<p class="underline" onclick="javascript:window.open('mailto:contact@tues.tech', '_blank')">Contact</p>
-			</div>
-			<div class="text-button">
-				<p class="header">Transform the way you work</p>
-				<p class="text">Study tools, automatic task prioritization, and workload management, all in one place</p>
-				<button class="get-started-button">Get Started</button>
-			</div>
-			<img class="page-cluster" src="{% static 'images/Page Cluster.png' %}" alt="Page Cluster">
+
+	<div id="hero">
+		<div id="nav">
+			<img src="{% static "images/logo.png" %}" alt="T">
+			<div class="button">Login</div>
+			<div class="button">Sign up</div>
+		</div>
+
+		<div id="title">
+			<h1>Transform the way you work</h1>
+			<h2>Join students around the world that trust Tuesday as their free work management solution</h2>
+		</div>
+
+		<div id="cluster">
+			<img id="bot" src="{% static "images/clusterbot.png" %}" alt="Schedule page">
+			<img id="mid" src="{% static "images/clustermid.png" %}" alt="Dashboard page">
+			<img id="top" src="{% static "images/clustertop.png" %}" alt="Lists">
 		</div>
 	</div>
 
-	<div class="content-container">
-		<div class="text-image">
-			<div class="text">
-				<p class="title">Algorithmic Assistance</p>
-				<p class="description">Tuesday is more than just a to-do list. Our unique system finds tasks that are going off track and prioritizes them. It will also identify days when you have too much work and warn you so you can plan ahead.</p>
-				<button class="get-started-button">Get Started</button>
-			</div>
-			<div class="image">
-				<img src="{% static 'images/Algorithm Images.png' %}" alt="Algorithm Images">
+	<main>
+		<div class="img-desc-block">
+			<p class="title">For students, by students</p>
+			<p class="desc">Founded and developed by students, Tuesday was designed to solve students’ problems from day 1. </p>
+			<a class="link" href="#">Get Started&nbsp➜</a>
+
+			<div class="img" id="student">
+				<img id="student-img" src="{% static "images/student.png" %}" alt="Students and Tuesday">
+				<img id="student-img-arrows" src="{% static "images/studentarrows.png" %}" alt="Arrows indicating working together">
 			</div>
 		</div>
 
-		<div class="text-image">
-			<div class="image">
-				<img src="{% static 'images/Versatile Visuals.png' %}" alt="Visuals Images">
+		<div class="feature-blocks">
+			<div class="feature-block" id="feat-work">
+				<p class="title">Workload Tracking</p>
+				<p class="desc">Adaptive visualizations of your workload over time to keep you in control of your time</p>
+				<a href="#" class="link">Try Workload Tracking&nbsp➜</a>
+				<img src="{% static "images/feat-work.png" %}" alt="Workload graph">
 			</div>
-			<div class="text">
-				<p class="title">Versatile Visuals</p>
-				<p class="description">Tuesday is designed to show all the important information at a glance. With just a few progress bars, you can quickly understand where you stand in work pace and progress.</p>
-				<button class="get-started-button">Get Started</button>
+
+			<div class="feature-block" id="feat-target">
+				<p class="title">Progress Targets</p>
+				<p class="desc">Automatic goals to ensure you always stay on-track</p>
+				<a href="#" class="link">Try Progress Targets&nbsp➜</a>
+				<img src="{% static "images/feat-target.png" %}" alt="Example task with target progress">
+			</div>
+
+			<div class="feature-block" id="feat-visual">
+				<p class="title">Summarized Visuals</p>
+				<p class="desc">Quickly understand your overall progress and timing through dashboard progress bars</p>
+				<a href="#" class="link">Try Summarized Visuals&nbsp➜</a>
+				<img src="{% static "images/feat-visual.png" %}" alt="Progress bar">
+			</div>
+
+			<div class="feature-block" id="feat-timing">
+				<p class="title">Curated Timing</p>
+				<p class="desc">Research-proven timer sequence to maximize your study efficiency</p>
+				<a href="#" class="link">Try Curated Timing&nbsp➜</a>
+				<img src="{% static "images/feat-timing.png" %}" alt="Pomodoro timer">
 			</div>
 		</div>
 
-		<div class="text-image">
-			<div class="text">
-				<p class="title">Technical Timings</p>
-				<p class="description">Tuesday includes a built-in timer that implements a technique shown through research to improve productivity through time-management.</p>
-				<button class="get-started-button">Get Started</button>
-			</div>
-			<div class="image">
-				<img src="{% static 'images/Technical Timings.png' %}" alt="Timing Images">
-			</div>
-		</div>
-	</div>
+		<div class="img-desc-block">
+			<p class="title">Your work, your way</p>
+			<p class="desc">Tuesday prioritizes your tasks according to your  preferences, keeping you in control of your work.</p>
+			<a class="link" href="#">Get Started&nbsp➜</a>
 
-	<div class="footer">
-		<div class="links">
-			<p class="underline" onclick="javascript:window.open('https://github.com/Tuestech/v2', '_blank')">Github</p>
-			<p class="underline" onclick="javascript:window.open('/privacy/', '_blank')">Privacy</p>
-			<p class="underline" onclick="javascript:window.open('https://github.com/Tuestech/v2/blob/main/LICENSE.md', '_blank')">License</p>
-			<p class="underline" onclick="javascript:window.open('mailto:contact@tues.tech', '_blank')">Contact</p>
+			<div class="img" id="work">
+				<svg xmlns="http://www.w3.org/2000/svg" width="320" height="121" viewBox="0 0 320 121" fill="none">
+					<path id="work-dash1" d="M3 71.9002C22.4858 71.9002 36.2642 117.7793 79.2918 117.7793C133.4800 117.7793 109.8680 35.6519 151.5000 34.0001C193.1320 32.3481 199.9940 71.9002 237.0000 71.9002C274.0060 71.9001 285.3650 94.0190 316.0940 94.019" stroke="#438BFF" stroke-opacity="0.5" stroke-width="6" stroke-linecap="round" stroke-dasharray="12 12"/>
+					<path id="work-dash2" d="M3 71.9003C22.4858 71.9003 36.2642 117.7790 79.2918 117.7790C133.4800 117.7790 109.8680 35.6520 151.5000 34.0001C193.1320 32.3482 202.4940 42.5003 239.5000 42.5002C276.5060 42.5002 287.2710 10.5002 318.0000 10.50024" stroke="#438BFF" stroke-opacity="0.5" stroke-width="6" stroke-linecap="round" stroke-dasharray="12 12"/>
+					<path id="work-dash3" d="M3 71.9002C22.4858 71.9002 36.2642 117.779 79.2918 117.779C133.48 117.779 109.868 35.6519 151.5 34C193.132 32.3481 197.494 3.00003 234.5 3C271.506 2.99997 282.271 71.9002 313 71.9002" stroke="#438BFF" stroke-opacity="0.5" stroke-width="6" stroke-linecap="round" stroke-dasharray="12 12"/>
+					<path id="work-main" d="M3 71.9002C22.4858 71.9002 36.2642 117.7792 79.2918 117.7792C133.4800 117.7792 109.8680 35.6519 151.5000 34.0" stroke="#438BFF" stroke-width="6" stroke-linecap="round"/>
+				</svg>
+			</div>
 		</div>
-		<p class="copy">Copyright © 2024 Jeffrey Lu</p>
-	</div>
+
+		<div class="img-desc-block">
+			<p class="title soon">Learning how you learn</p>
+			<p class="desc">AI-powered algorithms fine-tune recommendations to best fit your learning style.</p>
+			<a class="link" href="#">Get Started&nbsp➜</a>
+
+			<div class="img" id="work">
+				{% include 'network.svg' %}
+			</div>
+		</div>
+	</main>
 
 </body>
 </html>
