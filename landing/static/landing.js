@@ -60,8 +60,6 @@ networkSvg.addEventListener("load", () => {
 
 	edges = Array.from(svg.getElementsByClassName("network-edge"))
 
-	console.log(edges)
-
 	for (let i = 0; i < edges.length; i++) {
 		const edge = edges[i]
 
