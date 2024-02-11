@@ -29,10 +29,10 @@ for (const img of clusterImages) {
 		const y = rect.top - parseFloat(transform[5]) + rect.height/4 // Adjust center higher
 
 		// Compute magnitude of movement based on distance
-		const d = smoothDecay(distance(x, y, e.x, e.y))
+		const d = smoothDecay(distance(x, y, mouseX, mouseY))
 
 		// Create a shift vector <u, v> of max length MAX_SHIFT
-		let temp = unitVector(x-e.x, y-e.y)
+		let temp = unitVector(x-mouseX, y-mouseY)
 		let u = temp[0]*d*MAX_SHIFT
 		let v = temp[1]*d*MAX_SHIFT
 		
@@ -75,7 +75,19 @@ networkSvg.addEventListener("load", () => {
 })
 
 // Mouse callbacks
+let mouseX = 0
+let mouseY = 0
+
 document.addEventListener("mousemove", (e) => {
+	mouseX = e.x
+	mouseY = e.y
+
+	for (const listener of mouseCallbacks) {
+		listener(e)
+	}
+})
+
+document.addEventListener("scroll", (e) => {
 	for (const listener of mouseCallbacks) {
 		listener(e)
 	}
