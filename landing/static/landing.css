@@ -55,7 +55,19 @@ main > div{
 	align-items: center;
 	gap: 3rem;
 	height: 5.2rem;
-	padding: 5rem 5rem;
+	padding: 5rem;
+}
+
+@media screen and (max-width: 600px) {
+	#hero {
+		margin: 0.5rem;
+		padding: 0 max(20px, calc((100vw - 1rem - 100rem)/2));
+	}
+
+	#hero #nav {
+		gap: 1.5rem;
+		padding: 3rem 1.5rem;
+	}
 }
 
 #hero #nav img {
@@ -134,6 +146,18 @@ main > div{
 	gap: 1rem;
 }
 
+@media screen and (max-width: 600px) {
+	.img-desc-block {
+		grid-template-areas: "title"
+							 "desc"
+							 "img"
+							 "link";
+		grid-template-rows: min-content min-content min-content auto;
+		justify-items: center;
+		text-align: center;
+	}
+}
+
 .img-desc-block .title {
 	grid-area: title;
 	font-size: 3rem;
@@ -170,6 +194,8 @@ main > div{
 .img-desc-block .img {
 	grid-area: img;
 	width: 30rem;
+	min-height: 20rem;
+	margin-right: 3rem;
 }
 
 .img-desc-block .img img, .img-desc-block .img svg {
@@ -254,6 +280,26 @@ main > div{
 	gap: 2.5rem;
 }
 
+@media screen and (max-width: 600px) {
+	.feature-blocks {
+		font-size: 12px;
+		grid-template-areas:
+			"work"
+			"target"
+			"timing"
+			"visual";
+		grid-template-columns: minmax(30rem, 44rem);
+		grid-template-rows: repeat(4, max-content);
+		max-width: 44rem;
+		margin: auto;
+		margin-bottom: 15rem;
+	}
+
+	.feature-block {
+		justify-items: center;
+	}
+}
+
 #feat-work {
 	grid-area: work;
 }
@@ -298,6 +344,7 @@ main > div{
 	width: calc(100%);
 	margin-top: 2rem;
 	box-shadow: 0px 0px 25px 0px rgba(31, 97, 135, 0.1);
+	max-width: 40rem;
 }
 
 footer {
@@ -313,4 +360,12 @@ footer {
 
 footer a {
 	text-decoration: underline;
+}
+
+@media screen and (max-width: 600px) {
+	footer {
+		padding: 2rem;
+		width: calc(100% - 4rem);
+		align-items: center;
+	}
 }

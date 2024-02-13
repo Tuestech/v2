@@ -78,17 +78,19 @@ networkSvg.addEventListener("load", () => {
 let mouseX = 0
 let mouseY = 0
 
-document.addEventListener("mousemove", (e) => {
-	mouseX = e.x
-	mouseY = e.y
+if (!MOBILE) {
+	document.addEventListener("mousemove", (e) => {
+		mouseX = e.x
+		mouseY = e.y
 
-	for (const listener of mouseCallbacks) {
-		listener(e)
-	}
-})
+		for (const listener of mouseCallbacks) {
+			listener(e)
+		}
+	})
 
-document.addEventListener("scroll", (e) => {
-	for (const listener of mouseCallbacks) {
-		listener(e)
-	}
-})
+	document.addEventListener("scroll", (e) => {
+		for (const listener of mouseCallbacks) {
+			listener(e)
+		}
+	})
+}
