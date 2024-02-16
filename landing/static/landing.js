@@ -50,6 +50,22 @@ for (const img of clusterImages) {
 	mouseCallbacks.push(callback)
 }
 
+// Page cluster bobbing (mobile only)
+if (MOBILE) {
+	for (let i = 0; i < clusterImages.length; i++) {
+		clusterImages[i].animate([
+			{ transform: "translateY(0rem)" },
+			{ transform: "translateY(1rem)" },
+			{ transform: "translateY(0rem)" },
+		], {
+			duration: 10000,
+			iterations: Infinity,
+			easing: "cubic-bezier(0.730, 0.005, 0.265, 1.000)",
+			delay: -i*2000
+		})
+	}
+}
+
 // Network edge pulses
 const networkSvg = document.getElementById("network")
 
@@ -61,16 +77,15 @@ networkSvg.addEventListener("load", () => {
 	for (let i = 0; i < edges.length; i++) {
 		const edge = edges[i]
 
-		setTimeout(() => {
-			edge.animate([
-				{ "opacity": "100%" },
-				{ "opacity": "60%" },
-				{ "opacity": "100%" },
-			], {
-				duration: 1000 + i*200,
-				iterations: Infinity
-			})
-		}, i*500)
+		edge.animate([
+			{ "opacity": "100%" },
+			{ "opacity": "60%" },
+			{ "opacity": "100%" },
+		], {
+			duration: 1000 + i*200,
+			iterations: Infinity,
+			delay: i*500
+		})
 	}
 })
 

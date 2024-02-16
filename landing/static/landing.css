@@ -194,8 +194,11 @@ main > div{
 .img-desc-block .img {
 	grid-area: img;
 	width: 30rem;
-	min-height: 20rem;
 	margin-right: 3rem;
+}
+
+#student {
+	min-height: 22rem;
 }
 
 .img-desc-block .img img, .img-desc-block .img svg {
@@ -280,26 +283,6 @@ main > div{
 	gap: 2.5rem;
 }
 
-@media screen and (max-width: 600px) {
-	.feature-blocks {
-		font-size: 12px;
-		grid-template-areas:
-			"work"
-			"target"
-			"timing"
-			"visual";
-		grid-template-columns: minmax(30rem, 44rem);
-		grid-template-rows: repeat(4, max-content);
-		max-width: 44rem;
-		margin: auto;
-		margin-bottom: 15rem;
-	}
-
-	.feature-block {
-		justify-items: center;
-	}
-}
-
 #feat-work {
 	grid-area: work;
 }
@@ -345,6 +328,31 @@ main > div{
 	margin-top: 2rem;
 	box-shadow: 0px 0px 25px 0px rgba(31, 97, 135, 0.1);
 	max-width: 40rem;
+}
+
+@media screen and (max-width: 600px) {
+	.feature-blocks {
+		font-size: 12px;
+		grid-template-areas:
+			"work"
+			"target"
+			"timing"
+			"visual";
+		grid-template-columns: minmax(30rem, 44rem);
+		grid-template-rows: repeat(4, max-content);
+		max-width: 44rem;
+		margin: auto;
+		margin-bottom: 15rem;
+	}
+
+	.feature-block {
+		justify-items: center;
+		text-align: center;
+	}
+
+	.feature-block .desc {
+		max-width: 35rem;
+	}
 }
 
 footer {
