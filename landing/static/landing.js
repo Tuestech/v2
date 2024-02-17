@@ -56,11 +56,11 @@ if (MOBILE) {
 		clusterImages[i].animate([
 			{ transform: "translateY(0rem)" },
 			{ transform: "translateY(1rem)" },
-			{ transform: "translateY(0rem)" },
 		], {
-			duration: 10000,
+			duration: 3000,
 			iterations: Infinity,
-			easing: "cubic-bezier(0.730, 0.005, 0.265, 1.000)",
+			easing: "ease-in-out",
+			direction: "alternate-reverse",
 			delay: -i*2000
 		})
 	}
