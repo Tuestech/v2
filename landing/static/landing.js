@@ -109,3 +109,24 @@ if (!MOBILE) {
 		}
 	})
 }
+
+// No-mobile for call-to-action links
+const ctaLinks = document.getElementsByClassName("link")
+const noMobileEl = document.getElementById("no-mobile")
+
+function noMobile(e) {
+	e.preventDefault()
+	e.stopPropagation()
+
+	noMobileEl.classList.add("show")
+	document.addEventListener("click", (e) => {
+		noMobileEl.classList.remove("show")
+	}, {once: true})
+}
+
+if (MOBILE) {
+	for (const link of ctaLinks) {
+		link.href = ""
+		link.onclick = noMobile
+	}
+}
