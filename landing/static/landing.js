@@ -1,5 +1,5 @@
 // Determine if device is mobile
-const MOBILE = 'ontouchstart' in document.documentElement
+const MOBILE = ('ontouchstart' in document.documentElement) && (window.screen.width <= 850)
 
 // Button click callback
 const buttonCallback = () => {window.open("/app/", "_self")}
