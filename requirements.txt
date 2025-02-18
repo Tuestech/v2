@@ -6,3 +6,4 @@ django-cors-headers
 
 user-agents
 django-user-agents
+requests
