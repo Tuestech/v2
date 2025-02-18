@@ -2,7 +2,6 @@ django
 gunicorn
 django-heroku
 django-allauth >= 65.4.1
-django-cors-header
 
 user-agents
 django-user-agents
