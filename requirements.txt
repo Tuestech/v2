@@ -1,9 +1,9 @@
 django
 gunicorn
 django-heroku
-django-allauth
-django-cors-headers
+django-allauth >= 65.4.1
+django-cors-header
 
 user-agents
 django-user-agents
-requests
+requests >= 2.32.3
