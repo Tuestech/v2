@@ -1,8 +1,8 @@
 django
 gunicorn
 django-heroku
-django-allauth >= 65.4.1
+django-allauth==65.4.1
 
-user-agents
-django-user-agents
-requests >= 2.32.3
+user-agents==2.2.0
+django-user-agents==0.4.0
+requests==2.32.3
