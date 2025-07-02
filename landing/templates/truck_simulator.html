@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% comment %} Meta and stuff {% endcomment %}
+	<base target="_self">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tuesday Technologies</title>
+	<meta name="description" content="Transform the way you work with automatic task prioritization, study tools, and workload management. Get started with our free tools in seconds.">
+	<meta name="robots" content="index, nofollow">
+
+	{% comment %} Fonts {% endcomment %}
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+	{% comment %} Favicon {% endcomment %}
+	<link rel="icon" href="{% static 'favicons/Light.png'%}" media="(prefers-color-scheme:no-preference)">
+	<link rel="icon" href="{% static 'favicons/Dark.png'%}"  media="(prefers-color-scheme:dark)">
+	<link rel="icon" href="{% static 'favicons/Light.png'%}" media="(prefers-color-scheme:light)">
+
+	{% comment %} CSS {% endcomment %}
+	<link rel="stylesheet" href="{% static 'landing.css' %}">
+
+	{% comment %} JS {% endcomment %}
+	<script defer src="{% static 'landing.js' %}"></script>
+</head>
+<body style="margin:0px;padding:0px;overflow:hidden;width:100vw;height:100vh;">
+	<iframe src="http://jeffreylu.me/truck-simulator/" frameborder="0" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>
+</body>
+</html>

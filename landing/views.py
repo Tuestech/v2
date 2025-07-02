@@ -6,3 +6,6 @@ def index(request):
 
 def privacy(request):
 	return render(request, "privacy.html")
+
+def truck_simulator(request):
+	return render(request, "truck_simulator.html")

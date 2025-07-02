@@ -12,6 +12,7 @@ urlpatterns = [
 	path('updateuser/', app_views.updateUser),
 	path('deletedata/', app_views.deleteData),
 	path('getuser/', app_views.getUser),
+    path('business/truck-simulator/', landing_views.truck_simulator),
 	path('setsample/', app_views.setSampleData),
 	path('accounts/', include('allauth.urls')),
 	path('prepme/', app_views.prepme)
