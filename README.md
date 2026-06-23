@@ -1,4 +1,12 @@
-# Tuesday
+# A note on recent changes
+
+Over the past year, the primary business of Tuesday has shifted from the legacy work management app to contract work.
+The landing page (what you see on [https://tues.tech](https://tues.tech)) no longer provides direct access to the legacy app.
+
+However, Tuesday plans to continue hosting the web app for existing users until at least Janurary 2027. It remains accessible at [https://tues.tech/app](https://tues.tech/app).
+
+# Tuesday (original README)
+
 Tuesday is a web app that helps students manage and prioritize tasks.
 
 ## Table of contents
