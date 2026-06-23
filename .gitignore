@@ -1,4 +1,5 @@
 db.sqlite3
+tuesday/settings_local.py
 **/__pycache__
 staticfiles/*
 **/.DS_Store

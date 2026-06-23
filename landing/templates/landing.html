@@ -3,133 +3,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	{% comment %} Meta and stuff {% endcomment %}
 	<base target="_self">
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Tuesday Technologies</title>
-	<meta name="description" content="Transform the way you work with automatic task prioritization, study tools, and workload management. Get started with our free tools in seconds.">
+	<meta name="description" content="Tuesday Technologies — private contracting for data science, operations optimization, and AI integration.">
 	<meta name="robots" content="index, nofollow">
 
 	{% comment %} Fonts {% endcomment %}
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
 
 	{% comment %} Favicon {% endcomment %}
-	<link rel="icon" href="{% static 'favicons/Light.png'%}" media="(prefers-color-scheme:no-preference)">
-	<link rel="icon" href="{% static 'favicons/Dark.png'%}"  media="(prefers-color-scheme:dark)">
-	<link rel="icon" href="{% static 'favicons/Light.png'%}" media="(prefers-color-scheme:light)">
+	<link rel="icon" href="{% static 'favicons/Dark.png' %}">
 
-	{% comment %} CSS {% endcomment %}
-	<link rel="stylesheet" href="{% static 'landing.css' %}">
+	<style>
+		:root {
+			--bg: #0a0a0b;
+			--fg: #f4f4f5;
+			--muted: #71717a;
+			--accent: #438bff;
+			--line: rgba(255, 255, 255, 0.08);
+		}
 
-	{% comment %} JS {% endcomment %}
-	<script defer src="{% static 'landing.js' %}"></script>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		html, body {
+			height: 100%;
+		}
+
+		body {
+			background: var(--bg);
+			color: var(--fg);
+			font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+			-webkit-font-smoothing: antialiased;
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+			position: relative;
+			overflow-x: hidden;
+		}
+
+		/* Subtle radial glow behind content */
+		body::before {
+			content: "";
+			position: fixed;
+			top: -20%;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 900px;
+			height: 900px;
+			background: radial-gradient(circle, rgba(67, 139, 255, 0.10) 0%, transparent 60%);
+			pointer-events: none;
+			z-index: 0;
+		}
+
+		header {
+			padding: 32px 40px;
+			position: relative;
+			z-index: 1;
+		}
+
+		.wordmark {
+			font-family: 'Roboto Mono', monospace;
+			font-size: 15px;
+			font-weight: 500;
+			letter-spacing: 0.02em;
+			color: var(--fg);
+			text-decoration: none;
+		}
+
+		.wordmark span {
+			color: var(--muted);
+		}
+
+		main {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: flex-start;
+			padding: 40px;
+			max-width: 880px;
+			margin: 0 auto;
+			width: 100%;
+			position: relative;
+			z-index: 1;
+		}
+
+		.eyebrow {
+			font-family: 'Roboto Mono', monospace;
+			font-size: 13px;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: var(--accent);
+			margin-bottom: 28px;
+		}
+
+		h1 {
+			font-size: clamp(2.4rem, 6vw, 4.2rem);
+			font-weight: 600;
+			line-height: 1.05;
+			letter-spacing: -0.03em;
+			margin-bottom: 28px;
+		}
+
+		h1 .dim {
+			color: var(--muted);
+		}
+
+		.lead {
+			font-size: clamp(1.05rem, 2vw, 1.3rem);
+			line-height: 1.6;
+			color: var(--muted);
+			max-width: 620px;
+			margin-bottom: 44px;
+		}
+
+		.services {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+			margin-bottom: 48px;
+		}
+
+		.services span {
+			font-family: 'Roboto Mono', monospace;
+			font-size: 13px;
+			color: var(--fg);
+			border: 1px solid var(--line);
+			border-radius: 999px;
+			padding: 8px 16px;
+			background: rgba(255, 255, 255, 0.02);
+		}
+
+		.availability {
+			font-size: 0.98rem;
+			line-height: 1.6;
+			color: var(--muted);
+			max-width: 560px;
+		}
+
+		.availability a {
+			color: var(--fg);
+			text-decoration: none;
+			border-bottom: 1px solid var(--line);
+			transition: border-color 0.15s ease;
+		}
+
+		.availability a:hover {
+			border-color: var(--accent);
+		}
+
+		footer {
+			padding: 28px 40px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 12px;
+			border-top: 1px solid var(--line);
+			position: relative;
+			z-index: 1;
+			font-size: 0.85rem;
+			color: var(--muted);
+		}
+
+		footer nav {
+			display: flex;
+			gap: 24px;
+		}
+
+		footer a {
+			color: var(--muted);
+			text-decoration: none;
+			transition: color 0.15s ease;
+		}
+
+		footer a:hover {
+			color: var(--fg);
+		}
+
+		@media (max-width: 600px) {
+			header, main, footer {
+				padding-left: 24px;
+				padding-right: 24px;
+			}
+			footer {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+		}
+	</style>
 </head>
 <body>
 
-	<div id="hero">
-		<div id="nav">
-			<img src="{% static "images/logo.png" %}" alt="T">
-			<div class="button link" onclick="window.open('/app/', '_self')">Login</div>
-			<div class="button link" onclick="window.open('/app/', '_self')">Sign up</div>
-		</div>
-
-		<div id="title">
-			<h1>Transform the way you work</h1>
-			<h2>Join students around the world that trust Tuesday as their free work management solution</h2>
-		</div>
-
-		<div id="cluster">
-			<img id="bot" src="{% static "images/clusterbot.webp" %}" alt="Schedule page">
-			<img id="mid" src="{% static "images/clustermid.webp" %}" alt="Dashboard page">
-			<img id="top" src="{% static "images/clustertop.webp" %}" alt="Lists">
-		</div>
-	</div>
+	<header>
+		<a href="/" class="wordmark">tues<span>.tech</span></a>
+	</header>
 
 	<main>
-		<div class="img-desc-block">
-			<p class="title">For students, by students</p>
-			<p class="desc">Founded and developed by students, Tuesday was designed to solve students’ problems from day 1. </p>
-			<a class="link" href="/app/">Get Started&nbsp➜</a>
-
-			<div class="img" id="student">
-				<img id="student-img" src="{% static "images/student.png" %}" alt="Students and Tuesday">
-				<img id="student-img-arrows" src="{% static "images/studentarrows.png" %}" alt="Arrows indicating working together">
-			</div>
-		</div>
-
-		<div class="feature-blocks">
-			<div class="feature-block" id="feat-work">
-				<p class="title">Workload Tracking</p>
-				<p class="desc">Adaptive visualizations of your workload over time to keep you in control of your time</p>
-				<a href="/app/" class="link">Try Workload Tracking&nbsp;➜</a>
-				<img src="{% static "images/feat-work.png" %}" alt="Workload graph">
-			</div>
-
-			<div class="feature-block" id="feat-target">
-				<p class="title">Progress Targets</p>
-				<p class="desc">Automatic goals to ensure you always stay on&#8209;track</p>
-				<a href="/app/" class="link">Try Progress Targets&nbsp;➜</a>
-				<img src="{% static "images/feat-target.png" %}" alt="Example task with target progress">
-			</div>
-
-			<div class="feature-block" id="feat-visual">
-				<p class="title">Summarized Visuals</p>
-				<p class="desc">Quickly understand your overall progress and timing through dashboard progress bars</p>
-				<a href="/app/" class="link">Try Summarized Visuals&nbsp;➜</a>
-				<img src="{% static "images/feat-visual.png" %}" alt="Progress bar">
-			</div>
-
-			<div class="feature-block" id="feat-timing">
-				<p class="title">Curated Timing</p>
-				<p class="desc">Research-proven timer sequence to maximize your study efficiency</p>
-				<a href="/app/" class="link">Try Curated Timing&nbsp;➜</a>
-				<img src="{% static "images/feat-timing.png" %}" alt="Pomodoro timer">
-			</div>
-		</div>
-
-		<div class="img-desc-block">
-			<p class="title">Your work, your way</p>
-			<p class="desc">Tuesday prioritizes your tasks according to your preferences, keeping you in control of your work.</p>
-			<a class="link" href="/app/">Get Started&nbsp;➜</a>
-
-			<div class="img" id="work">
-				<svg xmlns="http://www.w3.org/2000/svg" width="320" height="121" viewBox="0 0 320 121" fill="none">
-					<path id="work-dash1" d="M3 71.9002C22.4858 71.9002 36.2642 117.7793 79.2918 117.7793C133.4800 117.7793 109.8680 35.6519 151.5000 34.0001C193.1320 32.3481 199.9940 71.9002 237.0000 71.9002C274.0060 71.9001 285.3650 94.0190 316.0940 94.019" stroke="#438BFF" stroke-opacity="0.5" stroke-width="6" stroke-linecap="round" stroke-dasharray="12 12"/>
-					<path id="work-dash2" d="M3 71.9003C22.4858 71.9003 36.2642 117.7790 79.2918 117.7790C133.4800 117.7790 109.8680 35.6520 151.5000 34.0001C193.1320 32.3482 202.4940 42.5003 239.5000 42.5002C276.5060 42.5002 287.2710 10.5002 318.0000 10.50024" stroke="#438BFF" stroke-opacity="0.5" stroke-width="6" stroke-linecap="round" stroke-dasharray="12 12"/>
-					<path id="work-dash3" d="M3 71.9002C22.4858 71.9002 36.2642 117.779 79.2918 117.779C133.48 117.779 109.868 35.6519 151.5 34C193.132 32.3481 197.494 3.00003 234.5 3C271.506 2.99997 282.271 71.9002 313 71.9002" stroke="#438BFF" stroke-opacity="0.5" stroke-width="6" stroke-linecap="round" stroke-dasharray="12 12"/>
-					<path id="work-main" d="M3 71.9002C22.4858 71.9002 36.2642 117.7792 79.2918 117.7792C133.4800 117.7792 109.8680 35.6519 151.5000 34.0" stroke="#438BFF" stroke-width="6" stroke-linecap="round"/>
-				</svg>
-			</div>
-		</div>
-
-		<div class="img-desc-block">
-			<p class="title soon">Learning how you learn</p>
-			<p class="desc">AI-powered algorithms fine-tune recommendations to best fit your learning style.</p>
-			<a class="link" href="/app/">Get Started&nbsp;➜</a>
-
-			<div class="img" id="work">
-				{% include 'network.svg' %}
-			</div>
-		</div>
+		<h1>Data-driven operations<br><span class="dim">for efficient impact.</span></h1>
+		<p class="lead">
+			We build custom, enterprise-scale solutions that turn your data into organized, actionable value without the AI hype.
+		</p>
+		<p class="availability">
+			We're currently at capacity with our clients and aren't taking on new work at the moment. For future projects, reach us at <a href="mailto:contact@tues.tech">contact@tues.tech</a>.
+		</p>
 	</main>
 
 	<footer>
-		<p id="copyright">© 2026 Tuesday Technologies LLC</p>
-		<a href="https://github.com/Tuestech/v2/blob/main/LICENSE.md">License</a>
-		<a href="mailto:contact@tues.tech">Contact</a>
-		<a href="/privacy/">Privacy</a>
+		<p>© 2026 Tuesday Technologies LLC</p>
+		<nav>
+			<a href="mailto:contact@tues.tech">Contact</a>
+			<a href="/privacy/">Privacy</a>
+		</nav>
 	</footer>
-
-	<div id="no-mobile">
-		<p class="title">Hey!</p>
-		<p class="desc">Thanks for your interest, but the mobile app isn’t ready yet!</p>
-		<p class="desc">Remind me to finish coding at <a href="https://jeffreylu.me">jeffreylu.me</a> if you really want it.</p>
-		<p class="close">Tap anywhere to close</p>
-	</div>
 
 </body>
 </html>
